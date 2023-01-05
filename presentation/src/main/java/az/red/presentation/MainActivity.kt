@@ -1,4 +1,4 @@
-package az.red.e_commerce_app_android
+package az.red.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
