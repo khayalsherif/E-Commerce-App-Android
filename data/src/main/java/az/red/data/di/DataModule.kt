@@ -2,6 +2,7 @@ package az.red.data.di
 
 import az.red.data.errors.RemoteErrorMapper
 import az.red.data.interceptor.HeaderInterceptor
+import az.red.data.local.SessionManager
 import az.red.data.remote.auth.AuthService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.domain.exception.ErrorMapper
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -22,10 +24,10 @@ const val IO_CONTEXT = "IO_CONTEXT"
 
 val dataModule = module {
 
-    single<CoroutineContext>(named(IO_CONTEXT)) { Dispatchers.IO }
+    ///////////////////////////////////// REMOTE ///////////////////////////////////////////////
 
     single {
-        val interceptor = HeaderInterceptor()
+        val interceptor = HeaderInterceptor(sessionManager = get())
 
         val builder = OkHttpClient.Builder()
             .readTimeout(20, TimeUnit.SECONDS)
@@ -57,7 +59,14 @@ val dataModule = module {
         AuthRepositoryImpl(service = get())
     }
 
+    ///////////////////////////////////// LOCAL ///////////////////////////////////////////////
+
+    single {
+        SessionManager(androidContext())
+    }
 
     ///////////////////////////////////// REMOTE ERROR MAP ///////////////////////////////////////////////
+
+    single<CoroutineContext>(named(IO_CONTEXT)) { Dispatchers.IO }
     factory<ErrorMapper>(named(ERROR_MAPPER_NETWORK)) { RemoteErrorMapper() }
 }
