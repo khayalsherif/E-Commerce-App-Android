@@ -6,6 +6,7 @@ import az.red.data.mapper.auth.AuthMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.domain.repository.auth.AuthRepository
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -66,6 +67,8 @@ val dataModule = module {
     }
 
     ///////////////////////////////////// MAPPER ///////////////////////////////////////////////
+
+    single { Gson() }
 
     factory { AuthMapper() }
 }
