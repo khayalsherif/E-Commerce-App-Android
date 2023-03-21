@@ -1,11 +1,9 @@
 package az.red.data.di
 
-import az.red.data.errors.RemoteErrorMapper
-import az.red.data.interceptor.HeaderInterceptor
+import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
 import az.red.data.remote.auth.AuthService
 import az.red.data.repository.auth.AuthRepositoryImpl
-import az.red.domain.exception.ErrorMapper
 import az.red.domain.repository.auth.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -19,10 +17,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.CoroutineContext
 
-const val ERROR_MAPPER_NETWORK = "ERROR_MAPPER_NETWORK"
 const val IO_CONTEXT = "IO_CONTEXT"
 
 val dataModule = module {
+
+    single<CoroutineContext>(named(IO_CONTEXT)) { Dispatchers.IO }
 
     ///////////////////////////////////// REMOTE ///////////////////////////////////////////////
 
@@ -65,8 +64,4 @@ val dataModule = module {
         SessionManager(androidContext())
     }
 
-    ///////////////////////////////////// REMOTE ERROR MAP ///////////////////////////////////////////////
-
-    single<CoroutineContext>(named(IO_CONTEXT)) { Dispatchers.IO }
-    factory<ErrorMapper>(named(ERROR_MAPPER_NETWORK)) { RemoteErrorMapper() }
 }

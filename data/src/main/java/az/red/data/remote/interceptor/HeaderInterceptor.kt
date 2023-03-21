@@ -1,4 +1,4 @@
-package az.red.data.interceptor
+package az.red.data.remote.interceptor
 
 import az.red.data.local.SessionManager
 import okhttp3.Headers.Companion.toHeaders
@@ -9,8 +9,9 @@ class HeaderInterceptor(private val sessionManager: SessionManager) : Intercepto
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
         val headers = HashMap<String, String>()
-        val response = chain.proceed(request.headers(headers.toHeaders()).build())
+        sessionManager.getAuthToken()?.let { headers["Authorization"] = it }
 
+        val response = chain.proceed(request.headers(headers.toHeaders()).build())
         if (response.code == 401) {
             sessionManager.removeAuthToken()
             // Event bus logic
