@@ -2,6 +2,7 @@ package az.red.data.di
 
 import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
+import az.red.data.mapper.auth.AuthMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.domain.repository.auth.AuthRepository
@@ -55,7 +56,7 @@ val dataModule = module {
     factory<AuthService> { get<Retrofit>().create(AuthService::class.java) }
 
     factory<AuthRepository> {
-        AuthRepositoryImpl(service = get())
+        AuthRepositoryImpl(service = get(), mapper = get())
     }
 
     ///////////////////////////////////// LOCAL ///////////////////////////////////////////////
@@ -64,4 +65,7 @@ val dataModule = module {
         SessionManager(androidContext())
     }
 
+    ///////////////////////////////////// MAPPER ///////////////////////////////////////////////
+
+    factory { AuthMapper() }
 }
