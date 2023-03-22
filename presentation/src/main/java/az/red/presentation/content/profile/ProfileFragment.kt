@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import az.red.presentation.R
 
 class ProfileFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

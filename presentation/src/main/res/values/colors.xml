@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="carrot_accent">#FF725E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_unselected">#F2F2F2</color>
+</resources>
