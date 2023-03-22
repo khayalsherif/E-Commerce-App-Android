@@ -62,6 +62,7 @@ val dataModule = module {
         AuthRepositoryImpl(service = get(), mapper = get())
     }
 
+    // Session Manager
     factory<SessionManagerRepository> {
         SessionManagerImpl(sessionManager = get())
     }
