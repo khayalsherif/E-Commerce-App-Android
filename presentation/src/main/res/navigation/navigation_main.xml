@@ -98,5 +98,5 @@
         android:id="@+id/profileFragment"
         android:name="az.red.presentation.content.productDetail.ProductDetailFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" /><action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment"/>
 </navigation>
