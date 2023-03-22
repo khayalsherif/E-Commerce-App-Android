@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val presentationModule = module {
 
-    viewModel { LoginViewModel(authUseCase = get()) }
+    viewModel { LoginViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
 }

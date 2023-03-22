@@ -5,7 +5,9 @@ import az.red.data.local.SessionManager
 import az.red.data.mapper.auth.AuthMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.repository.auth.AuthRepositoryImpl
+import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.domain.repository.auth.AuthRepository
+import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -58,6 +60,10 @@ val dataModule = module {
 
     factory<AuthRepository> {
         AuthRepositoryImpl(service = get(), mapper = get())
+    }
+
+    factory<SessionManagerRepository> {
+        SessionManagerImpl(sessionManager = get())
     }
 
     ///////////////////////////////////// LOCAL ///////////////////////////////////////////////
