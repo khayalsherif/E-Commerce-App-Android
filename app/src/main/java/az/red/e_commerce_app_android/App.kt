@@ -9,6 +9,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
+            properties(
+                mapOf("base" to "https://mobile.test-danit.com/api/")
+            )
             androidContext(androidContext = this@App)
             modules(appModule)
         }
