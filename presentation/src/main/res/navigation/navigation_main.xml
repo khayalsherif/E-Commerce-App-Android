@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/onBoardingFragment"
@@ -91,12 +91,12 @@
         tools:layout="@layout/fragment_orders" />
     <fragment
         android:id="@+id/cartFragment"
-        android:name="az.red.presentation.content.addFingerprint.AddFingerprintFragment"
+        android:name="az.red.presentation.content.cart.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="az.red.presentation.content.productDetail.ProductDetailFragment"
+        android:name="az.red.presentation.content.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
