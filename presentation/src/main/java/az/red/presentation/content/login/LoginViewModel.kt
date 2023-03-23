@@ -20,6 +20,10 @@ class LoginViewModel(
         MutableStateFlow<NetworkResult<Login>>(NetworkResult.Empty())
     val loginResponse: StateFlow<NetworkResult<Login>> get() = _loginResponse
 
+    fun saveToken(token: String, userId: String, rememberMe: Boolean) {
+        sessionManagerUseCase.saveAuthToken(token = token, userId = userId, rememberMe)
+    }
+
     fun login(userData: LoginRequest) = viewModelScope.launch {
         authUseCase.login(userData).collect {
             _loginResponse.emit(it)

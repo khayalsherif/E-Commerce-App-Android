@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.auth.login.LoginRequest
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
+import az.red.presentation.common.gone
 import az.red.presentation.common.setDrawableRightTouch
+import az.red.presentation.common.visible
 import az.red.presentation.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
@@ -28,6 +31,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     private var passwordIsVisible = false
 
     override val bindViews: FragmentLoginBinding.() -> Unit = {
+        navController = findNavController()
+
         inputName.addTextChangedListener(textWatcher)
         inputPassword.addTextChangedListener(textWatcher)
 
@@ -41,24 +46,29 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             viewModel.login(request)
         }
 
+        binding.buttonSignUp.setOnClickListener {
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
 
         lifecycleScope.launch {
             viewModel.loginResponse.collect {
                 when (it) {
                     is NetworkResult.Empty -> {
-                        println("Empty")
                     }
                     is NetworkResult.Error -> {
-                        println(it.data!!)
+                        layoutLoading.root.gone()
+                        showToast(it.message!!)
                     }
                     is NetworkResult.Exception -> {
-                        println(it.message)
+                        layoutLoading.root.gone()
+                        showToast(it.message!!)
                     }
                     is NetworkResult.Loading -> {
-                        println("Loading")
+                        layoutLoading.root.visible()
                     }
                     is NetworkResult.Success -> {
-                        println(it.data!!.token!!)
+                        layoutLoading.root.gone()
+                        viewModel.saveToken(it.data!!.token!!, "", binding.checkBox.isChecked)
                     }
                 }
             }
