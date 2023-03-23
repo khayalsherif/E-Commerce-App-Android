@@ -1,20 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    android:orientation="vertical"
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    android:padding="8dp"
+    tools:context=".content.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <SearchView
+            android:id="@+id/productSearchView"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_heart" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_notification" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCategoryCards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Shop categories" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSubCategoryCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Products" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" >
+            </Space>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="See all" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2" />
+    </LinearLayout>
+
+</LinearLayout>
