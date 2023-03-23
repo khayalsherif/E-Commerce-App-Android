@@ -23,7 +23,9 @@
     <color name="light_screen_background_color">#FFFFFF</color>
     <color name="light_button_is_enable_text_color">#F2F2F2</color>
     <color name="light_button_is_not_enable_text_color">#CFCFCF</color>
-
+    <color name="light_edit_text_stroke_selected_color">#FF000000</color>
+    <color name="light_edit_text_stroke_un_selected_color">#CFCFCF</color>
+    <color name="light_edit_text_background_color">#FFFFFF</color>
 
     <color name="dark_hint_color">#233447</color>
     <color name="dark_screen_title_color">#F2F2F2</color>
@@ -36,5 +38,7 @@
     <color name="dark_screen_background_color">#131C26</color>
     <color name="dark_button_is_enable_text_color">#16212D</color>
     <color name="dark_button_is_not_enable_text_color">#CFCFCF</color>
-
+    <color name="dark_edit_text_stroke_selected_color">#FFFFFF</color>
+    <color name="dark_edit_text_stroke_un_selected_color">#233447</color>
+    <color name="dark_edit_text_background_color">#16212D</color>
 </resources>

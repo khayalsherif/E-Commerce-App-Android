@@ -12,6 +12,9 @@
         <attr name="screen_background_color" format="color" />
         <attr name="button_is_enable_text_color" format="color" />
         <attr name="button_is_not_enable_text_color" format="color" />
+        <attr name="edit_text_stroke_selected_color" format="color" />
+        <attr name="edit_text_stroke_un_selected_color" format="color" />
+        <attr name="edit_text_background_color" format="color" />
     </declare-styleable>
 
     <style name="ButtonStyle">
