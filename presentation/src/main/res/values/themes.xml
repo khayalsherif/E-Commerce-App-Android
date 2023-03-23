@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
+        <item name="android:background">@color/light_screen_background_color</item>
         <!-- Customize your theme here. -->
         <item name="hint_color">@color/light_hint_color</item>
         <item name="screen_title_color">@color/light_screen_title_color</item>
@@ -22,5 +23,8 @@
         <item name="button_is_not_enable_color">@color/light_button_is_not_enable_color</item>
         <item name="line_color">@color/light_line_color</item>
         <item name="edit_text_text_color">@color/light_edit_text_text_color</item>
+        <item name="screen_background_color">@color/light_screen_background_color</item>
+        <item name="button_is_enable_text_color">@color/light_button_is_enable_text_color</item>
+        <item name="button_is_not_enable_text_color">@color/light_button_is_not_enable_text_color</item>
     </style>
 </resources>
