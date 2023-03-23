@@ -7,6 +7,7 @@
     tools:context=".content.login.LoginFragment">
 
     <TextView
+        android:id="@+id/title"
         style="@style/BarlowBold32spStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,9 +26,7 @@
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
         android:hint="@string/email"
-        android:inputType="text"
-        android:paddingHorizontal="8dp"
-        android:theme="@style/EditTextTheme" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/inputPassword"
@@ -39,14 +38,11 @@
         android:drawableStart="@drawable/ic_password"
         android:drawableEnd="@drawable/ic_close_eye"
         android:drawablePadding="12dp"
-        android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        android:paddingHorizontal="8dp"
-        android:theme="@style/EditTextTheme" />
+        android:inputType="textPassword" />
 
     <CheckBox
-        android:id="@+id/checkedTextView"
+        android:id="@+id/checkBox"
         style="@style/NunitoRegular16spStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,6 +104,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/buttonSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

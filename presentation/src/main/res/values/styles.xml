@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="colors">
         <attr name="hint_color" format="color" />
         <attr name="screen_title_color" format="color" />
@@ -39,6 +39,8 @@
         <item name="android:textColor">?attr/edit_text_text_color</item>
         <item name="android:background">@drawable/shape_edit_text</item>
         <item name="android:textColorHint">?attr/hint_color</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">8dp</item>
+        <item name="theme">@style/EditTextTheme</item>
     </style>
 
     <style name="BarlowBold32spStyle">

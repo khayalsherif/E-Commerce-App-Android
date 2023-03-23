@@ -6,11 +6,15 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import az.red.domain.common.NetworkResult
+import az.red.domain.model.auth.login.LoginRequest
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.common.setDrawableRightTouch
 import az.red.presentation.databinding.FragmentLoginBinding
+import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
@@ -27,9 +31,37 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         inputName.addTextChangedListener(textWatcher)
         inputPassword.addTextChangedListener(textWatcher)
 
-        binding.inputPassword.setDrawableRightTouch {
+        inputPassword.setDrawableRightTouch {
             passwordVisibility(binding.inputPassword, passwordIsVisible)
             passwordIsVisible = !passwordIsVisible
+        }
+
+        buttonSignIn.setOnClickListener {
+            val request = LoginRequest(inputName.text.toString(), inputPassword.text.toString())
+            viewModel.login(request)
+        }
+
+
+        lifecycleScope.launch {
+            viewModel.loginResponse.collect {
+                when (it) {
+                    is NetworkResult.Empty -> {
+                        println("Empty")
+                    }
+                    is NetworkResult.Error -> {
+                        println(it.data!!)
+                    }
+                    is NetworkResult.Exception -> {
+                        println(it.message)
+                    }
+                    is NetworkResult.Loading -> {
+                        println("Loading")
+                    }
+                    is NetworkResult.Success -> {
+                        println(it.data!!.token!!)
+                    }
+                }
+            }
         }
     }
 
