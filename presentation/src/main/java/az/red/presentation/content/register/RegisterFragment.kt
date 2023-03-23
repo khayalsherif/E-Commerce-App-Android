@@ -6,12 +6,18 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import az.red.data.model.auth.register.RegisterRequest
+import az.red.domain.common.NetworkResult
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
+import az.red.presentation.common.gone
 import az.red.presentation.common.setDrawableRightTouch
+import az.red.presentation.common.visible
 import az.red.presentation.databinding.FragmentRegisterBinding
+import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>() {
@@ -44,7 +50,40 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         }
 
         buttonContinue.setOnClickListener {
-            navController.navigate(R.id.action_registerFragment_to_otpFragment)
+            val request = RegisterRequest(
+                firstName = inputFirstName.text.toString(),
+                lastName = inputLastName.text.toString(),
+                login = inputUserName.text.toString(),
+                email = inputEmail.text.toString(),
+                password = inputPassword.text.toString(),
+                isAdmin = false
+            )
+            viewModel.register(request)
+        }
+
+        lifecycleScope.launch {
+            viewModel.registerResponse.collect {
+                when (it) {
+                    is NetworkResult.Empty -> {
+                    }
+                    is NetworkResult.Error -> {
+                        layoutLoading.root.gone()
+                        showToast(it.message!!)
+                    }
+                    is NetworkResult.Exception -> {
+                        layoutLoading.root.gone()
+                        showToast(it.message!!)
+                    }
+                    is NetworkResult.Loading -> {
+                        layoutLoading.root.visible()
+                    }
+                    is NetworkResult.Success -> {
+                        layoutLoading.root.gone()
+                        //navController.navigate(R.id.action_registerFragment_to_otpFragment)
+                        println(it.data!!)
+                    }
+                }
+            }
         }
     }
 
