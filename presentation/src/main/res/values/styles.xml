@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="colors">
+        <attr name="hint_color" format="color" />
+        <attr name="screen_title_color" format="color" />
+        <attr name="text_color" format="color" />
+        <attr name="back_icon_color" format="color" />
+        <attr name="button_is_enable_color" format="color" />
+        <attr name="button_is_not_enable_color" format="color" />
+        <attr name="line_color" format="color" />
+        <attr name="edit_text_text_color" format="color" />
+        <attr name="screen_background_color" format="color" />
+        <attr name="button_is_enable_text_color" format="color" />
+        <attr name="button_is_not_enable_text_color" format="color" />
+    </declare-styleable>
+
+    <style name="ButtonStyle">
+        <item name="android:fontFamily">@font/nunito_semi_bold</item>
+        <item name="android:textColor">@color/button_state_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/shape_28</item>
+        <item name="backgroundTint">@color/button_state_background_color</item>
+        <item name="lineHeight">20dp</item>
+    </style>
+
+    <style name="EditTextTheme">
+        <item name="colorAccent">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/edit_text_text_color</item>
+        <item name="android:background">@drawable/shape_edit_text</item>
+        <item name="android:textColorHint">?attr/hint_color</item>
+    </style>
+
+    <style name="BarlowBold32spStyle">
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">?attr/screen_title_color</item>
+    </style>
+
+    <style name="NunitoRegular16spStyle">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="NunitoRegular18spStyle">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="NunitoMedium18spStyle">
+        <item name="android:fontFamily">@font/nunito_medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="NunitoSemiBold18spStyle">
+        <item name="android:fontFamily">@font/nunito_semi_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+</resources>

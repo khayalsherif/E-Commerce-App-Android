@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Ecommerceappandroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:background">@color/dark_screen_background_color</item>
+        <!-- Customize your theme here. -->
+        <item name="hint_color">@color/dark_hint_color</item>
+        <item name="screen_title_color">@color/dark_screen_title_color</item>
+        <item name="text_color">@color/dark_text_color</item>
+        <item name="back_icon_color">@color/dark_back_icon_color</item>
+        <item name="button_is_enable_color">@color/dark_button_is_enable_color</item>
+        <item name="button_is_not_enable_color">@color/dark_button_is_not_enable_color</item>
+        <item name="line_color">@color/dark_line_color</item>
+        <item name="edit_text_text_color">@color/dark_edit_text_text_color</item>
+        <item name="screen_background_color">@color/dark_screen_background_color</item>
+        <item name="button_is_enable_text_color">@color/dark_button_is_enable_text_color</item>
+        <item name="button_is_not_enable_text_color">@color/dark_button_is_not_enable_text_color
+        </item>
+    </style>
+</resources>
