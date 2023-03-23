@@ -15,12 +15,18 @@ class AuthRepositoryImpl(private val service: AuthService, private val mapper: A
     AuthRepository {
     override suspend fun login(loginData: LoginRequest): Flow<NetworkResult<Login>> {
         val request = service.login(mapper.loginRequestToLoginRemoteRequest(loginData))
-        return handleApi { request }
+        return handleApi(
+            mapper = { mapper.loginResponseToLogin(request.body()!!) },
+            execute = { request }
+        )
     }
 
     override suspend fun register(registerData: RegisterRequest): Flow<NetworkResult<Register>> {
         val request = service.register(mapper.registerRequestToRegisterRemoteRequest(registerData))
-        return handleApi { request }
+        return handleApi(
+            mapper = { mapper.registerResponseToRegister(request.body()!!) },
+            execute = { request }
+        )
     }
 
 }

@@ -25,7 +25,9 @@
         <item name="edit_text_text_color">@color/dark_edit_text_text_color</item>
         <item name="screen_background_color">@color/dark_screen_background_color</item>
         <item name="button_is_enable_text_color">@color/dark_button_is_enable_text_color</item>
-        <item name="button_is_not_enable_text_color">@color/dark_button_is_not_enable_text_color
-        </item>
+        <item name="button_is_not_enable_text_color">@color/dark_button_is_not_enable_text_color</item>
+        <item name="edit_text_stroke_selected_color">@color/dark_edit_text_stroke_selected_color</item>
+        <item name="edit_text_stroke_un_selected_color">@color/dark_edit_text_stroke_un_selected_color</item>
+        <item name="edit_text_background_color">@color/dark_edit_text_background_color</item>
     </style>
 </resources>

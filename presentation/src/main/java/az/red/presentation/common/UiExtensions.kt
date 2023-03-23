@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import java.lang.Exception
 
 @SuppressLint("ClickableViewAccessibility")
@@ -27,4 +30,16 @@ fun EditText.setDrawableRightTouch(setClickListener: () -> Unit) {
         e.printStackTrace()
     }
 
+}
+
+fun View.gone() {
+    isGone = true
+}
+
+fun View.visible() {
+    isVisible = true
+}
+
+fun View.inVisible() {
+    isInvisible = true
 }

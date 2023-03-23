@@ -23,4 +23,11 @@
     <string name="username_or_email">Username or email</string>
     <string name="continue_text">Continue</string>
     <string name="enter_recovery_code">Enter recovery code</string>
+    <string name="lets_you_in">Lets you in</string>
+    <string name="you_can_sign_in_with">You can sign in with</string>
+    <string name="sign_in_with_password">Sign in with password</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="apple">Apple</string>
+    <string name="or">or</string>
 </resources>
