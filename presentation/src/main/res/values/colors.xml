@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
     <color name="carrot_accent">#FF725E</color>
     <color name="white">#FFFFFF</color>
     <color name="white_unselected">#F2F2F2</color>
+    <color name="primary_dark">#131C26</color>
+
+
+    <color name="light_hint_color">#B7B7B7</color>
+    <color name="light_screen_title_color">#131C26</color>
+    <color name="light_text_color">#16212D</color>
+    <color name="light_back_icon_color">#16212D</color>
+    <color name="light_button_is_enable_color">#131C26</color>
+    <color name="light_button_is_not_enable_color">#B7B7B7</color>
+    <color name="light_line_color">#B7B7B7</color>
+    <color name="light_edit_text_text_color">#16212D</color>
+
+    <color name="dark_hint_color">#233447</color>
+    <color name="dark_screen_title_color">#F2F2F2</color>
+    <color name="dark_text_color">#CFCFCF</color>
+    <color name="dark_back_icon_color">#F2F2F2</color>
+    <color name="dark_button_is_enable_color">#F2F2F2</color>
+    <color name="dark_button_is_not_enable_color">#B7B7B7</color>
+    <color name="dark_line_color">#B7B7B7</color>
+    <color name="dark_edit_text_text_color">#CFCFCF</color>
+
 </resources>
