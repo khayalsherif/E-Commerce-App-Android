@@ -1,19 +1,28 @@
 package az.red.presentation.content.home
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import az.red.presentation.R
+import androidx.activity.OnBackPressedCallback
+import az.red.presentation.base.BaseFragment
+import az.red.presentation.databinding.FragmentHomeBinding
+import kotlin.reflect.KClass
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
+        get() = FragmentHomeBinding::inflate
+    override val kClass: KClass<HomeViewModel>
+        get() = HomeViewModel::class
+
+
+    override val bindViews: FragmentHomeBinding.() -> Unit = {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
     }
 }
