@@ -56,6 +56,10 @@ class SessionManager(context: Context) {
         return prefs.getString(USER_TOKEN, null)
     }
 
+    fun getCurrentAppTheme() : Boolean{
+        return prefs.getBoolean(DARK_MODE,false)
+    }
+
 
     // User id
     fun getUserId(): String? {

@@ -31,4 +31,8 @@ class SessionManagerUseCase(
         return sessionManagerRepository.getRememberMe()
     }
 
+    fun getCurrentAppTheme(): Boolean {
+        return sessionManagerRepository.getCurrentAppTheme()
+    }
+
 }

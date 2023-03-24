@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:visibility="visible"
         android:layout_height="wrap_content"
+        app:itemBackground="@color/carrot_accent"
         android:padding="16dp"
         app:labelVisibilityMode="labeled"
         android:background="@drawable/nav_background_curved"
