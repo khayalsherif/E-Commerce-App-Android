@@ -1,5 +1,6 @@
 package az.red.presentation.di
 
+import az.red.presentation.content.cart.CartViewModel
 import az.red.presentation.content.home.HomeViewModel
 import az.red.presentation.content.login.LoginViewModel
 import az.red.presentation.content.profile.ProfileViewModel
@@ -13,4 +14,5 @@ val presentationModule = module {
     viewModel { RegisterViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
     viewModel { ProfileViewModel(sessionManagerUseCase = get()) }
     viewModel { HomeViewModel() }
+    viewModel { CartViewModel() }
 }
