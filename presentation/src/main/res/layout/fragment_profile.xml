@@ -487,13 +487,24 @@
             android:layout_marginTop="32dp"
             android:text="@string/add_new_product" />
 
-        <TextView
-            style="@style/OutlinedButtonStyle"
-            android:id="@+id/btn_go_my_products"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/outlined_button_state_background_color"
+            app:strokeColor="@color/outlined_button_state_text_color"
+            app:strokeWidth="1dp"
             android:layout_height="42dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/my_products" />
+            android:layout_marginTop="20dp">
+
+            <TextView
+                style="@style/OutlinedButtonStyle"
+                android:id="@+id/btn_go_my_products"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/my_products" />
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
