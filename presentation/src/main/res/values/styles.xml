@@ -43,6 +43,11 @@
         <item name="lineHeight">20dp</item>
     </style>
 
+    <style name="CustomToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleMarginTop">13dp</item>
+    </style>
+
     <style name="BottomNavigation">
         <item name="android:background">?attr/screen_background_color</item>
         <item name="itemIconTint">@color/bottom_nav_color</item>

@@ -13,6 +13,7 @@ import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.common.gone
 import az.red.presentation.common.visible
+import az.red.presentation.content.MainActivity
 import az.red.presentation.databinding.FragmentProfileBinding
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
@@ -66,7 +67,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         cvChangeAppTheme.setOnClickListener {
             isDarkMode = !isDarkMode
             viewModel.saveDarkMode(isDarkMode)
-            changeUI()
+            (activity as MainActivity).recreate()
         }
 
         btnGoMyProducts.setOnClickListener {

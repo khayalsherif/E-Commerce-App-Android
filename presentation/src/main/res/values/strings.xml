@@ -40,4 +40,6 @@
     <string name="google">Google</string>
     <string name="apple">Apple</string>
     <string name="or">or</string>
+    <string name="search">Search</string>
+    <string name="delete">Delete</string>
 </resources>
