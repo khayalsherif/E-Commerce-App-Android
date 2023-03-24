@@ -9,4 +9,5 @@ interface SessionManagerRepository {
     fun getAuthToken(): String?
     fun getUserId(): String?
     fun getRememberMe(): Boolean
+    fun getCurrentAppTheme(): Boolean
 }

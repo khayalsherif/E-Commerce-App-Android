@@ -38,4 +38,8 @@ class SessionManagerImpl(
     override fun getRememberMe(): Boolean {
         return sessionManager.getRememberMe()
     }
+
+    override fun getCurrentAppTheme(): Boolean {
+        return sessionManager.getCurrentAppTheme()
+    }
 }
