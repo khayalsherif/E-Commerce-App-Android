@@ -50,4 +50,7 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel> : 
         return this
     }
 
+    fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
 }
