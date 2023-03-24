@@ -20,7 +20,7 @@ abstract class BaseViewModel : ViewModel() {
                     )
                     triggerUIEvent(
                         UIEvent.Navigate(
-                            R.id.action_global_loginFragment
+                            R.id.loginFragment
                         )
                     )
                 }

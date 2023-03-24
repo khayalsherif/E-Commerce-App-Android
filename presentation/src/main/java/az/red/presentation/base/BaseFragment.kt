@@ -38,7 +38,7 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel> : 
         viewModel.consumeUIEvent { when(it){
             is UIEvent.Error -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
             is UIEvent.Message -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-            is UIEvent.Navigate -> findNavController().navigate(it.navAction!!)
+            is UIEvent.Navigate -> findNavController().navigate(it.route!!)
             is UIEvent.Loading -> Toast.makeText(requireContext(), "Loading...", Toast.LENGTH_SHORT).show()
         } }
     }

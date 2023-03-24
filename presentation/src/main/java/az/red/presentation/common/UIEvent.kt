@@ -1,9 +1,9 @@
 package az.red.presentation.common
 
 
-sealed class UIEvent(val message: String? = null, val navAction: Int? = null) {
+sealed class UIEvent(val message: String? = null, val route: Int? = null) {
     class Error(message: String) : UIEvent(message = message)
     class Message(message: String) : UIEvent(message = message)
-    class Navigate(navAction: Int) : UIEvent(navAction = navAction)
+    class Navigate(route: Int) : UIEvent(route = route)
     class Loading() : UIEvent()
 }
