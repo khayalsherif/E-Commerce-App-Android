@@ -15,8 +15,8 @@ class SessionManagerUseCase(
     fun saveDarkMode(isDarkMode: Boolean) {
         sessionManagerRepository.saveDarkMode(isDarkMode)
     }
-    fun saveAuthToken(token: String, userId: String, rememberMe: Boolean) {
-        sessionManagerRepository.saveAuthToken(token, userId, rememberMe)
+    fun saveAuthToken(token: String, rememberMe: Boolean) {
+        sessionManagerRepository.saveAuthToken(token, rememberMe)
     }
     fun removeAuthToken() {
         sessionManagerRepository.removeAuthToken()

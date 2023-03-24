@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.auth.login.LoginRequest
@@ -68,7 +69,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     }
                     is NetworkResult.Success -> {
                         layoutLoading.root.gone()
-                        viewModel.saveToken(it.data!!.token!!, "", binding.checkBox.isChecked)
+                        viewModel.saveToken(it.data!!.token!!, binding.checkBox.isChecked)
+
+                        navController.navigate( R.id.action_loginFragment_to_homeFragment )
                     }
                 }
             }

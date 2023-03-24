@@ -1,9 +1,6 @@
 package az.red.domain.common
 
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.*
 
 object EventBus {
     private val _events = MutableSharedFlow<Any>()

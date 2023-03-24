@@ -34,13 +34,24 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel> : 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.consumeUIEvent {
+            when (it) {
+                is UIEvent.Error -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG)
+                    .show()
+                is UIEvent.Message -> Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_LONG
+                ).show()
+                is UIEvent.Navigate -> findNavController().navigate(it.route!!)
+                is UIEvent.Loading -> Toast.makeText(
+                    requireContext(),
+                    "Loading...",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
         bindViews.invoke(binding)
-        viewModel.consumeUIEvent { when(it){
-            is UIEvent.Error -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-            is UIEvent.Message -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-            is UIEvent.Navigate -> findNavController().navigate(it.route!!)
-            is UIEvent.Loading -> Toast.makeText(requireContext(), "Loading...", Toast.LENGTH_SHORT).show()
-        } }
     }
 
     protected open val bindViews: Binding.() -> Unit = {}
