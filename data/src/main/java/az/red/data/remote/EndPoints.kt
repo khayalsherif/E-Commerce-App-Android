@@ -15,8 +15,6 @@ object EndPoints {
     const val PRODUCTS_FILTERED = "$PRODUCT_BASE/filter"
     const val PRODUCT = PRODUCT_BASE
     const val PRODUCT_SEARCH = "$PRODUCT_BASE/search"
-    const val CREATE_PRODUCT = PRODUCT_BASE
-    const val UPDATE_PRODUCT = "$PRODUCT_BASE/{id}"
 
     //Product Filters
     const val CATEGORY = "catalog"
