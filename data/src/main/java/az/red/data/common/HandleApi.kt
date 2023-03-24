@@ -10,6 +10,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 
 inline fun <T : Any, reified D : Any> handleApi(
+    crossinline mapper: (T) -> D,
     crossinline execute: suspend () -> Response<T>
 ): Flow<NetworkResult<D>> = flow {
     val response = execute()
@@ -17,7 +18,7 @@ inline fun <T : Any, reified D : Any> handleApi(
     emit(NetworkResult.Loading())
 
     if (response.isSuccessful && body != null) {
-        emit(NetworkResult.Success(body as D))
+        emit(NetworkResult.Success(mapper(body)))
     } else {
         val gson: Gson by KoinJavaComponent.inject(Gson::class.java)
         val e = response.errorBody()?.let { gson.fromJson(it.string(), D::class.java) }

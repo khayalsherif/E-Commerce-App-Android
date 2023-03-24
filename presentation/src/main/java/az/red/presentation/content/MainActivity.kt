@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment, R.id.ordersFragment, R.id.cartFragment, R.id.profileFragment -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
+                else -> {
+                    binding.bottomNavigationView.visibility = View.GONE
+                }
             }
         }
     }
