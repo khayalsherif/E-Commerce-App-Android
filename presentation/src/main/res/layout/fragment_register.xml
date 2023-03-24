@@ -1,6 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterFragment"/>
+    android:orientation="vertical"
+    tools:context=".content.register.RegisterFragment">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/screen_background_color"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_back" />
+
+    <include
+        android:id="@+id/layout_loading"
+        layout="@layout/layout_loading_transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/BarlowBold32spStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/create_your_account" />
+
+    <EditText
+        android:id="@+id/inputEmail"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="48dp"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@drawable/ic_password"
+        android:drawableEnd="@drawable/ic_close_eye"
+        android:drawablePadding="12dp"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/inputFirstName"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="12dp"
+        android:hint="@string/first_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/inputLastName"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="12dp"
+        android:hint="@string/last_name"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/inputUserName"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="12dp"
+        android:hint="@string/username"
+        android:inputType="text" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        style="@style/NunitoRegular16spStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:buttonTint="@color/carrot_accent"
+        android:text="@string/remember_me" />
+
+    <TextView
+        android:id="@+id/buttonContinue"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:enabled="false"
+        android:text="@string/continue_text" />
+
+    <LinearLayout
+        android:id="@+id/buttonSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/NunitoMedium18spStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_an_account" />
+
+        <TextView
+            style="@style/NunitoSemiBold18spStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/sign_in"
+            android:textColor="@color/carrot_accent" />
+    </LinearLayout>
+</LinearLayout>
