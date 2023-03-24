@@ -29,5 +29,6 @@
         <item name="edit_text_stroke_selected_color">@color/dark_edit_text_stroke_selected_color</item>
         <item name="edit_text_stroke_un_selected_color">@color/dark_edit_text_stroke_un_selected_color</item>
         <item name="edit_text_background_color">@color/dark_edit_text_background_color</item>
+        <item name="carrot_accent">@color/carrot_accent</item>
     </style>
 </resources>

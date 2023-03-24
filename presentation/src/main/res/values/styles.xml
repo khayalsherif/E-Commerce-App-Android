@@ -15,6 +15,7 @@
         <attr name="edit_text_stroke_selected_color" format="color" />
         <attr name="edit_text_stroke_un_selected_color" format="color" />
         <attr name="edit_text_background_color" format="color" />
+        <attr name="carrot_accent" format="color" />
     </declare-styleable>
 
     <style name="ButtonStyle">
@@ -41,6 +42,19 @@
         <item name="android:textColorHint">?attr/hint_color</item>
         <item name="android:paddingHorizontal" tools:targetApi="o">8dp</item>
         <item name="theme">@style/EditTextTheme</item>
+    </style>
+
+    <style name="SearchStyle">
+        <item name="android:drawableStart">@drawable/ic_search</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="drawableTint">?attr/edit_text_stroke_selected_color</item>
+        <item name="hintTextColor">?attr/hint_color</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/edit_text_text_color</item>
+        <item name="android:background">@drawable/shape_search</item>
+        <item name="android:textColorHint">?attr/hint_color</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">8dp</item>
     </style>
 
     <style name="BarlowBold32spStyle">
@@ -70,6 +84,16 @@
     <style name="NunitoSemiBold18spStyle">
         <item name="android:fontFamily">@font/nunito_semi_bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+    <style name="NunitoRegular14spAccentStyle">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/carrot_accent</item>
+    </style>
+    <style name="NunitoRegular14spStyle">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/text_color</item>
     </style>
 </resources>

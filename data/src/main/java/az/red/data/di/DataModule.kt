@@ -4,9 +4,12 @@ import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
 import az.red.data.mapper.auth.AuthMapper
 import az.red.data.remote.auth.AuthService
+import az.red.data.remote.category.CategoryService
 import az.red.data.repository.auth.AuthRepositoryImpl
+import az.red.data.repository.category.CategoryRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.domain.repository.auth.AuthRepository
+import az.red.domain.repository.category.CategoryRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +63,14 @@ val dataModule = module {
 
     factory<AuthRepository> {
         AuthRepositoryImpl(service = get(), mapper = get())
+    }
+
+
+    // Category
+    factory<CategoryService> { get<Retrofit>().create(CategoryService::class.java) }
+
+    factory<CategoryRepository> {
+        CategoryRepositoryImpl(service = get())
     }
 
     // Session Manager

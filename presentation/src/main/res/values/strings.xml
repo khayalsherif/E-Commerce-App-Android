@@ -30,4 +30,9 @@
     <string name="google">Google</string>
     <string name="apple">Apple</string>
     <string name="or">or</string>
+    <string name="search_for_anything">Search for anything</string>
+    <string name="products">Products</string>
+    <string name="see_all">See all</string>
+    <string name="shop_categories">Shop categories</string>
+    <string name="category">Category</string>
 </resources>

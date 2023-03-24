@@ -7,5 +7,6 @@ data class Category(
     val level: Int,
     val name: String,
     val parentId: String?,
+    val imgUrl: String?,
     val isSelected:Boolean = false
 )

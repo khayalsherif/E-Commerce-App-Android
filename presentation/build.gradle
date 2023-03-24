@@ -58,4 +58,7 @@ dependencies {
     // Koin
     implementation "io.insert-koin:koin-android:${koinVersion}"
     implementation "io.insert-koin:koin-androidx-viewmodel:${koinVersion}"
+
+    //Coil
+    implementation "io.coil-kt:coil:2.2.2"
 }

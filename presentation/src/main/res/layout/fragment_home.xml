@@ -12,51 +12,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <SearchView
+        <EditText
             android:id="@+id/productSearchView"
-            android:layout_width="wrap_content"
+            style="@style/SearchStyle"
+            android:layout_width="0dp"
             android:layout_height="42dp"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search" />
+            android:layout_weight="1"
+            android:layout_marginEnd="18dp"
+            android:hint="@string/search_for_anything"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:layout_marginEnd="18dp"
+            app:tint="?attr/carrot_accent"
             android:src="@drawable/ic_heart" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:layout_marginEnd="8dp"
+            app:tint="?attr/carrot_accent"
             android:src="@drawable/ic_notification" />
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCategoryCards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvCategoryCards"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="8dp"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
 
         <TextView
+            style="@style/NunitoMedium18spStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Shop categories" />
+            android:text="@string/shop_categories" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubCategoryCards"
@@ -82,18 +88,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/NunitoMedium18spStyle"
                 android:layout_marginStart="8dp"
-                android:text="Products" />
+                android:text="@string/products" />
+
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" >
-            </Space>
+                android:layout_weight="1"/>
+
             <TextView
+                style="@style/NunitoRegular14spAccentStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="See all" />
+                android:text="@string/see_all" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

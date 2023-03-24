@@ -8,5 +8,6 @@ class CategoryResponse (
     val id: String,
     val level: Int,
     val name: String,
+    val imgUrl: String?,
     val parentId: String
 )
