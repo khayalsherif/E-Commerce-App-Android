@@ -6,11 +6,17 @@ import az.red.data.mapper.auth.AuthMapper
 import az.red.data.mapper.cart.CartMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.remote.cart.CartService
+import az.red.data.remote.category.CategoryService
+import az.red.data.remote.product.ProductService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.data.repository.cart.CartRepositoryImpl
+import az.red.data.repository.category.CategoryRepositoryImpl
+import az.red.data.repository.product.ProductRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.domain.repository.auth.AuthRepository
 import az.red.domain.repository.cart.CartRepository
+import az.red.domain.repository.category.CategoryRepository
+import az.red.domain.repository.product.ProductRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -70,6 +76,21 @@ val dataModule = module {
     }
     factory<CartRepository> {
         CartRepositoryImpl(cartService = get(), cartMapper = get())
+    }
+
+
+    // Category
+    factory<CategoryService> { get<Retrofit>().create(CategoryService::class.java) }
+
+    factory<CategoryRepository> {
+        CategoryRepositoryImpl(service = get())
+    }
+
+    // Product
+    factory<ProductService> { get<Retrofit>().create(ProductService::class.java) }
+
+    factory<ProductRepository> {
+        ProductRepositoryImpl(service = get())
     }
 
     // Session Manager

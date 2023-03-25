@@ -28,7 +28,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    private fun triggerUIEvent(event: UIEvent) {
+    fun triggerUIEvent(event: UIEvent) {
         viewModelScope.launch {
             EventBus.publish(event)
         }
@@ -36,7 +36,7 @@ abstract class BaseViewModel : ViewModel() {
 
     fun consumeUIEvent(action: (UIEvent) -> Unit) {
         viewModelScope.launch {
-            EventBus.subscribe(action)
+            EventBus.subscribe<UIEvent>(action)
         }
     }
 }

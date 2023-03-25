@@ -19,8 +19,8 @@ class SessionManagerImpl(
         sessionManager.saveDarkMode(isDarkMode)
     }
 
-    override fun saveAuthToken(token: String, userId: String, rememberMe: Boolean) {
-        sessionManager.saveAuthToken(token, userId, rememberMe)
+    override fun saveAuthToken(token: String,  rememberMe: Boolean) {
+        sessionManager.saveAuthToken(token, rememberMe)
     }
 
     override fun removeAuthToken() {
