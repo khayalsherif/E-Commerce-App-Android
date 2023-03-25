@@ -7,6 +7,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.content.home.adapter.CategoryListItemAdapter
 import az.red.presentation.content.home.adapter.ProductListItemAdapter
@@ -48,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         rvSubCategoryCards.adapter = categoryListItemAdapter
         rvProducts.adapter = productListItemAdapter
-
+        ivWishList.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_wishListFragment) }
 
 
         lifecycleScope.launch {
