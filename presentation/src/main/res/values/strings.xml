@@ -51,4 +51,5 @@
     <string name="product_description">Product description</string>
     <string name="mock_price">US $XXX</string>
     <string name="product_image">Product image</string>
+    <string name="mock_discount">xx%</string>
 </resources>

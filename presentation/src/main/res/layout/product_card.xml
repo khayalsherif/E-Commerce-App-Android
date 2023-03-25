@@ -15,8 +15,36 @@
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
-            android:contentDescription="@string/product_image" />
+            android:contentDescription="@string/product_image"
+            android:src="@drawable/ic_launcher_background" />
+
+        <ImageView
+            android:id="@+id/ivHeart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="5dp"
+            android:contentDescription="@string/product_image"
+            android:elevation="1dp"
+            android:src="@drawable/ic_heart" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvSale"
+            android:layout_width="52dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:visibility="invisible"
+            android:layout_margin="5dp"
+            app:cardBackgroundColor="?attr/carrot_accent"
+            app:cardCornerRadius="6dp">
+
+            <TextView
+                android:id="@+id/tvSale"
+                style="@style/NunitoSemiBold12spWhiteStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/mock_discount" />
+        </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -47,6 +75,7 @@
         style="@style/NunitoRegular14spStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="@string/mock_price" />
 </LinearLayout>
 

@@ -2,15 +2,18 @@ package az.red.presentation.content.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView.SmoothScroller
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.content.home.adapter.CategoryListItemAdapter
+import az.red.presentation.content.home.adapter.ProductListItemAdapter
 import az.red.presentation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
-import androidx.activity.OnBackPressedCallback
-import az.red.presentation.content.home.adapter.ProductListItemAdapter
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -36,8 +39,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         )
-        categoryListItemAdapter = CategoryListItemAdapter{viewModel.selectCategory(it)}
-        productListItemAdapter = ProductListItemAdapter()
+        categoryListItemAdapter = CategoryListItemAdapter {
+            viewModel.selectCategory(it)
+        }
+        productListItemAdapter = ProductListItemAdapter { /*TODO:Add to wih list*/
+            Toast.makeText(requireContext(), "added to wishlist", Toast.LENGTH_SHORT).show()
+        }
         rvSubCategoryCards.adapter = categoryListItemAdapter
         rvProducts.adapter = productListItemAdapter
 
