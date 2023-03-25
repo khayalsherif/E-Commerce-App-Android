@@ -7,8 +7,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.RecyclerView.SmoothScroller
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.content.home.adapter.CategoryListItemAdapter
 import az.red.presentation.content.home.adapter.ProductListItemAdapter

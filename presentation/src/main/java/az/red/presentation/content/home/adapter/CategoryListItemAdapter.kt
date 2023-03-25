@@ -3,7 +3,6 @@ package az.red.presentation.content.home.adapter
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import az.red.domain.model.category.Category
 import az.red.presentation.R

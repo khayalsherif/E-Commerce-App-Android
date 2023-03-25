@@ -16,6 +16,7 @@
         <attr name="edit_text_stroke_un_selected_color" format="color" />
         <attr name="edit_text_background_color" format="color" />
         <attr name="carrot_accent" format="color" />
+        <attr name="custom_background" format="color" />
     </declare-styleable>
 
     <style name="ButtonStyle">
