@@ -8,14 +8,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.content.home.adapter.CategoryListItemAdapter
 import az.red.presentation.databinding.FragmentHomeBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.activity.OnBackPressedCallback
-
+import az.red.presentation.content.home.adapter.ProductListItemAdapter
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
-    private lateinit var adapter: CategoryListItemAdapter
+    private lateinit var categoryListItemAdapter: CategoryListItemAdapter
+    private lateinit var productListItemAdapter: ProductListItemAdapter
     override val bindingCallBack =
         { inflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean ->
             FragmentHomeBinding.inflate(
@@ -36,13 +36,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         )
-        adapter = CategoryListItemAdapter()
-        rvSubCategoryCards.apply {
-            adapter = adapter
+        categoryListItemAdapter = CategoryListItemAdapter{viewModel.selectCategory(it)}
+        productListItemAdapter = ProductListItemAdapter()
+        rvSubCategoryCards.adapter = categoryListItemAdapter
+        rvProducts.adapter = productListItemAdapter
+
+
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.categories.collect { categoryListItemAdapter.setData(it) }
+            }
         }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.categories.collect { adapter.setData(it) }
+                viewModel.products.collect { productListItemAdapter.setData(it) }
             }
         }
     }

@@ -21,35 +21,25 @@
             style="@style/SearchStyle"
             android:layout_width="0dp"
             android:layout_height="42dp"
-            android:layout_weight="1"
             android:layout_marginEnd="18dp"
-            android:hint="@string/search_for_anything"/>
+            android:layout_weight="1"
+            android:hint="@string/search_for_anything" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
-            app:tint="?attr/carrot_accent"
-            android:src="@drawable/ic_heart" />
+            android:src="@drawable/ic_heart"
+            app:tint="?attr/carrot_accent" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            app:tint="?attr/carrot_accent"
-            android:src="@drawable/ic_notification" />
+            android:src="@drawable/ic_notification"
+            app:tint="?attr/carrot_accent" />
 
     </LinearLayout>
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rvCategoryCards"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:padding="8dp"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2" />
     </LinearLayout>
@@ -86,16 +75,16 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/NunitoMedium18spStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/NunitoMedium18spStyle"
                 android:layout_marginStart="8dp"
                 android:text="@string/products" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 style="@style/NunitoRegular14spAccentStyle"
@@ -110,9 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     </LinearLayout>
 
 </LinearLayout>

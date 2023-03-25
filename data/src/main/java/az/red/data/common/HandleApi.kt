@@ -32,7 +32,7 @@ inline fun <T : Any, reified D : Any> handleApi(
     }
 }.catch {
     when (it) {
-        is HttpException -> emit(NetworkResult.Error(message = it.message(), code = it.code()))
-        else -> emit(NetworkResult.Exception(exception = it.message!!))
+        is HttpException -> emit(NetworkResult.Error(message = it.stackTraceToString(), code = it.code()))
+        else -> emit(NetworkResult.Exception(exception = it.stackTraceToString()))
     }
 }
