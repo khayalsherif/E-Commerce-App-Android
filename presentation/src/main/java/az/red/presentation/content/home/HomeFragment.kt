@@ -2,7 +2,6 @@ package az.red.presentation.content.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,31 +13,29 @@ import az.red.presentation.content.home.adapter.CategoryListItemAdapter
 import az.red.presentation.content.home.adapter.ProductListItemAdapter
 import az.red.presentation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
-
+import kotlin.reflect.KClass
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+
+    override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
+        get() = FragmentHomeBinding::inflate
+    override val kClass: KClass<HomeViewModel>
+        get() = HomeViewModel::class
+
     private val categoryListItemAdapter by lazy {
         CategoryListItemAdapter {
             viewModel.selectCategory(it)
         }
     }
+
     private val productListItemAdapter by lazy {
-        ProductListItemAdapter { /*TODO:Add to wih list*/
-            Toast.makeText(requireContext(), "added to wishlist", Toast.LENGTH_SHORT).show()
+        ProductListItemAdapter { //Add to wih list
+            showToast("added to wishlist")
         }
     }
-    override val bindingCallBack =
-        { inflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean ->
-            FragmentHomeBinding.inflate(
-                inflater,
-                parent,
-                attachToParent
-            )
-        }
-    override val kClass = HomeViewModel::class
-
 
     override val bindViews: FragmentHomeBinding.() -> Unit = {
+
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {

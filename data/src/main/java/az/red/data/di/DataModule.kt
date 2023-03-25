@@ -75,6 +75,7 @@ val dataModule = module {
     factory<CategoryRepository> {
         CategoryRepositoryImpl(service = get())
     }
+
     // Product
     factory<ProductService> { get<Retrofit>().create(ProductService::class.java) }
 

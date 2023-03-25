@@ -5,9 +5,11 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import az.red.domain.model.product.Product
 import az.red.presentation.R
+import az.red.presentation.base.BaseDiffUtil
 import az.red.presentation.databinding.ProductCardBinding
 import coil.load
 import kotlin.math.roundToInt
@@ -34,8 +36,10 @@ class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
     }
 
     fun setData(newData: List<Product>) {
+        val diffUtil = BaseDiffUtil(data, newData)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
         data = newData.toMutableList()
-        notifyDataSetChanged()
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 }
 
