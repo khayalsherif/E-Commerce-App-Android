@@ -40,4 +40,16 @@
     <string name="google">Google</string>
     <string name="apple">Apple</string>
     <string name="or">və ya</string>
+    <string name="search_for_anything">Nəyisə axtarın</string>
+    <string name="products">Məhsullar</string>
+    <string name="see_all">Hamısına bax</string>
+    <string name="shop_categories">Mağaza kateqoriyaları</string>
+    <string name="category">Kateqoriya</string>
+    <string name="search">Axtar</string>
+    <string name="delete">Sil</string>
+    <string name="product_name">Məhsul adı</string>
+    <string name="product_description">Məhsul təsviri</string>
+    <string name="mock_price">US $XXX</string>
+    <string name="product_image">Məhsul şəkli</string>
+    <string name="mock_discount">xx%</string>
 </resources>
