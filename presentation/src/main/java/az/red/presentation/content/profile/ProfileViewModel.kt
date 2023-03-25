@@ -22,6 +22,10 @@ class ProfileViewModel(
         isDarkMode = sessionManagerUseCase.getCurrentAppTheme()
     }
 
+    fun getCurrentLanguage(): String =
+        sessionManagerUseCase.getCurrentLanguage()
+
+
     fun saveCurrentLanguage(language: String) {
         sessionManagerUseCase.saveCurrentLanguage(language)
     }
