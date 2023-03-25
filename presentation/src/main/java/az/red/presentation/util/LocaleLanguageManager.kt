@@ -4,13 +4,14 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import java.util.*
 
 class LocalLanguageManager {
 
-    fun onAttach(context: Context): Context {
-        val lang = getPersistedData(context)
-        return setLocale(context, lang)
+    fun onAttach(context: Context, useCase: SessionManagerUseCase): Context {
+        val lang = getPersistedData(useCase)
+        return setLocale(context, lang, useCase)
     }
 
     private fun performSetLanguage(context: Context, lang: String?) {
@@ -21,8 +22,12 @@ class LocalLanguageManager {
         context.createConfigurationContext(config)
     }
 
-    private fun setLocale(context: Context, language: String): Context {
-        persist(context, language)
+    private fun setLocale(
+        context: Context,
+        language: String,
+        useCase: SessionManagerUseCase
+    ): Context {
+        persist( language, useCase)
         try {
             performSetLanguage(context, language)
         } catch (e: Exception) {
@@ -36,12 +41,15 @@ class LocalLanguageManager {
         }
     }
 
-    private fun getPersistedData(context: Context): String {
-        return ""
+    private fun getPersistedData(useCase: SessionManagerUseCase): String {
+        return useCase.getCurrentLanguage()
     }
 
-    private fun persist(context: Context, language: String) {
-//        sessionManagerUseCase.saveCurrentLanguage(language)
+    private fun persist(
+        language: String,
+        sessionManagerUseCase: SessionManagerUseCase
+    ) {
+        sessionManagerUseCase.saveCurrentLanguage(language)
     }
 
     @TargetApi(Build.VERSION_CODES.N)
