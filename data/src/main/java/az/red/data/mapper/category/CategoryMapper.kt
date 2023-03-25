@@ -11,7 +11,7 @@ fun CategoryResponse.categoryResponseToCategory(): Category {
         description = description,
         id = id,
         level = level,
-        name = name.capitalizeCustom(),
+        name = name,
         parentId = parentId,
         imgUrl = imgUrl,
         isSelected = false

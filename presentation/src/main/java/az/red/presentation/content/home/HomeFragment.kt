@@ -17,8 +17,16 @@ import kotlinx.coroutines.launch
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
-    private lateinit var categoryListItemAdapter: CategoryListItemAdapter
-    private lateinit var productListItemAdapter: ProductListItemAdapter
+    private val categoryListItemAdapter by lazy {
+        CategoryListItemAdapter {
+            viewModel.selectCategory(it)
+        }
+    }
+    private val productListItemAdapter by lazy {
+        ProductListItemAdapter { /*TODO:Add to wih list*/
+            Toast.makeText(requireContext(), "added to wishlist", Toast.LENGTH_SHORT).show()
+        }
+    }
     override val bindingCallBack =
         { inflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean ->
             FragmentHomeBinding.inflate(
@@ -39,12 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         )
-        categoryListItemAdapter = CategoryListItemAdapter {
-            viewModel.selectCategory(it)
-        }
-        productListItemAdapter = ProductListItemAdapter { /*TODO:Add to wih list*/
-            Toast.makeText(requireContext(), "added to wishlist", Toast.LENGTH_SHORT).show()
-        }
+
         rvSubCategoryCards.adapter = categoryListItemAdapter
         rvProducts.adapter = productListItemAdapter
 
