@@ -22,7 +22,7 @@
             android:id="@+id/ivHeart"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_margin="5dp"
+            android:layout_margin="6dp"
             android:contentDescription="@string/product_image"
             android:elevation="1dp"
             android:src="@drawable/ic_heart" />
