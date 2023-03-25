@@ -12,8 +12,9 @@ object EndPoints {
 
     //Cart
     private const val CART_BASE = "cart"
-
     const val GET_CART = CART_BASE
+    const val DECREASE_CART_PRODUCT = "$CART_BASE/product/{productId}"
+    const val DELETE_CART = CART_BASE
 
     //Product
     private const val PRODUCT_BASE = "products"
