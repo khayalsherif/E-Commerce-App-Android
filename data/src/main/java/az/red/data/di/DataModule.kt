@@ -3,10 +3,14 @@ package az.red.data.di
 import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
 import az.red.data.mapper.auth.AuthMapper
+import az.red.data.mapper.cart.CartMapper
 import az.red.data.remote.auth.AuthService
+import az.red.data.remote.cart.CartService
 import az.red.data.repository.auth.AuthRepositoryImpl
+import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.domain.repository.auth.AuthRepository
+import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -58,8 +62,14 @@ val dataModule = module {
     // Auth
     factory<AuthService> { get<Retrofit>().create(AuthService::class.java) }
 
+
+    factory<CartService> { get<Retrofit>().create(CartService::class.java) }
+
     factory<AuthRepository> {
         AuthRepositoryImpl(service = get(), mapper = get())
+    }
+    factory<CartRepository> {
+        CartRepositoryImpl(cartService = get(), cartMapper = get())
     }
 
     // Session Manager
@@ -78,4 +88,5 @@ val dataModule = module {
     single { Gson() }
 
     factory { AuthMapper() }
+    factory { CartMapper() }
 }

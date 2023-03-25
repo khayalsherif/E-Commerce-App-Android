@@ -9,4 +9,9 @@ object EndPoints {
     const val CURRENT_USER = "$USER_BASE/customer"
     const val UPDATE_USER = USER_BASE
     const val UPDATE_USER_PASSWORD = "$USER_BASE/password"
+
+    //Cart
+    private const val CART_BASE = "cart"
+
+    const val GET_CART = CART_BASE
 }

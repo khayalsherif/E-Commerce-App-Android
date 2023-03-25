@@ -2,23 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
 
     <com.google.android.material.appbar.MaterialToolbar
+        style="@style/CustomToolbarStyle"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/cart"
-        android:theme="@style/CustomToolbarStyle"
         app:menu="@menu/cart_menu"
+        app:title="@string/cart"
         app:navigationIcon="@drawable/ic_back" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:layout_marginHorizontal="16dp"
+        tools:listitem="@layout/cart_list_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="10"
+        android:id="@+id/rv_cart"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/carrot_accent"
+        app:cardElevation="0dp"
+        android:layout_weight="0.2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSemiBold14spStyle"
+                        android:id="@+id/txt_total_sum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Total sum"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/NunitoSemiBold14spStyle"
+                        android:id="@+id/txt_total_sum_value"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_total_sum"
+                        android:gravity="start"
+                        android:text="US $540.00"/>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="bottom"
+                    android:layout_height="44dp"
+                    android:text="@string/checkout" />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
 
 </LinearLayout>
