@@ -10,6 +10,9 @@ import az.red.presentation.content.home.adapter.CategoryListItemAdapter
 import az.red.presentation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import androidx.activity.OnBackPressedCallback
+
+
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private lateinit var adapter: CategoryListItemAdapter
@@ -23,17 +26,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     override val kClass = HomeViewModel::class
 
+
     override val bindViews: FragmentHomeBinding.() -> Unit = {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
         adapter = CategoryListItemAdapter()
         rvSubCategoryCards.apply {
             adapter = adapter
         }
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.categories.collect { adapter.setData(it) }
             }
         }
     }
-
 }

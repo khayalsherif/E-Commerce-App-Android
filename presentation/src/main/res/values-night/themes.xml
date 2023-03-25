@@ -13,7 +13,6 @@
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:background">@color/dark_screen_background_color</item>
         <!-- Customize your theme here. -->
         <item name="hint_color">@color/dark_hint_color</item>
         <item name="screen_title_color">@color/dark_screen_title_color</item>

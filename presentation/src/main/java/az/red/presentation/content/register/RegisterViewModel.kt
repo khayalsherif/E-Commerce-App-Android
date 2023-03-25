@@ -22,8 +22,8 @@ class RegisterViewModel(
         MutableStateFlow<NetworkResult<Register>>(NetworkResult.Empty())
     val registerResponse: StateFlow<NetworkResult<Register>> get() = _registerResponse
 
-    fun saveToken(token: String, userId: String, rememberMe: Boolean) {
-        sessionManagerUseCase.saveAuthToken(token = token, userId = userId, rememberMe)
+    fun saveToken(token: String, rememberMe: Boolean) {
+        sessionManagerUseCase.saveAuthToken(token = token, rememberMe)
     }
 
     fun register(userData: RegisterRequest) = viewModelScope.launch {

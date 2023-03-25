@@ -19,8 +19,8 @@ class SessionManagerImpl(
         sessionManager.saveDarkMode(isDarkMode)
     }
 
-    override fun saveAuthToken(token: String, userId: String, rememberMe: Boolean) {
-        sessionManager.saveAuthToken(token, userId, rememberMe)
+    override fun saveAuthToken(token: String,  rememberMe: Boolean) {
+        sessionManager.saveAuthToken(token, rememberMe)
     }
 
     override fun removeAuthToken() {
@@ -37,5 +37,9 @@ class SessionManagerImpl(
 
     override fun getRememberMe(): Boolean {
         return sessionManager.getRememberMe()
+    }
+
+    override fun getCurrentAppTheme(): Boolean {
+        return sessionManager.getCurrentAppTheme()
     }
 }

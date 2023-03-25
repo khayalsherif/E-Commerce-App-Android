@@ -16,17 +16,28 @@ class LoginViewModel(
     private val sessionManagerUseCase: SessionManagerUseCase
 ) : BaseViewModel() {
 
+    val isLoggedIn = MutableStateFlow(false)
     private val _loginResponse =
         MutableStateFlow<NetworkResult<Login>>(NetworkResult.Empty())
     val loginResponse: StateFlow<NetworkResult<Login>> get() = _loginResponse
 
-    fun saveToken(token: String, userId: String, rememberMe: Boolean) {
-        sessionManagerUseCase.saveAuthToken(token = token, userId = userId, rememberMe)
+    init {
+        authorizationCheck()
+    }
+
+    fun saveToken(token: String, rememberMe: Boolean) {
+        sessionManagerUseCase.saveAuthToken(token = token, rememberMe)
     }
 
     fun login(userData: LoginRequest) = viewModelScope.launch {
         authUseCase.login(userData).collect {
             _loginResponse.emit(it)
+        }
+    }
+
+    private fun authorizationCheck() {
+        sessionManagerUseCase.getAuthToken().let {
+            isLoggedIn.value = !it.isNullOrEmpty()
         }
     }
 

@@ -2,6 +2,7 @@ package az.red.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import az.red.data.util.JwtParser
 
 class SessionManager(context: Context) {
     private var prefs: SharedPreferences =
@@ -36,10 +37,10 @@ class SessionManager(context: Context) {
     }
 
     // Token
-    fun saveAuthToken(token: String, userId: String, rememberMe: Boolean) {
+    fun saveAuthToken(token: String,  rememberMe: Boolean) {
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)
-        editor.putString(USER_ID, userId)
+        editor.putString(USER_ID, JwtParser.getUserId(token))
         editor.putBoolean(REMEMBER_ME, rememberMe)
         editor.apply()
     }
@@ -54,6 +55,10 @@ class SessionManager(context: Context) {
 
     fun getAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
+    }
+
+    fun getCurrentAppTheme() : Boolean{
+        return prefs.getBoolean(DARK_MODE,false)
     }
 
 

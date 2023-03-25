@@ -3,6 +3,13 @@
     <string name="orders">Orders</string>
     <string name="cart">Cart</string>
     <string name="profile">Profile</string>
+    <string name="notification">Notification</string>
+    <string name="address">Address</string>
+    <string name="payment">Payment</string>
+    <string name="security">Security</string>
+    <string name="log_out">Log out</string>
+    <string name="my_products">My products</string>
+    <string name="add_new_product">Add new product</string>
     <string name="sing_in_to_account">Sing in to account</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -23,6 +30,9 @@
     <string name="username_or_email">Username or email</string>
     <string name="continue_text">Continue</string>
     <string name="enter_recovery_code">Enter recovery code</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="help_center">Help center</string>
+    <string name="edit_profile">Edit profile</string>
     <string name="lets_you_in">Lets you in</string>
     <string name="you_can_sign_in_with">You can sign in with</string>
     <string name="sign_in_with_password">Sign in with password</string>
@@ -35,4 +45,6 @@
     <string name="see_all">See all</string>
     <string name="shop_categories">Shop categories</string>
     <string name="category">Category</string>
+    <string name="search">Search</string>
+    <string name="delete">Delete</string>
 </resources>
