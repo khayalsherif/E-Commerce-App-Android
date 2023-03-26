@@ -2,6 +2,7 @@ package az.red.domain.di
 
 import az.red.domain.usecase.auth.AuthUseCase
 import az.red.domain.usecase.home.GetCategoriesUseCase
+import az.red.domain.usecase.home.GetProductByIdUseCase
 import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
@@ -20,6 +21,8 @@ val domainModule = module {
     factory {
         GetProductsFilteredPaginatedUseCase(repository = get())
     }
+    factory { GetProductByIdUseCase(repository = get()) }
+
     factory {
         SessionManagerUseCase(sessionManagerRepository = get())
     }

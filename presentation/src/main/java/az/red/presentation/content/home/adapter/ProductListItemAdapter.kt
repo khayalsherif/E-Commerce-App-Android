@@ -79,7 +79,7 @@ class ProductViewHolder(private val binding: ProductCardBinding) :
         }
 
         binding.root.setOnClickListener {
-            clickListener.onClick(it, product.id)
+            clickListener.onClick(it, product.itemNo)
         }
         binding.ivHeart.setOnClickListener {
             addToWishList(product.id)

@@ -1,9 +1,11 @@
 package az.red.data.remote.product
 
 import az.red.data.model.product.ProductListResponse
+import az.red.data.model.product.ProductResponse
 import az.red.data.remote.EndPoints
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
@@ -21,5 +23,8 @@ interface ProductService {
         @Query("startPage") startPage: Int? = null,
         @Query("perPage") perPage: Int? = null
     ): Response<ProductListResponse>
+
+    @GET(EndPoints.PRODUCT + "/{itemNo}")
+    suspend fun getProductById(@Path("itemNo") itemNo: String): Response<ProductResponse>
 
 }

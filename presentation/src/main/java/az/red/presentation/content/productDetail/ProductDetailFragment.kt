@@ -16,8 +16,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     private val args by navArgs<ProductDetailFragmentArgs>()
 
     override val bindViews: FragmentProductDetailBinding.() -> Unit = {
-
-        println(args.id)
-
+        viewModel.getProductDetail(args.id)
     }
 }
