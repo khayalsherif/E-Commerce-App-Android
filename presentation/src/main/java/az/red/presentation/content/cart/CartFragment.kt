@@ -7,8 +7,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import az.red.domain.model.cart.CartProduct
-import az.red.domain.model.order.request.DeliveryAddress
-import az.red.domain.model.order.request.OrderRequest
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.base.RecyclerListAdapter
@@ -66,24 +64,12 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
     private fun createOrder() {
         binding.btnCheckout.setOnClickListener {
-            val orderRequest = OrderRequest(
-                "63e77ae212c7cfc9d421fddd",
-                DeliveryAddress("Azerbaijan","M.Hadi 256","Baku","1024"),
-                "Baku AZ1000",
-                "Credit card",
-                "not shipped",
-                "fsaliyeva96@gmail.com",
-                "+380630000000",
-                "Thank you for order! You are welcome!",
-                "<h1>Your order is placed. OrderNo is ###.</h1><p>Have a good day!</p>",
-                products
-            )
 
-            viewModel.createOrder(orderRequest)
+            viewModel.createOrder(products)
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.createOrderResponse.collect {
-                        Snackbar.make(requireView(), "Success", Snackbar.LENGTH_LONG).show()
+                    viewModel.createOrderResponse.collect {//TODO: Add when for network result. In Snackbar display which items have problems (from error response product availability details)
+                        Snackbar.make(requireView(), it.data?.message.toString(), Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

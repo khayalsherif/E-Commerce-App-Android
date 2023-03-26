@@ -2,6 +2,7 @@ package az.red.data.repository.order
 
 import az.red.data.common.handleApi
 import az.red.data.mapper.order.OrderMapper
+import az.red.data.model.order.response.OrderResponse
 import az.red.data.remote.order.OrderService
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.order.request.OrderRequest
@@ -16,7 +17,7 @@ class OrderRepositoryImpl(
 
     override suspend fun createOrder(orderRequest: OrderRequest): Flow<NetworkResult<DomainOrder>> {
         val request = orderService.createOrder(orderRequest)
-        return handleApi(
+        return handleApi<OrderResponse,DomainOrder >(
             mapper = { orderMapper.orderResponseToDomainOrder(request.body()!!) },
             execute = { request }
         )

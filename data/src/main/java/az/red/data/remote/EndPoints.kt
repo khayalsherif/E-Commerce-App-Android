@@ -29,7 +29,7 @@ object EndPoints {
     const val COLOR = "colors"
 
     //Orders
-    private const val ORDER_BASE = "order"
+    private const val ORDER_BASE = "orders"
     const val CREATE_ORDER = ORDER_BASE
 
 
