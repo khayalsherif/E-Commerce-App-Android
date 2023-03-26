@@ -12,7 +12,7 @@ val presentationModule = module {
 
     viewModel { LoginViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
     viewModel { RegisterViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
-    viewModel { HomeViewModel(getCategoriesUseCase = get(), getProductsFilteredUseCase = get()) }
+    viewModel { HomeViewModel(getCategoriesUseCase = get(), getProductsFilteredUseCase = get(), getProductsFilteredPaginatedUseCase =  get()) }
     viewModel { ProfileViewModel(sessionManagerUseCase = get()) }
     viewModel { CartViewModel() }
 }

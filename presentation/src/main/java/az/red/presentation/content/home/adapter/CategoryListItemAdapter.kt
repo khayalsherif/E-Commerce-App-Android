@@ -59,7 +59,7 @@ class CategoryViewHolder(private val binding: CategoryCardBinding) :
         if (currentItem.isSelected) {
             binding.tvCategoryName.setTextColor(Color.RED)
         } else {
-            binding.tvCategoryName.setTextColor(Color.BLACK)
+            binding.tvCategoryName.setTextColor(R.attr.text_color)
         }
     }
 
