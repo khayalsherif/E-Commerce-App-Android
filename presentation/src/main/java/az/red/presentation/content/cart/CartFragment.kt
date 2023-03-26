@@ -6,12 +6,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import az.red.domain.model.cart.CartProduct
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.base.RecyclerListAdapter
 import az.red.presentation.common.gone
 import az.red.presentation.common.visible
+import az.red.presentation.content.MainActivity
 import az.red.presentation.databinding.CartListItemBinding
 import az.red.presentation.databinding.FragmentCartBinding
 import kotlinx.coroutines.launch
@@ -22,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar
 class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
     private var totalSum: Double = 0.0
-    private lateinit var customerId: String
     private lateinit var products : List<CartProduct>
 
     override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCartBinding
@@ -36,6 +37,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         checkoutValue()
         deleteCart()
         createOrder()
+        navigateBack()
     }
 
     private fun observeCartValues() {
@@ -48,7 +50,6 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                             binding.rvCart.adapter = adapter
                         } else {
                             adapter.submitList(it.data!!.products)
-                            customerId = it.data!!.customerId._id.toString()
                             products = it.data!!.products
                         }
                     }
@@ -91,7 +92,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             lifecycleScope.launch {
                 binding.layoutLoading.root.gone()
                 viewModel.deleteCartResponse.collect { result ->
-                    showToast(result.data!!.message)
+                    showToast("Cart deleted successfully")
+                    (activity as MainActivity).recreate()
                 }
             }
         }
@@ -196,5 +198,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         )
     }
 
+    private fun navigateBack(){
+        binding.toolbar.setNavigationOnClickListener {
+            val navController = findNavController()
+            navController.navigateUp()
+        }
+    }
 
 }
