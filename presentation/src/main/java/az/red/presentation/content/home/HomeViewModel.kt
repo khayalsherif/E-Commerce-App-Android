@@ -6,15 +6,14 @@ import androidx.paging.cachedIn
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.category.Category
 import az.red.domain.model.product.Product
-import az.red.domain.model.product.ProductListRequest
 import az.red.domain.usecase.home.GetCategoriesUseCase
 import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
 import az.red.presentation.base.BaseViewModel
+import az.red.presentation.content.home.enums.ViewOption
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 

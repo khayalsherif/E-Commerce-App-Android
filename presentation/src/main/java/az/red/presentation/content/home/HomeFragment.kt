@@ -1,7 +1,6 @@
 package az.red.presentation.content.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
@@ -14,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
+import az.red.presentation.common.gone
+import az.red.presentation.common.visible
 import az.red.presentation.content.home.adapter.CategoryListItemAdapter
 import az.red.presentation.content.home.adapter.ProductListItemAdapter
 import az.red.presentation.content.home.adapter.ProductListItemPagingAdapter
+import az.red.presentation.content.home.enums.ViewOption
 import az.red.presentation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -41,7 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
     }
     private val paginatedProductListItemAdapter by lazy {
-        ProductListItemPagingAdapter {   showToast("added to wishlist") }
+        ProductListItemPagingAdapter { showToast("added to wishlist") }
     }
 
     override val bindViews: FragmentHomeBinding.() -> Unit = {
@@ -75,7 +77,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         ivBlocks.setOnClickListener {
             viewModel.viewOption.value = ViewOption.BLOCK
-
         }
 
         lifecycleScope.launch {
@@ -92,45 +93,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         lifecycleScope.launch {
             viewModel.data.collectLatest {
                 paginatedProductListItemAdapter.submitData(it)
-                println( it.map { i-> i.name })
+                println(it.map { i -> i.name })
             }
         }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.viewOption.collect {
-                    when(it){
+                    when (it) {
                         ViewOption.FILTER -> {
-                            tvSeeAll.visibility = View.VISIBLE
-                            categoryFilterSection.visibility = View.VISIBLE
-                            rvProducts.visibility = View.VISIBLE
-                            productDisplaySettings.visibility = View.GONE
-                            rvProductListPaging.visibility = View.GONE
+                            tvSeeAll.visible()
+                            categoryFilterSection.visible()
+                            rvProducts.visible()
+                            productDisplaySettings.gone()
+                            rvProductListPaging.gone()
                         }
                         ViewOption.BLOCK -> {
-                            tvSeeAll.visibility = View.GONE
-                            rvProducts.visibility = View.GONE
-                            productDisplaySettings.visibility = View.VISIBLE
-                            ivBlocks.visibility = View.GONE
-                            categoryFilterSection.visibility = View.GONE
-                            ivLines.visibility = View.VISIBLE
+                            tvSeeAll.gone()
+                            rvProducts.gone()
+                            productDisplaySettings.visible()
+                            ivBlocks.gone()
+                            categoryFilterSection.gone()
+                            ivLines.visible()
+                            rvProductListPaging.visible()
                             rvProductListPaging.layoutManager =
                                 GridLayoutManager(requireContext(), 2, VERTICAL, false)
                             paginatedProductListItemAdapter.switchToBlockView()
-                            rvProductListPaging.visibility = View.VISIBLE
                         }
                         ViewOption.LIST -> {
-                            tvSeeAll.visibility = View.GONE
-                            rvProducts.visibility = View.GONE
-                            productDisplaySettings.visibility = View.VISIBLE
-                            ivBlocks.visibility = View.VISIBLE
-                            categoryFilterSection.visibility = View.GONE
-                            ivLines.visibility = View.GONE
-                            rvProductListPaging.layoutManager = LinearLayoutManager(requireContext())
+                            tvSeeAll.gone()
+                            rvProducts.gone()
+                            productDisplaySettings.visible()
+                            ivBlocks.visible()
+                            categoryFilterSection.gone()
+                            ivLines.gone()
+                            rvProductListPaging.visible()
+                            rvProductListPaging.layoutManager =
+                                LinearLayoutManager(requireContext())
                             paginatedProductListItemAdapter.switchToLineView()
-                            rvProductListPaging.visibility = View.VISIBLE
-
-
                         }
                     }
                 }

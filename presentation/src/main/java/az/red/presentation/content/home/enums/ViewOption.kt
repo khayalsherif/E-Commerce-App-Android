@@ -1,5 +1,4 @@
-package az.red.presentation.content.home
-
+package az.red.presentation.content.home.enums
 
 enum class ViewOption{
     FILTER,
