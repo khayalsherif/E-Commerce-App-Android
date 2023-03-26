@@ -1,29 +1,31 @@
 package az.red.presentation.content.cart
 
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import az.red.domain.common.NetworkResult
 import az.red.domain.model.cart.CartProduct
+import az.red.domain.model.order.request.DeliveryAddress
+import az.red.domain.model.order.request.OrderRequest
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.base.RecyclerListAdapter
 import az.red.presentation.common.gone
 import az.red.presentation.common.visible
-import az.red.presentation.content.MainActivity
 import az.red.presentation.databinding.CartListItemBinding
 import az.red.presentation.databinding.FragmentCartBinding
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 
 class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
     private var totalSum: Double = 0.0
+    private lateinit var customerId: String
+    private lateinit var products : List<CartProduct>
 
     override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCartBinding
         get() = FragmentCartBinding::inflate
@@ -35,6 +37,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         observeCartValues()
         checkoutValue()
         deleteCart()
+        createOrder()
     }
 
     private fun observeCartValues() {
@@ -45,12 +48,42 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                         binding.layoutLoading.root.gone()
                         if (binding.rvCart.adapter == null) {
                             binding.rvCart.adapter = adapter
-                        } else adapter.submitList(it.data!!.products)
+                        } else {
+                            adapter.submitList(it.data!!.products)
+                            customerId = it.data!!.customerId._id.toString()
+                            products = it.data!!.products
+                        }
                     }
                 }
                 launch {
                     viewModel.isLoading.collect {
                         binding.layoutLoading.root.visible()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createOrder() {
+        binding.btnCheckout.setOnClickListener {
+            val orderRequest = OrderRequest(
+                "63e77ae212c7cfc9d421fddd",
+                DeliveryAddress("Azerbaijan","M.Hadi 256","Baku","1024"),
+                "Baku AZ1000",
+                "Credit card",
+                "not shipped",
+                "fsaliyeva96@gmail.com",
+                "+380630000000",
+                "Thank you for order! You are welcome!",
+                "<h1>Your order is placed. OrderNo is ###.</h1><p>Have a good day!</p>",
+                products
+            )
+
+            viewModel.createOrder(orderRequest)
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.createOrderResponse.collect {
+                        Snackbar.make(requireView(), "Success", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }
@@ -70,9 +103,9 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         builder.setPositiveButton(android.R.string.yes) { _, _ ->
             viewModel.deleteCart()
             lifecycleScope.launch {
-                    binding.layoutLoading.root.gone()
-                    viewModel.deleteCartResponse.collect {result ->
-                        showToast(result.data!!.message)
+                binding.layoutLoading.root.gone()
+                viewModel.deleteCartResponse.collect { result ->
+                    showToast(result.data!!.message)
                 }
             }
         }
@@ -165,7 +198,6 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                         val sum = cartQuantity * data.product.currentPrice
                         if (isChecked) {
                             totalSum += sum
-
 
                         } else {
                             totalSum -= sum

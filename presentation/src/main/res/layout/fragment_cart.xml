@@ -111,6 +111,7 @@
 
                 <TextView
                     style="@style/ButtonStyle"
+                    android:id="@+id/btn_checkout"
                     android:layout_width="0dp"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="0.5"

@@ -6,6 +6,7 @@ import az.red.domain.usecase.cart.DeleteCartUseCase
 import az.red.domain.usecase.cart.GetCartUseCase
 import az.red.domain.usecase.home.GetCategoriesUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
+import az.red.domain.usecase.order.CreateOrderUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import org.koin.dsl.module
 
@@ -32,6 +33,11 @@ val domainModule = module {
     factory {
         GetProductsFilteredUseCase(repository = get())
     }
+
+    factory {
+        CreateOrderUseCase(orderRepository = get())
+    }
+
     factory {
         SessionManagerUseCase(sessionManagerRepository = get())
     }

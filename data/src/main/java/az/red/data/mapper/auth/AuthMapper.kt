@@ -33,7 +33,8 @@ class AuthMapper {
             login = registerResponse.login,
             password = registerResponse.password,
             telephone = registerResponse.telephone,
-            message = registerResponse.message
+            message = registerResponse.message,
+            _id = registerResponse._id
         )
     }
 
