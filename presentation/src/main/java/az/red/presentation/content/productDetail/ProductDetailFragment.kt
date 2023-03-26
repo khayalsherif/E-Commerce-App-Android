@@ -1,20 +1,23 @@
 package az.red.presentation.content.productDetail
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import az.red.presentation.R
+import androidx.navigation.fragment.navArgs
+import az.red.presentation.base.BaseFragment
+import az.red.presentation.databinding.FragmentProductDetailBinding
+import kotlin.reflect.KClass
 
-class ProductDetailFragment : Fragment() {
+class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, ProductDetailViewModel>() {
+    override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailBinding
+        get() = FragmentProductDetailBinding::inflate
+    override val kClass: KClass<ProductDetailViewModel>
+        get() = ProductDetailViewModel::class
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_detail, container, false)
+    private val args by navArgs<ProductDetailFragmentArgs>()
+
+    override val bindViews: FragmentProductDetailBinding.() -> Unit = {
+
+        println(args.id)
+
     }
-
 }

@@ -86,7 +86,11 @@
         android:id="@+id/productDetailFragment"
         android:name="az.red.presentation.content.productDetail.ProductDetailFragment"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="az.red.presentation.content.orders.OrdersFragment"

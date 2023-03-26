@@ -1,11 +1,13 @@
 package az.red.presentation.content.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,16 +22,19 @@ import az.red.presentation.content.home.adapter.ProductListItemAdapter
 import az.red.presentation.content.home.adapter.ProductListItemPagingAdapter
 import az.red.presentation.content.home.enums.ViewOption
 import az.red.presentation.databinding.FragmentHomeBinding
+import az.red.presentation.util.ClickListener
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), ClickListener {
 
     override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
     override val kClass: KClass<HomeViewModel>
         get() = HomeViewModel::class
+
+    private lateinit var navController: NavController
 
     private val categoryListItemAdapter by lazy {
         CategoryListItemAdapter {
@@ -38,15 +43,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private val productListItemAdapter by lazy {
-        ProductListItemAdapter { //Add to wih list
-            showToast("added to wishlist")
-        }
+        ProductListItemAdapter(
+            addToWishList = { showToast("added to wishlist") },
+            clickListener = this@HomeFragment
+        )
     }
     private val paginatedProductListItemAdapter by lazy {
-        ProductListItemPagingAdapter { showToast("added to wishlist") }
+        ProductListItemPagingAdapter(
+            addToWishList = { showToast("added to wishlist") },
+            clickListener = this@HomeFragment
+        )
     }
 
     override val bindViews: FragmentHomeBinding.() -> Unit = {
+        navController = findNavController()
 
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
@@ -136,6 +146,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
+    }
+
+    override fun onClick(view: View, id: String) {
+        navController.navigate(
+            HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(id = id)
+        )
     }
 
 }

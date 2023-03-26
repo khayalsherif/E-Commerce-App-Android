@@ -5,11 +5,16 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import az.red.domain.model.product.Product
+import az.red.presentation.util.ClickListener
 
-class ProductListItemPagingAdapter(private val addToWishList: (id: String) -> Unit) :
+class ProductListItemPagingAdapter(
+    private val addToWishList: (id: String) -> Unit,
+    private val clickListener: ClickListener
+) :
     PagingDataAdapter<Product, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     private var lineView = false
+
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Product>() {
             override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
@@ -21,17 +26,25 @@ class ProductListItemPagingAdapter(private val addToWishList: (id: String) -> Un
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        getItem(position)?.let{(holder as? ProductViewHolder)?.bind(product = it, addToWishList,lineView)}
+        getItem(position)?.let {
+            (holder as? ProductViewHolder)?.bind(
+                product = it,
+                addToWishList,
+                lineView,
+                clickListener
+            )
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ProductViewHolder.getInstance(parent)
     }
 
-    fun switchToLineView(){
+    fun switchToLineView() {
         lineView = true
     }
-    fun switchToBlockView(){
+
+    fun switchToBlockView() {
         lineView = false
     }
 }
