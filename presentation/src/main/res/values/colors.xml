@@ -17,21 +17,24 @@
     <color name="light_text_color">#16212D</color>
     <color name="light_back_icon_color">#16212D</color>
     <color name="light_button_is_enable_color">#131C26</color>
+    <color name="light_button_is_not_enable_text_color">#CFCFCF</color>
     <color name="light_button_is_not_enable_color">#B7B7B7</color>
     <color name="light_line_color">#B7B7B7</color>
     <color name="light_edit_text_text_color">#16212D</color>
     <color name="light_screen_background_color">#FFFFFF</color>
     <color name="light_button_is_enable_text_color">#F2F2F2</color>
-    <color name="light_button_is_not_enable_text_color">#CFCFCF</color>
+    <color name="outlined_light_button_is_enable_color">#FFFFFF</color>
     <color name="light_edit_text_stroke_selected_color">#FF000000</color>
     <color name="light_edit_text_stroke_un_selected_color">#CFCFCF</color>
     <color name="light_edit_text_background_color">#FFFFFF</color>
+    <color name="light_outlined_button_text_color">#FF000000</color>
 
     <color name="dark_hint_color">#233447</color>
     <color name="dark_screen_title_color">#F2F2F2</color>
     <color name="dark_text_color">#CFCFCF</color>
     <color name="dark_back_icon_color">#F2F2F2</color>
     <color name="dark_button_is_enable_color">#F2F2F2</color>
+    <color name="outlined_dark_button_is_enable_color">#131C26</color>
     <color name="dark_button_is_not_enable_color">#B7B7B7</color>
     <color name="dark_line_color">#B7B7B7</color>
     <color name="dark_edit_text_text_color">#CFCFCF</color>
@@ -41,4 +44,5 @@
     <color name="dark_edit_text_stroke_selected_color">#FFFFFF</color>
     <color name="dark_edit_text_stroke_un_selected_color">#233447</color>
     <color name="dark_edit_text_background_color">#16212D</color>
+    <color name="dark_outlined_button_text_color">#FFFFFF</color>
 </resources>

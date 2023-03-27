@@ -21,4 +21,9 @@ object EndPoints {
     const val BRAND = "filters/brand"
     const val SIZE = "sizes"
     const val COLOR = "colors"
+
+
+    //Wishlist
+    private const val WISHLIST_BASE = "wishlist"
+    const val WISHLIST = WISHLIST_BASE
 }

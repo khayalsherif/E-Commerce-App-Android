@@ -5,6 +5,7 @@ import az.red.domain.usecase.home.GetCategoriesUseCase
 import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
+import az.red.domain.usecase.wishList.GetWishListUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -19,6 +20,9 @@ val domainModule = module {
     }
     factory {
         GetProductsFilteredPaginatedUseCase(repository = get())
+    }
+    factory {
+        GetWishListUseCase(repository = get())
     }
     factory {
         SessionManagerUseCase(sessionManagerRepository = get())

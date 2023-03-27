@@ -13,5 +13,23 @@ data class Register(
     val login: String?,
     val password: String?,
     val telephone: String?,
-    val message:String?
-)
+    val message: String?
+) {
+    companion object {
+        val NULL = Register(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+    }
+}

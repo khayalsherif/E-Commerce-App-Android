@@ -6,10 +6,13 @@ import az.red.data.mapper.auth.AuthMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.product.ProductService
+import az.red.data.remote.wishList.WishlistService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
+import az.red.data.repository.wishlist.WishListRepositoryImpl
+import az.red.domain.repository.WishListRepository
 import az.red.domain.repository.auth.AuthRepository
 import az.red.domain.repository.category.CategoryRepository
 import az.red.domain.repository.product.ProductRepository
@@ -81,6 +84,13 @@ val dataModule = module {
 
     factory<ProductRepository> {
         ProductRepositoryImpl(service = get())
+    }
+
+    // WishList
+    factory<WishlistService> { get<Retrofit>().create(WishlistService::class.java) }
+
+    factory<WishListRepository> {
+        WishListRepositoryImpl(service = get())
     }
 
     // Session Manager
