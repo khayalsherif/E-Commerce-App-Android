@@ -47,9 +47,15 @@
     <string name="category">Category</string>
     <string name="search">Search</string>
     <string name="delete">Delete</string>
+    <string name="checkout">Checkout</string>
     <string name="product_name">Product name</string>
     <string name="product_description">Product description</string>
     <string name="mock_price">US $XXX</string>
     <string name="product_image">Product image</string>
     <string name="mock_discount">xx%</string>
+    <string name="total_price">Total price</string>
+    <string name="warning">Warning!</string>
+    <string name="do_you_want_delete_cart">Do you want delete cart?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
