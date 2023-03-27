@@ -6,6 +6,7 @@ import az.red.presentation.content.login.LoginViewModel
 import az.red.presentation.content.productDetail.ProductDetailViewModel
 import az.red.presentation.content.profile.ProfileViewModel
 import az.red.presentation.content.register.RegisterViewModel
+import az.red.presentation.content.reviews.ReviewsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -17,4 +18,5 @@ val presentationModule = module {
     viewModel { ProfileViewModel(sessionManagerUseCase = get()) }
     viewModel { CartViewModel() }
     viewModel { ProductDetailViewModel(useCase = get(), getProductsFilteredUseCase = get()) }
+    viewModel { ReviewsViewModel(useCase = get()) }
 }

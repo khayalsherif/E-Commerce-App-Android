@@ -93,6 +93,9 @@
         <action
             android:id="@+id/action_productDetailFragment_self"
             app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -135,4 +138,13 @@
         android:name="az.red.presentation.content.wishList.WishListFragment"
         android:label="fragment_wish_list"
         tools:layout="@layout/fragment_wish_list" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="az.red.presentation.content.reviews.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" >
+        <argument
+            android:name="productId"
+            app:argType="string" />
+    </fragment>
 </navigation>

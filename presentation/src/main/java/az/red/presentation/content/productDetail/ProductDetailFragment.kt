@@ -30,6 +30,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     private lateinit var navController: NavController
 
     private val args by navArgs<ProductDetailFragmentArgs>()
+    private lateinit var productId: String
 
     private val productListItemAdapter by lazy {
         ProductListItemAdapter(
@@ -42,6 +43,14 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     override val bindViews: FragmentProductDetailBinding.() -> Unit = {
         init()
         integrationRcView()
+
+        buttonReviews.setOnClickListener {
+            navController.navigate(
+                ProductDetailFragmentDirections.actionProductDetailFragmentToReviewsFragment(
+                    productId = productId
+                )
+            )
+        }
 
         lifecycleScope.launch {
             viewModel.productResponse.collect {
@@ -67,6 +76,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
                         textDescription.text = it.data?.description ?: ""
                         textNewPrice.text = "US $${it.data?.currentPrice}"
                         textOldPrice.text = "US $${it.data?.currentPrice}"
+                        productId = it.data!!.id
                     }
                 }
             }

@@ -58,4 +58,6 @@
     <string name="reviews">Reviews</string>
     <string name="questions">Questions</string>
     <string name="similar_goods">Similar goods</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
