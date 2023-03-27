@@ -9,6 +9,8 @@ import androidx.navigation.fragment.navArgs
 import az.red.domain.common.NetworkResult
 import az.red.presentation.base.BaseFragment
 import az.red.presentation.databinding.FragmentReviewsBinding
+import coil.ImageLoader
+import coil.load
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
@@ -23,11 +25,17 @@ class ReviewsFragment : BaseFragment<FragmentReviewsBinding, ReviewsViewModel>()
 
     override val bindViews: FragmentReviewsBinding.() -> Unit = {
         navController = findNavController()
+        binding.toolbar.setNavigationOnClickListener { navController.popBackStack() }
         viewModel.getReviews(args.productId)
+
+        textTitle.text = args.title
+        textNewPrice.text = args.newPrice
+        textOldPrice.text = args.oldPrice
+        binding.imageView.load(args.imageUrl)
 
         lifecycleScope.launch {
             viewModel.reviewResponse.collect {
-                when(it){
+                when (it) {
                     is NetworkResult.Empty -> {
                     }
                     is NetworkResult.Error -> {

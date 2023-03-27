@@ -146,5 +146,16 @@
         <argument
             android:name="productId"
             app:argType="string" />
+        <argument android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="newPrice"
+            app:argType="string" />
+        <argument
+            android:name="oldPrice"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
     </fragment>
 </navigation>

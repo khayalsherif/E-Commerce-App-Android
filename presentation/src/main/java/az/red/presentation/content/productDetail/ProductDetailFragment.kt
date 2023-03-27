@@ -30,7 +30,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     private lateinit var navController: NavController
 
     private val args by navArgs<ProductDetailFragmentArgs>()
-    private lateinit var productId: String
 
     private val productListItemAdapter by lazy {
         ProductListItemAdapter(
@@ -44,24 +43,16 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
         init()
         integrationRcView()
 
-        buttonReviews.setOnClickListener {
-            navController.navigate(
-                ProductDetailFragmentDirections.actionProductDetailFragmentToReviewsFragment(
-                    productId = productId
-                )
-            )
-        }
-
         lifecycleScope.launch {
-            viewModel.productResponse.collect {
-                when (it) {
+            viewModel.productResponse.collect { result ->
+                when (result) {
                     is NetworkResult.Empty -> {}
                     is NetworkResult.Error -> {
-                        showToast(it.message!!)
+                        showToast(result.message!!)
                         layoutLoading.root.gone()
                     }
                     is NetworkResult.Exception -> {
-                        showToast(it.message!!)
+                        showToast(result.message!!)
                         layoutLoading.root.gone()
                     }
                     is NetworkResult.Loading -> {
@@ -69,14 +60,26 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
                     }
                     is NetworkResult.Success -> {
                         layoutLoading.root.gone()
-                        viewModel.getSimilarProducts(it.data!!.categories)
-                        val list = it.data!!.imageUrls.map { image -> SlideModel(image) }
+                        val data = result.data!!
+                        viewModel.getSimilarProducts(data.categories)
+                        val list = data.imageUrls.map { image -> SlideModel(image) }
                         imageSlider.setImageList(list, ScaleTypes.FIT)
-                        textTitle.text = it.data?.name ?: ""
-                        textDescription.text = it.data?.description ?: ""
-                        textNewPrice.text = "US $${it.data?.currentPrice}"
-                        textOldPrice.text = "US $${it.data?.currentPrice}"
-                        productId = it.data!!.id
+                        textTitle.text = data.name ?: ""
+                        textDescription.text = result.data?.description ?: ""
+                        textNewPrice.text = "US $${data.currentPrice}"
+                        textOldPrice.text = "US $${data.currentPrice}"
+
+                        buttonReviews.setOnClickListener {
+                            navController.navigate(
+                                ProductDetailFragmentDirections.actionProductDetailFragmentToReviewsFragment(
+                                    productId = data.id,
+                                    title = data.name,
+                                    newPrice = "US $${data.currentPrice}",
+                                    oldPrice = "US $${data.currentPrice}",
+                                    imageUrl = data.imageUrls.first()
+                                )
+                            )
+                        }
                     }
                 }
             }
