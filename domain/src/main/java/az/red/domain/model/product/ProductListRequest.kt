@@ -8,4 +8,16 @@ data class ProductListRequest(
     val brand: String? = null,
     val size: String? = null,
     val userId: String? = null
-)
+){
+    fun toMap(): Map<String, String> {
+        return mapOf(
+            "categories" to categories,
+            "color" to color,
+            "fabric" to fabric,
+            "name" to name,
+            "userId" to userId,
+            "brand" to brand,
+            "size" to size
+        ).filter { !it.value.isNullOrEmpty() } as Map<String, String>
+    }
+}

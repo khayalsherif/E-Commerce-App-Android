@@ -1,10 +1,13 @@
 package az.red.presentation.content.home.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.graphics.Paint
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import az.red.domain.model.product.Product
@@ -14,16 +17,12 @@ import az.red.presentation.databinding.ProductCardBinding
 import coil.load
 import kotlin.math.roundToInt
 
+
 class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
     RecyclerView.Adapter<ProductViewHolder>() {
     private var data = mutableListOf<Product>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding = ProductCardBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return ProductViewHolder(binding)
+        return ProductViewHolder.getInstance(parent)
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +31,7 @@ class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentItem = data[position]
-        holder.bind(currentItem, addToWishList)
+        holder.bind(currentItem, addToWishList, false)
     }
 
     fun setData(newData: List<Product>) {
@@ -46,7 +45,7 @@ class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
 class ProductViewHolder(private val binding: ProductCardBinding) :
     RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
-    fun bind(product: Product, addToWishList: (id: String) -> Unit) {
+    fun bind(product: Product, addToWishList: (id: String) -> Unit, lineView: Boolean) {
         binding.tvName.text = product.name
         if (product.description.isNullOrBlank()) binding.tvDescription.visibility = View.GONE
         binding.tvDescription.text = product.description.toString()
@@ -73,5 +72,54 @@ class ProductViewHolder(private val binding: ProductCardBinding) :
         binding.ivHeart.setOnClickListener {
             addToWishList(product._id)
         }
+
+        if (lineView) {
+            binding.ivHeart.visibility = View.GONE
+
+            binding.cvSale.layoutParams.height = 16.toPx.toInt()
+            binding.cvSale.layoutParams.width = 37.toPx.toInt()
+            binding.tvSale.textSize = 8f
+
+            binding.cvImage.layoutParams.height = 80.toPx.toInt()
+            binding.cvImage.layoutParams.width = 80.toPx.toInt()
+
+            (binding.root as LinearLayout).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT
+            }
+        } else {
+
+            binding.ivHeart.visibility = View.VISIBLE
+
+            binding.cvSale.layoutParams.height = 20.toPx.toInt()
+            binding.cvSale.layoutParams.width = 52.toPx.toInt()
+            binding.tvSale.textSize = 12f
+
+            binding.cvImage.layoutParams.height = 160.toPx.toInt()
+            binding.cvImage.layoutParams.width = 160.toPx.toInt()
+
+            (binding.root as LinearLayout).apply {
+                orientation = LinearLayout.VERTICAL
+                layoutParams.width = 168.toPx.toInt()
+            }
+        }
+    }
+
+    companion object {
+        fun getInstance(parent: ViewGroup): ProductViewHolder {
+            val binding = ProductCardBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            return ProductViewHolder(binding)
+        }
     }
 }
+
+val Int.toPx
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        Resources.getSystem().displayMetrics
+    )

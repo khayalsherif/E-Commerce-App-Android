@@ -5,6 +5,7 @@ import az.red.domain.usecase.cart.DecreaseCartProductUseCase
 import az.red.domain.usecase.cart.DeleteCartUseCase
 import az.red.domain.usecase.cart.GetCartUseCase
 import az.red.domain.usecase.home.GetCategoriesUseCase
+import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
@@ -38,6 +39,9 @@ val domainModule = module {
         CreateOrderUseCase(orderRepository = get())
     }
 
+    factory {
+        GetProductsFilteredPaginatedUseCase(repository = get())
+    }
     factory {
         SessionManagerUseCase(sessionManagerRepository = get())
     }
