@@ -90,6 +90,9 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailFragment_self"
+            app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
