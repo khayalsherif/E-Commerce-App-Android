@@ -13,7 +13,6 @@ import az.red.presentation.base.BaseFragment
 import az.red.presentation.base.RecyclerListAdapter
 import az.red.presentation.common.gone
 import az.red.presentation.common.visible
-import az.red.presentation.content.MainActivity
 import az.red.presentation.databinding.CartListItemBinding
 import az.red.presentation.databinding.FragmentCartBinding
 import kotlinx.coroutines.launch
@@ -49,13 +48,14 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                         adapter.submitList(it.products)
                     }
                 }
-            }
-            launch {
-                viewModel.isLoading.collect {
-                    if (it)
-                        binding.layoutLoading.root.visible()
-                    else
-                        binding.layoutLoading.root.gone()
+
+                launch {
+                    viewModel.isLoading.collect {
+                        if (it)
+                            binding.layoutLoading.root.visible()
+                        else
+                            binding.layoutLoading.root.gone()
+                    }
                 }
             }
         }
@@ -86,22 +86,22 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     }
 
     private fun showDeleteCartAlert() {
+        lifecycleScope.launch {
+            binding.layoutLoading.root.gone()
+            viewModel.deleteCartResponse.collect { _ ->
+                Snackbar.make(
+                    requireView(),
+                    "Cart item(s) deleted successfully!",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.warning))
         builder.setMessage(getString(R.string.do_you_want_delete_cart))
         builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
             viewModel.deleteSelectedCartItems()
-            lifecycleScope.launch {
-                binding.layoutLoading.root.gone()
-                viewModel.deleteCartResponse.collect { _ ->
-                    Snackbar.make(
-                        requireView(),
-                        "Cart deleted successfully!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    (activity as MainActivity).recreate()
-                }
-            }
         }
 
         builder.setNegativeButton(getString(R.string.no)) { dialog, _ ->

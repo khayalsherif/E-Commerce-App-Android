@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.cart.Cart
-import az.red.domain.model.cart.DeleteCart
 import az.red.domain.model.order.request.DeliveryAddress
 import az.red.domain.model.order.request.OrderRequest
 import az.red.domain.model.order.response.DomainOrder
@@ -17,7 +16,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Math.max
 
 class CartViewModel(
     private val cartUseCase: GetCartUseCase,
@@ -30,9 +28,9 @@ class CartViewModel(
     private val _cart = MutableStateFlow<Cart>(Cart.NULL)
     val cart = _cart.asStateFlow()
 
-    private val _deleteCartResponse =
-        MutableStateFlow<NetworkResult<DeleteCart>>(NetworkResult.Empty())
-    val deleteCartResponse: StateFlow<NetworkResult<DeleteCart>> get() = _deleteCartResponse
+    private val _deleteCartItemResponse =
+        MutableStateFlow<NetworkResult<Cart>>(NetworkResult.Empty())
+    val deleteCartResponse: StateFlow<NetworkResult<Cart>> get() = _deleteCartItemResponse
 
     private val _createOrderResponse =
         MutableStateFlow<NetworkResult<DomainOrder>>(NetworkResult.Empty())
@@ -70,15 +68,19 @@ class CartViewModel(
     fun deleteSelectedCartItems() {
         isLoading.value = true
         viewModelScope.launch {
-            deleteCartUseCase.deleteCart().collect { networkResult ->
-                when (networkResult) {
-                    is NetworkResult.Empty -> Log.i("DELETE_CART_VIEW_MODEL", "Empty")
-                    is NetworkResult.Error -> Log.i("DELETE_CART_VIEW_MODEL", "Error")
-                    is NetworkResult.Exception -> Log.i("DELETE_CART_VIEW_MODEL", "Exception")
-                    is NetworkResult.Loading -> Log.i("DELETE_CART_VIEW_MODEL", "Loading")
-                    is NetworkResult.Success -> {
-                        isLoading.value = false
-                        _deleteCartResponse.emit(networkResult)
+            val itemsToDelete =  _cart.value.products.filter { it.isSelected }
+            itemsToDelete.forEach {
+                deleteCartUseCase.decreaseCartProduct(it.product._id).collect { networkResult ->
+                    when (networkResult) {
+                        is NetworkResult.Empty -> Log.i("DELETE_CART_VIEW_MODEL", "Empty")
+                        is NetworkResult.Error -> Log.i("DELETE_CART_VIEW_MODEL", "Error")
+                        is NetworkResult.Exception -> Log.i("DELETE_CART_VIEW_MODEL", "Exception")
+                        is NetworkResult.Loading -> Log.i("DELETE_CART_VIEW_MODEL", "Loading")
+                        is NetworkResult.Success -> {
+                            isLoading.value = false
+                            _deleteCartItemResponse.value = networkResult
+                            getCart()
+                        }
                     }
                 }
             }
