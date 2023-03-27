@@ -26,4 +26,5 @@ object EndPoints {
     //Wishlist
     private const val WISHLIST_BASE = "wishlist"
     const val WISHLIST = WISHLIST_BASE
+    const val WISHLIST_REMOVE_ITEM = "$WISHLIST_BASE/{productId}"
 }

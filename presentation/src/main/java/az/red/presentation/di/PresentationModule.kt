@@ -17,5 +17,5 @@ val presentationModule = module {
     viewModel { HomeViewModel(getCategoriesUseCase = get(), getProductsFilteredUseCase = get(), getProductsFilteredPaginatedUseCase =  get()) }
     viewModel { ProfileViewModel(sessionManagerUseCase = get()) }
     viewModel { CartViewModel() }
-    viewModel { WishListViewModel(getWishListUseCase = get()) }
+    viewModel { WishListViewModel(getWishListUseCase = get(), removeWishListItemUseCase = get()) }
 }

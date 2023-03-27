@@ -5,12 +5,15 @@ import androidx.lifecycle.viewModelScope
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.wishlist.WishList
 import az.red.domain.usecase.wishList.GetWishListUseCase
+import az.red.domain.usecase.wishList.RemoveWishListItemUseCase
 import az.red.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class WishListViewModel(private val getWishListUseCase: GetWishListUseCase) : BaseViewModel() {
+class WishListViewModel(private val getWishListUseCase: GetWishListUseCase,
+                        private val removeWishListItemUseCase: RemoveWishListItemUseCase
+) : BaseViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -22,7 +25,7 @@ class WishListViewModel(private val getWishListUseCase: GetWishListUseCase) : Ba
         getWishList()
     }
 
-    fun getWishList(searchQuery: String? = null) {
+    private fun getWishList(searchQuery: String? = null) {
         _isLoading.value = true
         viewModelScope.launch {
             getWishListUseCase().collect { result ->
@@ -45,7 +48,7 @@ class WishListViewModel(private val getWishListUseCase: GetWishListUseCase) : Ba
                         result.data?.let { _wishList.value = it }
                     }
                 }
-                _isLoading.value = true
+                _isLoading.value = false
             }
         }
     }
@@ -55,6 +58,28 @@ class WishListViewModel(private val getWishListUseCase: GetWishListUseCase) : Ba
     }
 
     fun removeFromWishList(productId: String) {
-
+        _isLoading.value = true
+        viewModelScope.launch {
+            removeWishListItemUseCase(productId).collect{result ->
+                when (result) {
+                    is NetworkResult.Empty -> {
+                        Log.e("REMOVE_FROM_WISH_LIST", "Empty")
+                    }
+                    is NetworkResult.Error -> {
+                        Log.e("REMOVE_FROM_WISH_LIST", "Error ${result.data?.message}")
+                    }
+                    is NetworkResult.Exception -> {
+                        result.message?.let { Log.e("REMOVE_FROM_WISH_LIST", it) }
+                    }
+                    is NetworkResult.Loading -> {
+                        Log.e("REMOVE_FROM_WISH_LIST", "Loading ...")
+                    }
+                    is NetworkResult.Success -> {
+                        Log.e("REMOVE_FROM_WISH_LIST", "Success")
+                    }
+                }
+                getWishList()
+            }
+        }
     }
 }

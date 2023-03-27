@@ -2,7 +2,6 @@ package az.red.data.di
 
 import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
-import az.red.data.mapper.auth.AuthMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.product.ProductService
@@ -68,7 +67,7 @@ val dataModule = module {
     factory<AuthService> { get<Retrofit>().create(AuthService::class.java) }
 
     factory<AuthRepository> {
-        AuthRepositoryImpl(service = get(), mapper = get())
+        AuthRepositoryImpl(service = get())
     }
 
 
@@ -107,6 +106,4 @@ val dataModule = module {
     ///////////////////////////////////// MAPPER ///////////////////////////////////////////////
 
     single { Gson() }
-
-    factory { AuthMapper() }
 }
