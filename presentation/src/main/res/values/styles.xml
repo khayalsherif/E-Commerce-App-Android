@@ -17,6 +17,7 @@
         <attr name="edit_text_background_color" format="color" />
         <attr name="carrot_accent" format="color" />
         <attr name="custom_background" format="color" />
+        <attr name="button_stroke_background_color" format="color" />
     </declare-styleable>
 
     <style name="ButtonStyle">
@@ -26,6 +27,15 @@
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/shape_28</item>
         <item name="backgroundTint">@color/button_state_background_color</item>
+        <item name="lineHeight">20dp</item>
+    </style>
+
+    <style name="ButtonStyleWithStroke">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textColor">?attr/text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/shape_28_stroke</item>
         <item name="lineHeight">20dp</item>
     </style>
 
@@ -151,5 +161,11 @@
         <item name="android:fontFamily">@font/nunito_semi_bold</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NunitoMedium14spStyle">
+        <item name="android:fontFamily">@font/nunito_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/text_color</item>
     </style>
 </resources>
