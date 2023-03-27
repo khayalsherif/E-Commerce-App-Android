@@ -49,16 +49,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:id="@+id/cart_empty_image"
-        android:layout_marginHorizontal="16dp"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        android:src="@drawable/ic_orders_cancelled"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
