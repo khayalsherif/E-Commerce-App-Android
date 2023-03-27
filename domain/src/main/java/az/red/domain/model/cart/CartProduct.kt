@@ -5,5 +5,6 @@ import az.red.domain.model.product.Product
 data class CartProduct(
     val _id : String,
     val product : Product,
-    val cartQuantity : Int
+    val cartQuantity : Int,
+    var isSelected: Boolean = false
 )

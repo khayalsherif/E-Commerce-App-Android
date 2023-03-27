@@ -7,4 +7,8 @@ data class Cart(
     val products : List<CartProduct>,
     val customerId : Register,
     val date : String?
-)
+){
+    companion object{
+        val NULL = Cart("", emptyList(), Register.NULL , null)
+    }
+}

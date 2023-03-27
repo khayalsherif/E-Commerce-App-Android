@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include
@@ -15,58 +14,60 @@
         android:visibility="gone" />
 
     <androidx.appcompat.widget.Toolbar
-        style="@style/CustomToolbarStyle"
         android:id="@+id/toolbar"
+        style="@style/CustomToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/cart"
-        app:navigationIcon="@drawable/ic_back" >
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@string/cart">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/cart_menu_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cart_menu_search"
-                android:background="@android:color/transparent"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_search"/>
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_search" />
 
             <ImageButton
+                android:id="@+id/cart_menu_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cart_menu_delete"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_delete"
-                android:clickable="false"/>
+                android:clickable="false"
+                android:src="@drawable/ic_delete" />
 
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.88"
         android:layout_marginHorizontal="16dp"
-        tools:listitem="@layout/cart_list_item"
+        android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="10"
-        android:id="@+id/rv_cart"/>
+        tools:listitem="@layout/cart_list_item" />
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:id="@+id/cv_checkout_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-16dp"
         android:visibility="gone"
         app:cardBackgroundColor="@color/carrot_accent"
-        app:cardElevation="0dp"
-        android:layout_weight="0.12">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -77,8 +78,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="16dp"
+                android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -87,36 +89,36 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/NunitoRegular18spStyle"
                         android:id="@+id/txt_total_sum"
-                        android:textColor="@color/white_unselected"
+                        style="@style/NunitoRegular18spStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/total_price"
+                        android:textColor="@color/white_unselected"
                         android:textSize="18sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/NunitoSemiBold18spStyle"
                         android:id="@+id/txt_total_sum_value"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        style="@style/NunitoSemiBold18spStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_total_sum"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:gravity="start"
-                        android:text="US $540.00"/>
+                        android:text="US $540.00" />
 
                 </LinearLayout>
 
                 <TextView
-                    style="@style/ButtonStyle"
                     android:id="@+id/btn_checkout"
+                    style="@style/ButtonStyle"
                     android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="bottom"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="0.5"
-                    android:layout_gravity="bottom"
-                    android:layout_height="44dp"
                     android:text="@string/checkout" />
 
             </LinearLayout>

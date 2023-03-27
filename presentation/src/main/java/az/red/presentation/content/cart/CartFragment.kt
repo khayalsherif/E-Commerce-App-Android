@@ -23,19 +23,16 @@ import com.google.android.material.snackbar.Snackbar
 
 class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
-    private var totalSum: Double = 0.0
-    private lateinit var products: List<CartProduct>
-
     override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCartBinding
         get() = FragmentCartBinding::inflate
     override val kClass: KClass<CartViewModel>
         get() = CartViewModel::class
 
     override val bindViews: FragmentCartBinding.() -> Unit = {
-        viewModel.getCart()
+
         observeCartValues()
         checkoutValue()
-        deleteCart()
+        deleteSelectedCartItems()
         createOrder()
         navigateBack()
     }
@@ -44,32 +41,30 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.cartResponse.collect { networkResult ->
+                    viewModel.cart.collect {
                         binding.layoutLoading.root.gone()
                         if (binding.rvCart.adapter == null) {
                             binding.rvCart.adapter = adapter
-                        } else {
-                            adapter.submitList(networkResult.data!!.products)
-                            products = networkResult.data!!.products
                         }
+                        adapter.submitList(it.products)
                     }
                 }
-                launch {
-                    viewModel.isLoading.collect {
-                        if (it)
-                            binding.layoutLoading.root.visible()
-                        else
-                            binding.layoutLoading.root.gone()
-                    }
+            }
+            launch {
+                viewModel.isLoading.collect {
+                    if (it)
+                        binding.layoutLoading.root.visible()
+                    else
+                        binding.layoutLoading.root.gone()
                 }
             }
         }
     }
 
+
     private fun createOrder() {
         binding.btnCheckout.setOnClickListener {
-
-            viewModel.createOrder(products)
+            viewModel.createOrder()
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.createOrderResponse.collect {//TODO: Add when for network result. In Snackbar display which items have problems (from error response product availability details)
@@ -84,7 +79,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         }
     }
 
-    private fun deleteCart() {
+    private fun deleteSelectedCartItems() {
         binding.cartMenuDelete.setOnClickListener {
             showDeleteCartAlert()
         }
@@ -95,7 +90,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         builder.setTitle(getString(R.string.warning))
         builder.setMessage(getString(R.string.do_you_want_delete_cart))
         builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
-            viewModel.deleteCart()
+            viewModel.deleteSelectedCartItems()
             lifecycleScope.launch {
                 binding.layoutLoading.root.gone()
                 viewModel.deleteCartResponse.collect { _ ->
@@ -120,8 +115,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.checkoutValue.collect { checkoutValue ->
-                        if (checkoutValue.toDouble() > 0.0) {
+                    viewModel.cart.collect { cart ->
+                        val checkoutValue =
+                            cart.products.filter { it.isSelected }
+                                .sumOf { it.product.currentPrice * it.cartQuantity }
+                        if (checkoutValue > 0.0) {
                             binding.apply {
                                 cvCheckoutContainer.visible()
                                 cartMenuDelete.isClickable = true
@@ -144,7 +142,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 )
                             }
                         }
-                        binding.txtTotalSumValue.text = checkoutValue
+                        binding.txtTotalSumValue.text = checkoutValue.toString()
                     }
                 }
             }
@@ -156,12 +154,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             onInflate = CartListItemBinding::inflate,
             onBind = { binding, data, _ ->
                 binding.apply {
-                    var cartQuantity = data.cartQuantity
-
                     //Cart texts
                     txtCartProductName.text = data.product.name
                     txtCartProductPrice.text = "$ ${data.product.currentPrice}"
-                    txtCartProductQuantity.text = cartQuantity.toString()
+                    txtCartProductQuantity.text = data.cartQuantity.toString()
+                    cbCart.isChecked = data.isSelected
 
                     //Cart image
                     if (data.product.imageUrls.firstOrNull().isNullOrEmpty()) {
@@ -172,46 +169,23 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
                     //Increase cart quantity
                     cartProductPlus.setOnClickListener {
-                        cartQuantity += 1
-                        txtCartProductQuantity.text = cartQuantity.toString()
-                        if (cbCart.isChecked) {
-                            totalSum += data.product.currentPrice
-                            viewModel.checkoutValue.value = totalSum.toString()
-                        }
+
+                        viewModel.incrementProductQty(data._id)
                     }
 
                     //Decrease cart quantity
                     cartProductMinus.setOnClickListener {
-                        if (cartQuantity > 1) {
-                            cartQuantity -= 1
-                            txtCartProductQuantity.text = cartQuantity.toString()
-                        }
-                        if (cbCart.isChecked) {
-                            totalSum -= data.product.currentPrice
-                            viewModel.checkoutValue.value = totalSum.toString()
-                        }
+                        viewModel.decrementProductQty(data._id)
                     }
 
                     //Cart checkbox
                     cbCart.setOnCheckedChangeListener { _, isChecked ->
-                        val sum = cartQuantity * data.product.currentPrice
-                        if (isChecked) {
-                            totalSum += sum
-
-                        } else {
-                            totalSum -= sum
-                        }
-                        viewModel.checkoutValue.value = totalSum.toString()
+                        if (isChecked != data.isSelected)
+                            viewModel.setCartProductCheck(data._id, isChecked)
                     }
-
                 }
             }
         )
-    }
-
-    override fun onPause() {
-        viewModel.checkoutValue.value = "0.0"
-        super.onPause()
     }
 
     private fun navigateBack() {

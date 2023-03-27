@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.cart.Cart
-import az.red.domain.model.cart.CartProduct
 import az.red.domain.model.cart.DeleteCart
 import az.red.domain.model.order.request.DeliveryAddress
 import az.red.domain.model.order.request.OrderRequest
@@ -16,7 +15,9 @@ import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import az.red.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.lang.Math.max
 
 class CartViewModel(
     private val cartUseCase: GetCartUseCase,
@@ -24,13 +25,10 @@ class CartViewModel(
     private val createOrderUseCase: CreateOrderUseCase,
     private val sessionManagerUseCase: SessionManagerUseCase
 ) : BaseViewModel() {
-
-    val checkoutValue = MutableStateFlow("0.0")
     val isLoading = MutableStateFlow(false)
 
-    private val _cartResponse =
-        MutableStateFlow<NetworkResult<Cart>>(NetworkResult.Empty())
-    val cartResponse: StateFlow<NetworkResult<Cart>> get() = _cartResponse
+    private val _cart = MutableStateFlow<Cart>(Cart.NULL)
+    val cart = _cart.asStateFlow()
 
     private val _deleteCartResponse =
         MutableStateFlow<NetworkResult<DeleteCart>>(NetworkResult.Empty())
@@ -40,9 +38,13 @@ class CartViewModel(
         MutableStateFlow<NetworkResult<DomainOrder>>(NetworkResult.Empty())
     val createOrderResponse: StateFlow<NetworkResult<DomainOrder>> get() = _createOrderResponse
 
+    init {
+        getCart()
+    }
 
     //Functions start
-    fun getCart() {
+    private fun getCart() {
+        isLoading.value = true
         viewModelScope.launch {
             cartUseCase.getCart().collect { networkResult ->
                 when (networkResult) {
@@ -57,15 +59,16 @@ class CartViewModel(
                     }
                     is NetworkResult.Loading -> Log.i("CART_VIEW_MODEL", "Loading")
                     is NetworkResult.Success -> {
-                        isLoading.value = true
-                        _cartResponse.emit(networkResult)
+                        isLoading.value = false
+                        _cart.value = networkResult.data!!
                     }
                 }
             }
         }
     }
 
-    fun deleteCart() {
+    fun deleteSelectedCartItems() {
+        isLoading.value = true
         viewModelScope.launch {
             deleteCartUseCase.deleteCart().collect { networkResult ->
                 when (networkResult) {
@@ -82,7 +85,7 @@ class CartViewModel(
         }
     }
 
-    fun createOrder(products: List<CartProduct>) {
+    fun createOrder() {
         val userId = sessionManagerUseCase.getUserId()
         if (userId.isNullOrEmpty()) return
         val orderRequest = OrderRequest(
@@ -95,7 +98,7 @@ class CartViewModel(
             "+380630000000",
             "Thank you for order! You are welcome!",
             "<h1>Your order is placed. OrderNo is ###.</h1><p>Have a good day!</p>",
-            products
+            _cart.value.products.filter { it.isSelected }
         )
 
         viewModelScope.launch {
@@ -114,5 +117,26 @@ class CartViewModel(
                 }
             }
         }
+    }
+
+    fun setCartProductCheck(_id: String, isChecked: Boolean) {
+        _cart.value =
+            _cart.value.copy(products = _cart.value.products.map { it.copy(isSelected = if (it._id == _id) isChecked else it.isSelected) })
+    }
+
+    fun incrementProductQty(_id: String) {
+        _cart.value =
+            _cart.value.copy(products = _cart.value.products.map { it.copy(cartQuantity = if (it._id == _id) it.cartQuantity + 1 else it.cartQuantity) })
+    }
+
+    fun decrementProductQty(_id: String) {
+        _cart.value = _cart.value.copy(products = _cart.value.products.map {
+            it.copy(
+                cartQuantity = if (it._id == _id) kotlin.math.max(
+                    (it.cartQuantity - 1),
+                    0
+                ) else it.cartQuantity
+            )
+        })
     }
 }
