@@ -50,10 +50,11 @@ class WishListItemViwHolder(private val binding: ItemWishlistCardBinding) :
         }
 
         binding.ivHeart.setOnClickListener {
-            removeFromWishList(product.id)
+            binding.ivHeart.setImageResource(R.drawable.ic_heart)
+            removeFromWishList(product._id)
         }
         binding.btnAddToCart.setOnClickListener {
-            addToCart(product.id)
+            addToCart(product._id)
         }
     }
 

@@ -2,8 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="colors">
         <attr name="hint_color" format="color" />
-        <attr name="custom_background" format="color" />
-        <attr name="carrot_accent" format="color" />
         <attr name="screen_title_color" format="color" />
         <attr name="text_color" format="color" />
         <attr name="back_icon_color" format="color" />

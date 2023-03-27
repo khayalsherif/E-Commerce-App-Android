@@ -4,15 +4,18 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.wishlist.WishList
+import az.red.domain.usecase.cart.AddToCartUseCase
 import az.red.domain.usecase.wishList.GetWishListUseCase
 import az.red.domain.usecase.wishList.RemoveWishListItemUseCase
 import az.red.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class WishListViewModel(private val getWishListUseCase: GetWishListUseCase,
-                        private val removeWishListItemUseCase: RemoveWishListItemUseCase
+                        private val removeWishListItemUseCase: RemoveWishListItemUseCase,
+                        private val addToCartUseCase: AddToCartUseCase
 ) : BaseViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
@@ -54,7 +57,29 @@ class WishListViewModel(private val getWishListUseCase: GetWishListUseCase,
     }
 
     fun addToCart(productId: String) {
-
+        _isLoading.value = true
+        viewModelScope.launch {
+            addToCartUseCase(productId).collect{
+                when (it) {
+                    is NetworkResult.Empty -> {
+                        Log.e("ADD_TO_CART", "Empty")
+                    }
+                    is NetworkResult.Error -> {
+                        Log.e("ADD_TO_CART", "Error ${it.data?.message}")
+                    }
+                    is NetworkResult.Exception -> {
+                        it.message?.let { Log.e("ADD_TO_CART", it) }
+                    }
+                    is NetworkResult.Loading -> {
+                        Log.e("ADD_TO_CART", "Loading ...")
+                    }
+                    is NetworkResult.Success -> {
+                        Log.e("ADD_TO_CART", "Success")
+                        removeFromWishList(productId)
+                    }
+                }
+            }
+        }
     }
 
     fun removeFromWishList(productId: String) {

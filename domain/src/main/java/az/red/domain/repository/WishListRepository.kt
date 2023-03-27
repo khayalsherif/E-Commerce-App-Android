@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface WishListRepository {
     suspend fun getWishlist(): Flow<NetworkResult<WishList>>
     suspend fun removeItem(productId: String): Flow<NetworkResult<WishList>>
+    suspend fun addItem(productId: String): Flow<NetworkResult<WishList>>
 }

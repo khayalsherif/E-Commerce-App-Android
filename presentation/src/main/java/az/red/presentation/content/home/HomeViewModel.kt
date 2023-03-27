@@ -9,18 +9,21 @@ import az.red.domain.model.product.Product
 import az.red.domain.usecase.home.GetCategoriesUseCase
 import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
+import az.red.domain.usecase.wishList.AddToWishListUseCase
 import az.red.presentation.base.BaseViewModel
 import az.red.presentation.content.home.enums.ViewOption
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
 class HomeViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getProductsFilteredUseCase: GetProductsFilteredUseCase,
-    private val getProductsFilteredPaginatedUseCase: GetProductsFilteredPaginatedUseCase
+    private val getProductsFilteredPaginatedUseCase: GetProductsFilteredPaginatedUseCase,
+    private val addToWishListUseCase: AddToWishListUseCase
 ) : BaseViewModel() {
 
     val viewOption = MutableStateFlow(ViewOption.FILTER)
@@ -75,11 +78,26 @@ class HomeViewModel(
             }
         }
     }
+
     private fun getProductsPaginated() {
         viewModelScope.launch {
             data =
                 getProductsFilteredPaginatedUseCase()
                     .cachedIn(viewModelScope)
+        }
+    }
+
+    fun addToWishList(productId: String) {
+        viewModelScope.launch {
+            addToWishListUseCase(productId).collect {
+                when (it) {
+                    is NetworkResult.Empty -> println("Empty")
+                    is NetworkResult.Error -> println("Error")
+                    is NetworkResult.Exception -> println("Exception ${it.message}")
+                    is NetworkResult.Loading -> println("Loading")
+                    is NetworkResult.Success ->  println("Success")
+                }
+            }
         }
     }
 }

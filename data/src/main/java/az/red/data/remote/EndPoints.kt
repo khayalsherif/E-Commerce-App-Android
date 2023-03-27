@@ -14,6 +14,7 @@ object EndPoints {
     private const val CART_BASE = "cart"
     const val GET_CART = CART_BASE
     const val DECREASE_CART_PRODUCT = "$CART_BASE/product/{productId}"
+    const val ADD_CART_PRODUCT = "$CART_BASE/{productId}"
     const val DELETE_CART = CART_BASE
 
     //Product
@@ -33,6 +34,7 @@ object EndPoints {
     private const val WISHLIST_BASE = "wishlist"
     const val WISHLIST = WISHLIST_BASE
     const val WISHLIST_REMOVE_ITEM = "$WISHLIST_BASE/{productId}"
+    const val WISHLIST_ADD = "$WISHLIST_BASE/{productId}"
 
     //Orders
     private const val ORDER_BASE = "orders"

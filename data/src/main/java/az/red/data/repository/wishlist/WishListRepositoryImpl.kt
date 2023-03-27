@@ -15,4 +15,7 @@ class WishListRepositoryImpl(private val service: WishlistService) : WishListRep
 
     override suspend fun removeItem(productId: String): Flow<NetworkResult<WishList>> =
         handleApi<WishListResponse, WishList>(mapper = { it.wishListResponseToWishList() }) { service.removeItem(productId) }
+
+    override suspend fun addItem(productId: String): Flow<NetworkResult<WishList>> =
+        handleApi<WishListResponse, WishList>(mapper = { it.wishListResponseToWishList() }) { service.addItem(productId) }
 }
