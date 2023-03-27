@@ -29,6 +29,16 @@
         <item name="lineHeight">20dp</item>
     </style>
 
+    <style name="OrderButtonStyle">
+        <item name="android:fontFamily">@font/nunito_semi_bold</item>
+        <item name="android:textColor">@color/button_state_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/shape_28</item>
+        <item name="backgroundTint">@color/button_state_background_color</item>
+        <item name="lineHeight">20dp</item>
+    </style>
+
     <style name="ProfileInfoStyle">
         <item name="fontFamily">@font/nunito_regular</item>
         <item name="android:gravity">center</item>
@@ -157,6 +167,12 @@
         <item name="android:fontFamily">@font/nunito_regular</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="NunitoRegular10spStyle">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/carrot_accent</item>
     </style>
 
     <style name="NunitoSemiBold12spWhiteStyle">

@@ -31,6 +31,7 @@ object EndPoints {
     //Orders
     private const val ORDER_BASE = "orders"
     const val CREATE_ORDER = ORDER_BASE
+    const val GET_CUSTOMER_ORDERS = ORDER_BASE
 
 
 }
