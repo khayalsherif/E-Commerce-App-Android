@@ -26,7 +26,7 @@ class CartViewModel(
 ) : BaseViewModel() {
 
     val checkoutValue = MutableStateFlow("0.0")
-    val isLoading = MutableStateFlow(true)
+    val isLoading = MutableStateFlow(false)
 
     private val _cartResponse =
         MutableStateFlow<NetworkResult<Cart>>(NetworkResult.Empty())
@@ -46,12 +46,18 @@ class CartViewModel(
         viewModelScope.launch {
             cartUseCase.getCart().collect { networkResult ->
                 when (networkResult) {
-                    is NetworkResult.Empty -> Log.i("CART_VIEW_MODEL", "Empty")
-                    is NetworkResult.Error -> Log.i("CART_VIEW_MODEL", "Error")
-                    is NetworkResult.Exception -> Log.i("CART_VIEW_MODEL", "Exception")
+                    is NetworkResult.Empty -> {
+                        Log.i("CART_VIEW_MODEL", "Empty")
+                    }
+                    is NetworkResult.Error -> {
+                        Log.i("CART_VIEW_MODEL", "Error")
+                    }
+                    is NetworkResult.Exception -> {
+                        Log.i("CART_VIEW_MODEL", "Exception")
+                    }
                     is NetworkResult.Loading -> Log.i("CART_VIEW_MODEL", "Loading")
                     is NetworkResult.Success -> {
-                        isLoading.value = false
+                        isLoading.value = true
                         _cartResponse.emit(networkResult)
                     }
                 }

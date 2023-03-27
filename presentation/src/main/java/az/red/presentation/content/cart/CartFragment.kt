@@ -24,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
     private var totalSum: Double = 0.0
-    private lateinit var products : List<CartProduct>
+    private lateinit var products: List<CartProduct>
 
     override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCartBinding
         get() = FragmentCartBinding::inflate
@@ -44,19 +44,22 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.cartResponse.collect {
+                    viewModel.cartResponse.collect { networkResult ->
                         binding.layoutLoading.root.gone()
                         if (binding.rvCart.adapter == null) {
                             binding.rvCart.adapter = adapter
                         } else {
-                            adapter.submitList(it.data!!.products)
-                            products = it.data!!.products
+                            adapter.submitList(networkResult.data!!.products)
+                            products = networkResult.data!!.products
                         }
                     }
                 }
                 launch {
                     viewModel.isLoading.collect {
-                        binding.layoutLoading.root.visible()
+                        if (it)
+                            binding.layoutLoading.root.visible()
+                        else
+                            binding.layoutLoading.root.gone()
                     }
                 }
             }
@@ -70,7 +73,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.createOrderResponse.collect {//TODO: Add when for network result. In Snackbar display which items have problems (from error response product availability details)
-                        Snackbar.make(requireView(), it.data?.message.toString(), Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            requireView(),
+                            it.data?.message.toString(),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -87,18 +94,22 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.warning))
         builder.setMessage(getString(R.string.do_you_want_delete_cart))
-        builder.setPositiveButton(android.R.string.yes) { _, _ ->
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
             viewModel.deleteCart()
             lifecycleScope.launch {
                 binding.layoutLoading.root.gone()
-                viewModel.deleteCartResponse.collect { result ->
-                    showToast("Cart deleted successfully")
+                viewModel.deleteCartResponse.collect { _ ->
+                    Snackbar.make(
+                        requireView(),
+                        "Cart deleted successfully!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     (activity as MainActivity).recreate()
                 }
             }
         }
 
-        builder.setNegativeButton(android.R.string.no) { dialog, _ ->
+        builder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
             dialog.dismiss()
         }
 
@@ -198,7 +209,12 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         )
     }
 
-    private fun navigateBack(){
+    override fun onPause() {
+        viewModel.checkoutValue.value = "0.0"
+        super.onPause()
+    }
+
+    private fun navigateBack() {
         binding.toolbar.setNavigationOnClickListener {
             val navController = findNavController()
             navController.navigateUp()

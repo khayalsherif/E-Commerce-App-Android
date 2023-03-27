@@ -56,4 +56,6 @@
     <string name="total_price">Total price</string>
     <string name="warning">Warning!</string>
     <string name="do_you_want_delete_cart">Do you want delete cart?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

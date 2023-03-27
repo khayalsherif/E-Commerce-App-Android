@@ -56,4 +56,6 @@
     <string name="total_price">Ümumi qiymət</string>
     <string name="warning">Xəbərdarlıq!</string>
     <string name="do_you_want_delete_cart">Arabanı silmək istəyirsiz?</string>
+    <string name="yes">Bəli</string>
+    <string name="no">Xeyr</string>
 </resources>
