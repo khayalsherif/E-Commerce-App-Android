@@ -12,9 +12,7 @@ import az.red.domain.usecase.cart.GetCartUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import az.red.presentation.base.BaseViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class CartViewModel(
@@ -30,11 +28,11 @@ class CartViewModel(
 
     private val _deleteCartItemResponse =
         MutableStateFlow<NetworkResult<Cart>>(NetworkResult.Empty())
-    val deleteCartResponse: StateFlow<NetworkResult<Cart>> get() = _deleteCartItemResponse
+    val deleteCartResponse = _deleteCartItemResponse.asStateFlow()
 
     private val _createOrderResponse =
-        MutableStateFlow<NetworkResult<DomainOrder>>(NetworkResult.Empty())
-    val createOrderResponse: StateFlow<NetworkResult<DomainOrder>> get() = _createOrderResponse
+        MutableSharedFlow<NetworkResult<DomainOrder>>()
+    val createOrderResponse = _createOrderResponse.asSharedFlow()
 
     init {
         getCart()
@@ -47,18 +45,20 @@ class CartViewModel(
             cartUseCase.getCart().collect { networkResult ->
                 when (networkResult) {
                     is NetworkResult.Empty -> {
+                        _cart.value = Cart.NULL
+                        isLoading.value = false
                         Log.i("CART_VIEW_MODEL", "Empty")
                     }
                     is NetworkResult.Error -> {
                         Log.i("CART_VIEW_MODEL", "Error")
                     }
                     is NetworkResult.Exception -> {
-                        Log.i("CART_VIEW_MODEL", "Exception")
+                        Log.i("CART_VIEW_MODEL", "Exception ${networkResult.message}")
                     }
                     is NetworkResult.Loading -> Log.i("CART_VIEW_MODEL", "Loading")
                     is NetworkResult.Success -> {
+                        networkResult.data?.let { _cart.value = it }
                         isLoading.value = false
-                        _cart.value = networkResult.data!!
                     }
                 }
             }
@@ -68,7 +68,7 @@ class CartViewModel(
     fun deleteSelectedCartItems() {
         isLoading.value = true
         viewModelScope.launch {
-            val itemsToDelete =  _cart.value.products.filter { it.isSelected }
+            val itemsToDelete = _cart.value.products.filter { it.isSelected }
             itemsToDelete.forEach {
                 deleteCartUseCase.decreaseCartProduct(it.product._id).collect { networkResult ->
                     when (networkResult) {
@@ -88,6 +88,7 @@ class CartViewModel(
     }
 
     fun createOrder() {
+        isLoading.value = true
         val userId = sessionManagerUseCase.getUserId()
         if (userId.isNullOrEmpty()) return
         val orderRequest = OrderRequest(
@@ -100,20 +101,40 @@ class CartViewModel(
             "+380630000000",
             "Thank you for order! You are welcome!",
             "<h1>Your order is placed. OrderNo is ###.</h1><p>Have a good day!</p>",
-            _cart.value.products.filter { it.isSelected }
+            _cart.value.products
         )
 
         viewModelScope.launch {
             createOrderUseCase.createOrder(orderRequest).collect { networkResult ->
                 when (networkResult) {
-                    is NetworkResult.Empty -> Log.i("CREATE_ORDER_VIEW_MODEL", "Empty")
-                    is NetworkResult.Error -> Log.i("CREATE_ORDER_VIEW_MODEL", "Error")
-                    is NetworkResult.Exception -> Log.i(
-                        "CREATE_ORDER_VIEW_MODEL",
-                        "Exception -> ${networkResult.message}"
-                    )
-                    is NetworkResult.Loading -> Log.i("CREATE_ORDER_VIEW_MODEL", "Loading")
+                    is NetworkResult.Empty -> Log.i("CREATE_ORDER", "Empty")
+                    is NetworkResult.Error -> {
+                        Log.i("CREATE_ORDER", "Error")
+                        isLoading.value = false
+                    }
+                    is NetworkResult.Exception -> {
+                        Log.i(
+                            "CREATE_ORDER",
+                            "Exception -> ${networkResult.message}"
+                        )
+                        isLoading.value = false
+                    }
+                    is NetworkResult.Loading -> Log.i("CREATE_ORDER", "Loading")
                     is NetworkResult.Success -> {
+                        Log.i("CREATE_ORDER", "Success")
+                        deleteCartUseCase.deleteCart().collect {
+                            when (it) {
+                                is NetworkResult.Empty ->  {Log.i("DELETE_CART", "Empty")}
+                                is NetworkResult.Error ->  {Log.i("DELETE_CART", "Error")}
+                                is NetworkResult.Exception ->  { Log.i(
+                                    "DELETE_CART",
+                                    "Exception -> ${networkResult.message}"
+                                )}
+                                is NetworkResult.Loading -> {Log.i("DELETE_CART", "Loading")}
+                                is NetworkResult.Success -> {Log.i("DELETE_CART", "Success")}
+                            }
+                            getCart()
+                        }
                         _createOrderResponse.emit(networkResult)
                     }
                 }

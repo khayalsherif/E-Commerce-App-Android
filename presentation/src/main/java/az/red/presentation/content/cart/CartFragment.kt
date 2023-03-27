@@ -7,6 +7,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import az.red.domain.common.NetworkResult
+import az.red.domain.model.cart.Cart
 import az.red.domain.model.cart.CartProduct
 import az.red.presentation.R
 import az.red.presentation.base.BaseFragment
@@ -41,7 +43,6 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.cart.collect {
-                        binding.layoutLoading.root.gone()
                         if (binding.rvCart.adapter == null) {
                             binding.rvCart.adapter = adapter
                         }
@@ -65,12 +66,14 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     private fun createOrder() {
         binding.btnCheckout.setOnClickListener {
             viewModel.createOrder()
-            lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.createOrderResponse.collect {//TODO: Add when for network result. In Snackbar display which items have problems (from error response product availability details)
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.createOrderResponse.collect {
+                    if (it is NetworkResult.Success) {
                         Snackbar.make(
                             requireView(),
-                            it.data?.message.toString(),
+                            it.data?.message ?: "Order has been created successfully",
                             Snackbar.LENGTH_LONG
                         ).show()
                     }
@@ -116,7 +119,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.cart.collect { cart ->
-                        val checkoutValue =
+
+                        val checkoutValue = if (cart == Cart.NULL) 0.0 else
                             cart.products.filter { it.isSelected }
                                 .sumOf { it.product.currentPrice * it.cartQuantity }
                         if (checkoutValue > 0.0) {
