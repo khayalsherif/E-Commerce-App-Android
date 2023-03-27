@@ -1,5 +1,6 @@
 package az.red.data.remote.interceptor
 
+import android.util.Log
 import az.red.data.local.SessionManager
 import az.red.domain.common.EventBus
 import az.red.domain.common.enum.AuthenticationStatus
@@ -10,6 +11,7 @@ import okhttp3.Response
 
 class HeaderInterceptor(private val sessionManager: SessionManager) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
+        try{
         val request = chain.request().newBuilder()
         val headers = HashMap<String, String>()
         sessionManager.getAuthToken()?.let { headers["Authorization"] = it }
@@ -19,6 +21,9 @@ class HeaderInterceptor(private val sessionManager: SessionManager) : Intercepto
             sessionManager.removeAuthToken()
             runBlocking { EventBus.publish(AuthenticationStatus.UNAUTHORIZED) }
         }
-        return response
+        return response } catch (ex: java.lang.Exception) {
+            Log.i("INTERCEPTOR", " exception $ex")
+            throw ex
+        }
     }
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:orientation="horizontal">
+    
+    
+    <ImageView
+        android:layout_width="97dp"
+        android:layout_height="97dp"
+        android:src="@drawable/product_image"
+        android:scaleType="fitXY"
+        android:id="@+id/cart_image"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_cart_product_name"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/NunitoRegular16spStyle"
+                android:id="@+id/txt_cart_product_name"
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:gravity="start"
+                android:text="Iphone 13 pro max"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:id="@+id/cb_cart"
+                android:buttonTint="@color/carrot_accent"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/NunitoSemiBold14spStyle"
+            android:id="@+id/txt_cart_product_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/ll_cart_product_name"
+            android:paddingStart="8dp"
+            android:gravity="start"
+            android:text="US $540.00"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:id="@+id/cart_product_plus"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_plus"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/BarlowBold16spStyle"
+                android:id="@+id/txt_cart_product_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:gravity="start"
+                android:text="1"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cart_product_minus"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_minus"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

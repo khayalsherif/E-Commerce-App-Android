@@ -32,7 +32,8 @@ fun RegisterResponse.registerResponseToRegister(): Register {
         login,
         password,
         telephone,
-        message
+        message,
+        _id
     )
 }
 

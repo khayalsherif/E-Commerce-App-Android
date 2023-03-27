@@ -2,18 +2,26 @@ package az.red.data.di
 
 import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
+import az.red.data.mapper.cart.CartMapper
+import az.red.data.mapper.order.OrderMapper
 import az.red.data.remote.auth.AuthService
+import az.red.data.remote.cart.CartService
 import az.red.data.remote.category.CategoryService
+import az.red.data.remote.order.OrderService
 import az.red.data.remote.product.ProductService
 import az.red.data.remote.wishList.WishlistService
 import az.red.data.repository.auth.AuthRepositoryImpl
+import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
+import az.red.data.repository.order.OrderRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.data.repository.wishlist.WishListRepositoryImpl
 import az.red.domain.repository.WishListRepository
 import az.red.domain.repository.auth.AuthRepository
+import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.category.CategoryRepository
+import az.red.domain.repository.order.OrderRepository
 import az.red.domain.repository.product.ProductRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
@@ -66,8 +74,14 @@ val dataModule = module {
     // Auth
     factory<AuthService> { get<Retrofit>().create(AuthService::class.java) }
 
+
+    factory<CartService> { get<Retrofit>().create(CartService::class.java) }
+
     factory<AuthRepository> {
         AuthRepositoryImpl(service = get())
+    }
+    factory<CartRepository> {
+        CartRepositoryImpl(cartService = get(), cartMapper = get())
     }
 
 
@@ -76,6 +90,13 @@ val dataModule = module {
 
     factory<CategoryRepository> {
         CategoryRepositoryImpl(service = get())
+    }
+
+    //Order
+    factory<OrderService> { get<Retrofit>().create(OrderService::class.java) }
+
+    factory<OrderRepository> {
+        OrderRepositoryImpl(orderService = get(), orderMapper = get())
     }
 
     // Product
@@ -106,4 +127,7 @@ val dataModule = module {
     ///////////////////////////////////// MAPPER ///////////////////////////////////////////////
 
     single { Gson() }
+
+    factory { CartMapper() }
+    factory { OrderMapper() }
 }

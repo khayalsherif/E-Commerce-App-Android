@@ -17,8 +17,10 @@ inline fun <T : Any, reified D : Any> handleApi(
     val body = response.body()
     emit(NetworkResult.Loading())
 
-    if (response.isSuccessful && body != null) {
-        emit(NetworkResult.Success(mapper(body)))
+    if (response.isSuccessful) {
+        if (body == null) emit(NetworkResult.Empty())
+        else
+            emit(NetworkResult.Success(mapper(body)))
     } else {
         val gson: Gson by KoinJavaComponent.inject(Gson::class.java)
         val e = response.errorBody()?.let { gson.fromJson(it.string(), D::class.java) }
@@ -32,7 +34,12 @@ inline fun <T : Any, reified D : Any> handleApi(
     }
 }.catch {
     when (it) {
-        is HttpException -> emit(NetworkResult.Error(message = it.stackTraceToString(), code = it.code()))
+        is HttpException -> emit(
+            NetworkResult.Error(
+                message = it.stackTraceToString(),
+                code = it.code()
+            )
+        )
         else -> emit(NetworkResult.Exception(exception = it.stackTraceToString()))
     }
 }

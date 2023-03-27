@@ -1,7 +1,7 @@
 package az.red.domain.model.product
 
 data class Product(
-    val id: String,
+    val _id: String,
     val categories: String,
     val color: String?,
     val currentPrice: Double,
