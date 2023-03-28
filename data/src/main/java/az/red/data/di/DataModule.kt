@@ -5,13 +5,13 @@ import az.red.data.local.SessionManager
 import az.red.data.mapper.auth.AuthMapper
 import az.red.data.mapper.cart.CartMapper
 import az.red.data.mapper.order.OrderMapper
-import az.red.data.mapper.review.ReviewMapper
+import az.red.data.mapper.add_review.AddReviewMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.remote.cart.CartService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.order.OrderService
 import az.red.data.remote.product.ProductService
-import az.red.data.remote.review.ReviewService
+import az.red.data.remote.review.AddReviewService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
@@ -109,7 +109,7 @@ val dataModule = module {
     }
 
     //Review
-    factory<ReviewService> { get<Retrofit>().create(ReviewService::class.java) }
+    factory<AddReviewService> { get<Retrofit>().create(AddReviewService::class.java) }
 
     factory<AddReviewRepository> {
         AddReviewRepositoryImpl(reviewService = get(), reviewMapper = get())
@@ -133,5 +133,5 @@ val dataModule = module {
     factory { AuthMapper() }
     factory { CartMapper() }
     factory { OrderMapper() }
-    factory { ReviewMapper() }
+    factory { AddReviewMapper() }
 }

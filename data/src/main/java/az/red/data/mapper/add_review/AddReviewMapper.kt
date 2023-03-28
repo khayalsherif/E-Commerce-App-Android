@@ -1,9 +1,9 @@
-package az.red.data.mapper.review
+package az.red.data.mapper.add_review
 
 import az.red.data.model.review.response.AddCommentResponse
 import az.red.domain.model.review.response.AddComment
 
-class ReviewMapper {
+class AddReviewMapper {
 
     fun addCommentResponseToAddComment(addCommentResponse: AddCommentResponse):AddComment {
         return AddComment(
