@@ -7,6 +7,7 @@ data class ReviewResponse(
     @SerializedName("_id")
     val id: String,
     val product: ProductResponse,
+    val customer: UserResponse,
     val content: String,
     val __v: Int
 )
