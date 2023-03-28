@@ -1,13 +1,9 @@
 package az.red.presentation.content.orders.dialog
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.provider.MediaStore
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -21,8 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment() {
     private lateinit var binding: LayoutLeaveReviewBinding
-    private val pickImage = 100
-    private var imageUri: Uri? = null
     val leaveReviewViewModel: LeaveReviewViewModel by viewModel()
 
     override fun onCreateView(
@@ -80,14 +74,6 @@ class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment()
             }
         }
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == pickImage) {
-            imageUri = data?.data
-
-        }
     }
 
     override fun onStart() {
