@@ -14,11 +14,15 @@ import az.red.domain.model.product.Product
 import az.red.presentation.R
 import az.red.presentation.base.BaseDiffUtil
 import az.red.presentation.databinding.ProductCardBinding
+import az.red.presentation.util.ClickListener
 import coil.load
 import kotlin.math.roundToInt
 
 
-class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
+class ProductListItemAdapter(
+    private val addToWishList: (id: String) -> Unit,
+    private val clickListener: ClickListener
+) :
     RecyclerView.Adapter<ProductViewHolder>() {
     private var data = mutableListOf<Product>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -31,7 +35,7 @@ class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentItem = data[position]
-        holder.bind(currentItem, addToWishList, false)
+        holder.bind(currentItem, addToWishList, lineView = false, clickListener = clickListener)
     }
 
     fun setData(newData: List<Product>) {
@@ -45,7 +49,12 @@ class ProductListItemAdapter(private val addToWishList: (id: String) -> Unit) :
 class ProductViewHolder(private val binding: ProductCardBinding) :
     RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
-    fun bind(product: Product, addToWishList: (id: String) -> Unit, lineView: Boolean) {
+    fun bind(
+        product: Product,
+        addToWishList: (id: String) -> Unit,
+        lineView: Boolean,
+        clickListener: ClickListener
+    ) {
         binding.tvName.text = product.name
         if (product.description.isNullOrBlank()) binding.tvDescription.visibility = View.GONE
         binding.tvDescription.text = product.description.toString()
@@ -69,6 +78,9 @@ class ProductViewHolder(private val binding: ProductCardBinding) :
                 "${(product.currentPrice - product.previousPrice!!).roundToInt()}%"
         }
 
+        binding.root.setOnClickListener {
+            clickListener.onClick(it, product.itemNo)
+        }
         binding.ivHeart.setOnClickListener {
             binding.ivHeart.setImageResource(R.drawable.ic_full_heart)
             addToWishList(product._id)

@@ -86,7 +86,17 @@
         android:id="@+id/productDetailFragment"
         android:name="az.red.presentation.content.productDetail.ProductDetailFragment"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailFragment_self"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="az.red.presentation.content.orders.OrdersFragment"
@@ -128,4 +138,24 @@
         android:name="az.red.presentation.content.wishList.WishListFragment"
         android:label="fragment_wish_list"
         tools:layout="@layout/fragment_wish_list" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="az.red.presentation.content.reviews.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" >
+        <argument
+            android:name="productId"
+            app:argType="string" />
+        <argument android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="newPrice"
+            app:argType="string" />
+        <argument
+            android:name="oldPrice"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -53,6 +53,12 @@
     <string name="mock_price">US $XXX</string>
     <string name="product_image">Product image</string>
     <string name="mock_discount">xx%</string>
+    <string name="buy_now">Buy now</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="specifications">Specifications</string>
+    <string name="reviews">Reviews</string>
+    <string name="questions">Questions</string>
+    <string name="similar_goods">Similar goods</string>
     <string name="wishlist">Wish list</string>
     <string name="total_price">Total price</string>
     <string name="warning">Warning!</string>

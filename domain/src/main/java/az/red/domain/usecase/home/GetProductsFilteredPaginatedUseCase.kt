@@ -7,9 +7,9 @@ import az.red.domain.repository.product.ProductRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetProductsFilteredPaginatedUseCase(private val repository: ProductRepository) {
-    suspend operator fun invoke(): Flow<PagingData<Product>> {
+    suspend operator fun invoke(request: ProductListRequest? = ProductListRequest()): Flow<PagingData<Product>> {
         return repository.getProductsFilteredPaginated(
-            ProductListRequest()
+            request!!
         )
     }
 }

@@ -6,8 +6,10 @@ import az.red.domain.usecase.cart.DecreaseCartProductUseCase
 import az.red.domain.usecase.cart.DeleteCartUseCase
 import az.red.domain.usecase.cart.GetCartUseCase
 import az.red.domain.usecase.home.GetCategoriesUseCase
+import az.red.domain.usecase.home.GetProductByIdUseCase
 import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
+import az.red.domain.usecase.review.ReviewUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
 import az.red.domain.usecase.order.GetCustomerOrdersUseCase
 import az.red.domain.usecase.add_review.AddCommentUseCase
@@ -52,6 +54,10 @@ val domainModule = module {
     factory {
         GetProductsFilteredPaginatedUseCase(repository = get())
     }
+    
+    factory { GetProductByIdUseCase(repository = get()) }
+
+    factory { ReviewUseCase(repository = get()) }
 
     factory {
         AddCommentUseCase(reviewRepository = get())

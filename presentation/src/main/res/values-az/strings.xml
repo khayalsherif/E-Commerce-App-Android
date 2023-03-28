@@ -52,6 +52,12 @@
     <string name="mock_price">US $XXX</string>
     <string name="product_image">Məhsul şəkli</string>
     <string name="mock_discount">xx%</string>
+    <string name="buy_now">Indi al</string>
+    <string name="add_to_cart">Səbətə əlavə et</string>
+    <string name="specifications">Spesifikasiyalar</string>
+    <string name="reviews">Rəylər</string>
+    <string name="questions">Suallar</string>
+    <string name="similar_goods">Oxşar mallar</string>
     <string name="checkout">Yoxla</string>
     <string name="total_price">Ümumi qiymət</string>
     <string name="warning">Xəbərdarlıq!</string>

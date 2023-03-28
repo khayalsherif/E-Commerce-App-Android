@@ -10,6 +10,7 @@ object EndPoints {
     const val UPDATE_USER = USER_BASE
     const val UPDATE_USER_PASSWORD = "$USER_BASE/password"
 
+
     //Cart
     private const val CART_BASE = "cart"
     const val GET_CART = CART_BASE
@@ -23,13 +24,16 @@ object EndPoints {
     const val PRODUCT = PRODUCT_BASE
     const val PRODUCT_SEARCH = "$PRODUCT_BASE/search"
 
-    //Product Filters
+    // Product Filters
     const val CATEGORY = "catalog"
     const val BRAND = "filters/brand"
     const val SIZE = "sizes"
     const val COLOR = "colors"
 
-
+    // Reviews
+    private const val REVIEW = "comments"
+    const val GET_COMMENTS_OF_CUSTOMER = "$REVIEW/product/{productId}"
+    
     //Wishlist
     private const val WISHLIST_BASE = "wishlist"
     const val WISHLIST = WISHLIST_BASE
@@ -44,6 +48,5 @@ object EndPoints {
     //Review
     private const val REVIEW_BASE = "comments"
     const val ADD_COMMENT = REVIEW_BASE
-
 
 }

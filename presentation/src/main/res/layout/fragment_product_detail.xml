@@ -1,6 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProudctDetailFragment"/>
+    android:background="?attr/screen_background_color"
+    android:orientation="horizontal">
+
+    <include
+        android:id="@+id/layout_loading"
+        layout="@layout/layout_loading_transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/screen_background_color"
+        android:fillViewport="true"
+        tools:context=".content.productDetail.ProductDetailFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/screen_background_color"
+                android:minHeight="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_back" />
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                app:iss_delay="0"
+                app:iss_period="1000"
+                app:iss_placeholder="@drawable/no_image">
+
+            </com.denzcoskun.imageslider.ImageSlider>
+
+            <TextView
+                android:id="@+id/textTitle"
+                style="@style/NunitoSemiBold18spStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                tools:text="Iphone 13 pro max Black 256gb" />
+
+            <TextView
+                android:id="@+id/textDescription"
+                style="@style/NunitoRegular16spStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                tools:text="Description Description Description\nDescription" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textNewPrice"
+                    style="@style/NunitoBold14spStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    tools:text="US $540.00" />
+
+                <TextView
+                    android:id="@+id/textOldPrice"
+                    style="@style/NunitoRegular14spStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    tools:text="US $600.00" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/buttonBuy"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/buy_now" />
+
+            <TextView
+                android:id="@+id/buttonAddCart"
+                style="@style/ButtonStyleWithStroke"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/add_to_cart" />
+
+            <TextView
+                android:id="@+id/buttonSpecifications"
+                style="@style/NunitoSemiBold16spStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/specifications"
+                app:drawableEndCompat="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/buttonReviews"
+                style="@style/NunitoSemiBold16spStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/reviews"
+                app:drawableEndCompat="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/buttonQuestions"
+                style="@style/NunitoSemiBold16spStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/questions"
+                app:drawableEndCompat="@drawable/ic_next" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textGoods"
+                    style="@style/NunitoSemiBold18spStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/similar_goods" />
+
+                <TextView
+                    android:id="@+id/buttonSeeAll"
+                    style="@style/NunitoMedium14spStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/see_all"
+                    android:textColor="@color/carrot_accent" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcViewSimilarGoods"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                tools:itemCount="1"
+                tools:listitem="@layout/product_card" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
+

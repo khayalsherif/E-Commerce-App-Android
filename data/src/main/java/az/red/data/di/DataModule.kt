@@ -10,6 +10,7 @@ import az.red.data.remote.cart.CartService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.order.OrderService
 import az.red.data.remote.product.ProductService
+import az.red.data.remote.review.ReviewService
 import az.red.data.remote.wishList.WishlistService
 import az.red.data.remote.review.AddReviewService
 import az.red.data.repository.auth.AuthRepositoryImpl
@@ -17,6 +18,7 @@ import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
 import az.red.data.repository.order.OrderRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
+import az.red.data.repository.review.ReviewRepositoryImpl
 import az.red.data.repository.add_review.AddReviewRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.data.repository.wishlist.WishListRepositoryImpl
@@ -26,6 +28,7 @@ import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.category.CategoryRepository
 import az.red.domain.repository.order.OrderRepository
 import az.red.domain.repository.product.ProductRepository
+import az.red.domain.repository.review.ReviewRepository
 import az.red.domain.repository.add_review.AddReviewRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
@@ -110,6 +113,14 @@ val dataModule = module {
         ProductRepositoryImpl(service = get())
     }
 
+    // Review
+    factory<ReviewService> { get<Retrofit>().create(ReviewService::class.java) }
+
+    factory<ReviewRepository> {
+        ReviewRepositoryImpl(service = get())
+   
+   //Review
+
     // WishList
     factory<WishlistService> { get<Retrofit>().create(WishlistService::class.java) }
 
@@ -117,11 +128,12 @@ val dataModule = module {
         WishListRepositoryImpl(service = get())
     }
 
-    //Review
+    // Review Add
     factory<AddReviewService> { get<Retrofit>().create(AddReviewService::class.java) }
 
     factory<AddReviewRepository> {
         AddReviewRepositoryImpl(reviewService = get(), reviewMapper = get())
+
     }
 
     // Session Manager
