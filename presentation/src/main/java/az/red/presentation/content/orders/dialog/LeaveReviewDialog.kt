@@ -2,8 +2,6 @@ package az.red.presentation.content.orders.dialog
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -16,11 +14,7 @@ import az.red.presentation.R
 import az.red.presentation.databinding.LayoutLeaveReviewBinding
 import coil.load
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.tasks.await
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment() {
     private lateinit var binding : LayoutLeaveReviewBinding
@@ -53,7 +47,7 @@ class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment()
             imageDialog.load(cartProduct.product.imageUrls.first())
 
             llAddPhoto.setOnClickListener {
-                val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+
             }
 
             btnCancel.setOnClickListener {
@@ -71,20 +65,6 @@ class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment()
             }
         }
 
-    }
-
-    private suspend fun uploadAvatarToStorage(uri: Uri) {
-        val storageRef = Firebase.storage.reference
-        val uuid = UUID.randomUUID()
-        val mountainImagesRef = storageRef.child("images/${uuid}.jpg")
-        val uploadTask = mountainImagesRef.putFile(uri).await()
-
-        if (uploadTask.metadata != null) {
-            if (uploadTask.metadata!!.reference != null) {
-
-//                fillProfileState.value.avatarUrl = uploadTask.storage.downloadUrl.await().toString()
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
