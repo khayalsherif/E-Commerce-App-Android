@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id "com.google.gms.google-services"
 }
 
 android {
@@ -70,8 +69,4 @@ dependencies {
     // Paging
     implementation "androidx.paging:paging-runtime:3.1.1"
     implementation("androidx.paging:paging-common-ktx:3.1.1")
-
-    // Firebase
-    implementation platform('com.google.firebase:firebase-bom:31.2.3')
-    implementation 'com.google.firebase:firebase-storage-ktx'
 }
