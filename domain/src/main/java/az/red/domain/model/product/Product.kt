@@ -15,4 +15,23 @@ data class Product(
     val previousPrice: Double?,
     val quantity: Int,
     val size: String?
-)
+){
+    companion object {
+        val NULL = Product(
+            "",
+            "",
+            "",
+            0.0,
+            "",
+            "",
+            true,
+            "",
+            emptyList(),
+            "",
+            "",
+            0.0,
+            0,
+            ""
+        )
+    }
+}

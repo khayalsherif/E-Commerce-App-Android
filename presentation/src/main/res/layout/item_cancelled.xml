@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/image_ongoing"
+        android:src="@drawable/product_image"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_cancelled_product_name"
+            style="@style/NunitoSemiBold16spStyle"
+            android:text="Iphone 13 pro"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_cancelled_product_name"
+            android:id="@+id/tv_cancelled_product_price"
+            style="@style/NunitoSemiBold14spStyle"
+            android:text="US $ 540.00"
+            android:layout_marginTop="8dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="64dp"
+            app:cardCornerRadius="4dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/outlined_button_state_background_color"
+            app:strokeColor="@color/order_red"
+            app:strokeWidth="1dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                style="@style/NunitoRegular10spStyle"
+                android:id="@+id/btn_go_my_products"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/order_red"
+                android:text="@string/cancelled" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+            style="@style/OrderButtonStyle"
+            android:id="@+id/btn_track_order"
+            android:layout_width="110dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/buy_again" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

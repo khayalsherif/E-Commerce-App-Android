@@ -11,7 +11,7 @@ open class RecyclerViewHolder<VB : ViewBinding, D>(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(data: D) {
-        onBind(binding, data, adapterPosition)
+        onBind(binding, data, absoluteAdapterPosition)
     }
 
     companion object {

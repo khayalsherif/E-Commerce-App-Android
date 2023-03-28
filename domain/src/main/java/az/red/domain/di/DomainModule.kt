@@ -9,6 +9,8 @@ import az.red.domain.usecase.home.GetCategoriesUseCase
 import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
+import az.red.domain.usecase.order.GetCustomerOrdersUseCase
+import az.red.domain.usecase.add_review.AddCommentUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import az.red.domain.usecase.wishList.AddToWishListUseCase
 import az.red.domain.usecase.wishList.GetWishListUseCase
@@ -44,8 +46,17 @@ val domainModule = module {
     }
 
     factory {
+        GetCustomerOrdersUseCase(orderRepository = get())
+    }
+
+    factory {
         GetProductsFilteredPaginatedUseCase(repository = get())
     }
+
+    factory {
+        AddCommentUseCase(reviewRepository = get())
+    }
+
     factory {
         GetWishListUseCase(repository = get())
     }

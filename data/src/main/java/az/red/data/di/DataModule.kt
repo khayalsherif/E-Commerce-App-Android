@@ -4,17 +4,20 @@ import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
 import az.red.data.mapper.cart.CartMapper
 import az.red.data.mapper.order.OrderMapper
+import az.red.data.mapper.add_review.AddReviewMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.remote.cart.CartService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.order.OrderService
 import az.red.data.remote.product.ProductService
 import az.red.data.remote.wishList.WishlistService
+import az.red.data.remote.review.AddReviewService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
 import az.red.data.repository.order.OrderRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
+import az.red.data.repository.add_review.AddReviewRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.data.repository.wishlist.WishListRepositoryImpl
 import az.red.domain.repository.WishListRepository
@@ -23,6 +26,7 @@ import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.category.CategoryRepository
 import az.red.domain.repository.order.OrderRepository
 import az.red.domain.repository.product.ProductRepository
+import az.red.domain.repository.add_review.AddReviewRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -113,6 +117,13 @@ val dataModule = module {
         WishListRepositoryImpl(service = get())
     }
 
+    //Review
+    factory<AddReviewService> { get<Retrofit>().create(AddReviewService::class.java) }
+
+    factory<AddReviewRepository> {
+        AddReviewRepositoryImpl(reviewService = get(), reviewMapper = get())
+    }
+
     // Session Manager
     factory<SessionManagerRepository> {
         SessionManagerImpl(sessionManager = get())
@@ -130,4 +141,5 @@ val dataModule = module {
 
     factory { CartMapper() }
     factory { OrderMapper() }
+    factory { AddReviewMapper() }
 }

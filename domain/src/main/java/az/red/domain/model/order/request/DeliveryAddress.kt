@@ -5,4 +5,13 @@ data class DeliveryAddress(
     val address : String,
     val city : String,
     val postal : String
-)
+){
+    companion object {
+        val NULL = DeliveryAddress(
+            "",
+            "",
+            "",
+            ""
+        )
+    }
+}
