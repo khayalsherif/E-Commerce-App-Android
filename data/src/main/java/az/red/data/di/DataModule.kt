@@ -2,7 +2,6 @@ package az.red.data.di
 
 import az.red.data.remote.interceptor.HeaderInterceptor
 import az.red.data.local.SessionManager
-import az.red.data.mapper.auth.AuthMapper
 import az.red.data.mapper.cart.CartMapper
 import az.red.data.mapper.order.OrderMapper
 import az.red.data.mapper.add_review.AddReviewMapper
@@ -11,6 +10,7 @@ import az.red.data.remote.cart.CartService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.order.OrderService
 import az.red.data.remote.product.ProductService
+import az.red.data.remote.wishList.WishlistService
 import az.red.data.remote.review.AddReviewService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.data.repository.cart.CartRepositoryImpl
@@ -19,6 +19,8 @@ import az.red.data.repository.order.OrderRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
 import az.red.data.repository.add_review.AddReviewRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
+import az.red.data.repository.wishlist.WishListRepositoryImpl
+import az.red.domain.repository.WishListRepository
 import az.red.domain.repository.auth.AuthRepository
 import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.category.CategoryRepository
@@ -80,7 +82,7 @@ val dataModule = module {
     factory<CartService> { get<Retrofit>().create(CartService::class.java) }
 
     factory<AuthRepository> {
-        AuthRepositoryImpl(service = get(), mapper = get())
+        AuthRepositoryImpl(service = get())
     }
     factory<CartRepository> {
         CartRepositoryImpl(cartService = get(), cartMapper = get())
@@ -108,6 +110,13 @@ val dataModule = module {
         ProductRepositoryImpl(service = get())
     }
 
+    // WishList
+    factory<WishlistService> { get<Retrofit>().create(WishlistService::class.java) }
+
+    factory<WishListRepository> {
+        WishListRepositoryImpl(service = get())
+    }
+
     //Review
     factory<AddReviewService> { get<Retrofit>().create(AddReviewService::class.java) }
 
@@ -130,7 +139,6 @@ val dataModule = module {
 
     single { Gson() }
 
-    factory { AuthMapper() }
     factory { CartMapper() }
     factory { OrderMapper() }
     factory { AddReviewMapper() }

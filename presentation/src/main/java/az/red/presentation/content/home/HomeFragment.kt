@@ -39,11 +39,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private val productListItemAdapter by lazy {
         ProductListItemAdapter { //Add to wih list
+            viewModel.addToWishList(it)
             showToast("added to wishlist")
         }
     }
     private val paginatedProductListItemAdapter by lazy {
-        ProductListItemPagingAdapter { showToast("added to wishlist") }
+        ProductListItemPagingAdapter {
+            viewModel.addToWishList(it)
+            showToast("added to wishlist")
+        }
     }
 
     override val bindViews: FragmentHomeBinding.() -> Unit = {

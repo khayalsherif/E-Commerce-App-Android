@@ -38,4 +38,11 @@ class CartRepositoryImpl(
             execute = {request }
         )
     }
+    override suspend fun add(productId : String): Flow<NetworkResult<Cart>> {
+        val request = cartService.add(productId)
+        return handleApi(
+            mapper = { cartMapper.cartResponseToCart(request.body()!!) },
+            execute = {request }
+        )
+    }
 }

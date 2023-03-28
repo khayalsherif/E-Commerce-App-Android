@@ -20,6 +20,7 @@
         <item name="text_color">@color/light_text_color</item>
         <item name="back_icon_color">@color/light_back_icon_color</item>
         <item name="button_is_enable_color">@color/light_button_is_enable_color</item>
+        <item name="outlined_button_is_enable_color">@color/outlined_light_button_is_enable_color</item>
         <item name="button_is_not_enable_color">@color/light_button_is_not_enable_color</item>
         <item name="line_color">@color/light_line_color</item>
         <item name="edit_text_text_color">@color/light_edit_text_text_color</item>
@@ -30,5 +31,6 @@
         <item name="edit_text_stroke_un_selected_color">@color/light_edit_text_stroke_un_selected_color</item>
         <item name="edit_text_background_color">@color/light_edit_text_background_color</item>
         <item name="carrot_accent">@color/carrot_accent</item>
+        <item name="outlined_button_text_color">@color/light_outlined_button_text_color</item>
     </style>
 </resources>
