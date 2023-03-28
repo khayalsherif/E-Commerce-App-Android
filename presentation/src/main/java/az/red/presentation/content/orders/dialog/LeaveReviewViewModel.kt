@@ -18,7 +18,15 @@ class LeaveReviewViewModel(
     private val _addCommentResponse = MutableStateFlow<AddComment>(AddComment.NULL)
     val addCommentResponse = _addCommentResponse.asStateFlow()
 
-    fun addComment(addCommentRequest: AddCommentRequest){
+    fun addComment(
+        addCommentRequest: AddCommentRequest,
+        toast: (String) -> Unit,
+        onSuccess: () -> Unit
+    ){
+        if(addCommentRequest.content.isBlank()){
+            toast("Review cannot be empty")
+            return
+        }
         viewModelScope.launch {
             addCommentUseCase.addComment(addCommentRequest).collect{result ->
                 when(result){
@@ -32,6 +40,7 @@ class LeaveReviewViewModel(
                               it
                             }
                         }
+                        onSuccess()
                     }
                 }
             }
