@@ -58,4 +58,21 @@
     <string name="do_you_want_delete_cart">Arabanı silmək istəyirsiz?</string>
     <string name="yes">Bəli</string>
     <string name="no">Xeyr</string>
+    <string name="ongoing">Davam edir</string>
+    <string name="cancelled">Ləğv edildi</string>
+    <string name="completed">Tamamlandı</string>
+    <string name="you_don_t_have_an_ongoing_orders_at_this_time">Hazırda davam edən sifarişləriniz yoxdur</string>
+    <string name="there_are_no_cancelled_orders">Ləğv edilmiş sifarişlər yoxdur</string>
+    <string name="you_don_t_have_completed_orders_yet">Hələ tamamlanmış sifarişləriniz yoxdur</string>
+    <string name="track_order">Sifarişi izləyin</string>
+    <string name="in_delivery">Çatdırılmada</string>
+    <string name="leave_review">Rəy yazın</string>
+    <string name="buy_again">Yenidən al</string>
+
+    <string name="how_is_your_order">Sifarişiniz necədir</string>
+    <string name="add_photo">Foto əlavə edin</string>
+    <string name="cancel">Ləğv et</string>
+    <string name="submit">Təsdiq edin</string>
+    <string name="type_review">Rəy yazın</string>
+    <string name="comment_added_successfully">Şərh uğurla əlavə edildi!!</string>
 </resources>

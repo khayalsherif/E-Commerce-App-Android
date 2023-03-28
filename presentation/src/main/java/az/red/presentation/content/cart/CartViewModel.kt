@@ -6,7 +6,7 @@ import az.red.domain.common.NetworkResult
 import az.red.domain.model.cart.Cart
 import az.red.domain.model.order.request.DeliveryAddress
 import az.red.domain.model.order.request.OrderRequest
-import az.red.domain.model.order.response.DomainOrder
+import az.red.domain.model.order.response.CreateOrder
 import az.red.domain.usecase.cart.DeleteCartUseCase
 import az.red.domain.usecase.cart.GetCartUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
@@ -31,7 +31,7 @@ class CartViewModel(
     val deleteCartResponse = _deleteCartItemResponse.asStateFlow()
 
     private val _createOrderResponse =
-        MutableSharedFlow<NetworkResult<DomainOrder>>()
+        MutableSharedFlow<NetworkResult<CreateOrder>>()
     val createOrderResponse = _createOrderResponse.asSharedFlow()
 
     init {

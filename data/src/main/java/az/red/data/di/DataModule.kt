@@ -5,22 +5,26 @@ import az.red.data.local.SessionManager
 import az.red.data.mapper.auth.AuthMapper
 import az.red.data.mapper.cart.CartMapper
 import az.red.data.mapper.order.OrderMapper
+import az.red.data.mapper.review.ReviewMapper
 import az.red.data.remote.auth.AuthService
 import az.red.data.remote.cart.CartService
 import az.red.data.remote.category.CategoryService
 import az.red.data.remote.order.OrderService
 import az.red.data.remote.product.ProductService
+import az.red.data.remote.review.ReviewService
 import az.red.data.repository.auth.AuthRepositoryImpl
 import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
 import az.red.data.repository.order.OrderRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
+import az.red.data.repository.review.ReviewRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.domain.repository.auth.AuthRepository
 import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.category.CategoryRepository
 import az.red.domain.repository.order.OrderRepository
 import az.red.domain.repository.product.ProductRepository
+import az.red.domain.repository.review.ReviewRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -104,6 +108,13 @@ val dataModule = module {
         ProductRepositoryImpl(service = get())
     }
 
+    //Review
+    factory<ReviewService> { get<Retrofit>().create(ReviewService::class.java) }
+
+    factory<ReviewRepository> {
+        ReviewRepositoryImpl(reviewService = get(), reviewMapper = get())
+    }
+
     // Session Manager
     factory<SessionManagerRepository> {
         SessionManagerImpl(sessionManager = get())
@@ -122,4 +133,5 @@ val dataModule = module {
     factory { AuthMapper() }
     factory { CartMapper() }
     factory { OrderMapper() }
+    factory { ReviewMapper() }
 }

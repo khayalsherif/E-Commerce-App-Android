@@ -58,4 +58,20 @@
     <string name="do_you_want_delete_cart">Do you want delete cart?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="ongoing">Ongoing</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="completed">Completed</string>
+    <string name="you_don_t_have_an_ongoing_orders_at_this_time">You don’t have an ongoing orders at this time</string>
+    <string name="there_are_no_cancelled_orders">There are no cancelled orders</string>
+    <string name="you_don_t_have_completed_orders_yet">You don’t have completed orders yet</string>
+    <string name="track_order">Track order</string>
+    <string name="in_delivery">In delivery</string>
+    <string name="leave_review">Leave review</string>
+    <string name="buy_again">Buy again</string>
+    <string name="how_is_your_order">How is your order</string>
+    <string name="add_photo">Add photo</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="type_review">Type review</string>
+    <string name="comment_added_successfully">Comment added successfully!</string>
 </resources>
