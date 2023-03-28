@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_marginHorizontal="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/reviewlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="16dp">
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/pop_up_card"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/BarlowBold24spStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/how_is_your_order"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            style="@style/BarlowBold24spStyle"
-            android:layout_gravity="center_horizontal"/>
+            android:text="@string/how_is_your_order" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/image_dialog"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:id="@+id/image_dialog"
-                android:src="@drawable/product_image"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/product_image" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,42 +40,42 @@
                 android:layout_marginHorizontal="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/tv_dialog_product_name"
                     style="@style/NunitoSemiBold16spStyle"
-                    android:text="Iphone 13 pro"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Iphone 13 pro" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_dialog_product_price"
+                    style="@style/NunitoSemiBold14spStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_dialog_product_name"
-                    android:id="@+id/tv_dialog_product_price"
-                    style="@style/NunitoSemiBold14spStyle"
-                    android:text="US $ 540.00"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:text="US $ 540.00" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_width="64dp"
-                    app:cardCornerRadius="4dp"
                     android:id="@+id/cv_status"
+                    android:layout_width="64dp"
+                    android:layout_height="18dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    app:cardElevation="0dp"
+                    android:layout_marginTop="20dp"
                     app:cardBackgroundColor="@color/outlined_button_state_background_color"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
                     app:strokeColor="@color/order_green"
-                    app:strokeWidth="1dp"
-                    android:layout_height="18dp"
-                    android:layout_marginTop="20dp">
+                    app:strokeWidth="1dp">
 
                     <TextView
-                        style="@style/NunitoRegular10spStyle"
                         android:id="@+id/tv_status"
-                        android:textColor="@color/order_green"
+                        style="@style/NunitoRegular10spStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="@string/completed" />
+                        android:text="@string/completed"
+                        android:textColor="@color/order_green" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -87,35 +86,35 @@
         <EditText
             android:id="@+id/input_type_review"
             style="@style/EditTextStyle"
-            android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
             android:layout_height="44dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="32dp"
             android:drawablePadding="12dp"
             android:hint="@string/type_review"
             android:inputType="text" />
 
         <LinearLayout
+            android:id="@+id/ll_add_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:id="@+id/ll_add_photo"
             android:orientation="horizontal">
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_add_image_24"
-                android:layout_marginEnd="16dp"/>
+                android:src="@drawable/ic_add_image_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                style="@style/NunitoRegular16spStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_photo"
-                style="@style/NunitoRegular16spStyle"
-                android:textColor="@color/carrot_accent"/>
+                android:textColor="@color/carrot_accent" />
 
         </LinearLayout>
 
@@ -123,46 +122,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:weightSum="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
                 android:id="@+id/btn_cancel"
-                app:cardCornerRadius="28dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="16dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/outlined_button_state_background_color"
-                app:strokeColor="@color/outlined_button_state_text_color"
-                app:strokeWidth="1dp"
+                android:layout_width="0dp"
                 android:layout_height="28dp"
-                android:layout_marginTop="44dp">
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.5"
+                app:cardBackgroundColor="@color/outlined_button_state_background_color"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/outlined_button_state_text_color"
+                app:strokeWidth="1dp">
 
                 <TextView
                     style="@style/NunitoRegular12spStyle"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="@string/cancel" />
 
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                style="@style/OrderButtonStyle"
                 android:id="@+id/btn_submit"
+                style="@style/OrderButtonStyle"
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
                 android:layout_height="28dp"
                 android:layout_marginTop="44dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="24dp"
+                android:layout_weight="0.5"
                 android:text="@string/submit" />
 
         </LinearLayout>
 
     </LinearLayout>
+</LinearLayout>
 
-
-
-</com.google.android.material.card.MaterialCardView>
