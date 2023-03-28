@@ -1,5 +1,7 @@
 package az.red.presentation.content.orders.dialog
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
@@ -26,6 +28,7 @@ class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment()
         if(dialog != null && dialog!!.window != null){
             dialog!!.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog!!.window?.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+//            dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
         return binding.root
