@@ -82,6 +82,7 @@ class ProductViewHolder(private val binding: ProductCardBinding) :
             clickListener.onClick(it, product.itemNo)
         }
         binding.ivHeart.setOnClickListener {
+            binding.ivHeart.setImageResource(R.drawable.ic_full_heart)
             addToWishList(product._id)
         }
 

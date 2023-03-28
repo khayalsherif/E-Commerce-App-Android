@@ -44,13 +44,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), ClickLi
 
     private val productListItemAdapter by lazy {
         ProductListItemAdapter(
-            addToWishList = { showToast("added to wishlist") },
+            addToWishList = {
+            viewModel.addToWishList(it)
+            showToast("added to wishlist") 
+            },
             clickListener = this@HomeFragment
         )
     }
     private val paginatedProductListItemAdapter by lazy {
         ProductListItemPagingAdapter(
-            addToWishList = { showToast("added to wishlist") },
+            addToWishList = {
+            viewModel.addToWishList(it)
+            showToast("added to wishlist")
+            },
             clickListener = this@HomeFragment
         )
     }

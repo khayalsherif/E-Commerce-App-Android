@@ -9,4 +9,5 @@ interface CartRepository {
     suspend fun getCart() : Flow<NetworkResult<Cart>>
     suspend fun deleteCart() : Flow<NetworkResult<DeleteCart>>
     suspend fun decreaseCartProduct(productId : String) : Flow<NetworkResult<Cart>>
+    suspend fun add(productId : String) : Flow<NetworkResult<Cart>>
 }

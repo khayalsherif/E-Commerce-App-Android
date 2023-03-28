@@ -2,12 +2,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="colors">
         <attr name="hint_color" format="color" />
-        <attr name="custom_background" format="color" />
-        <attr name="carrot_accent" format="color" />
         <attr name="screen_title_color" format="color" />
         <attr name="text_color" format="color" />
         <attr name="back_icon_color" format="color" />
         <attr name="button_is_enable_color" format="color" />
+        <attr name="outlined_button_is_enable_color" format="color" />
         <attr name="button_is_not_enable_color" format="color" />
         <attr name="line_color" format="color" />
         <attr name="edit_text_text_color" format="color" />
@@ -20,6 +19,7 @@
         <attr name="carrot_accent" format="color" />
         <attr name="custom_background" format="color" />
         <attr name="button_stroke_background_color" format="color" />
+        <attr name="outlined_button_text_color" format="color" />
     </declare-styleable>
 
     <style name="ButtonStyle">
@@ -38,6 +38,26 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/shape_28_stroke</item>
+
+    <style name="ButtonStyle12Sp">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textColor">@color/button_state_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/shape_28</item>
+        <item name="backgroundTint">?attr/button_is_enable_color</item>
+
+    </style>
+
+    <style name="ButtonStyle12SpOutlined">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textColor">?attr/outlined_button_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/outlined_button_28</item>
+
+    </style>
+
     <style name="OrderButtonStyle">
         <item name="android:fontFamily">@font/nunito_semi_bold</item>
         <item name="android:textColor">@color/button_state_text_color</item>

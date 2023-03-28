@@ -6,6 +6,7 @@ import az.red.data.remote.EndPoints
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface CartService {
@@ -18,6 +19,11 @@ interface CartService {
 
     @DELETE(EndPoints.DECREASE_CART_PRODUCT)
     suspend fun decreaseCartProduct(
+        @Path("productId") productId: String
+    ): Response<CartResponse>
+
+    @PUT(EndPoints.ADD_CART_PRODUCT)
+    suspend fun add(
         @Path("productId") productId: String
     ): Response<CartResponse>
 }
