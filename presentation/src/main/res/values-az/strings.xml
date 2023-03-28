@@ -68,4 +68,11 @@
     <string name="in_delivery">Çatdırılmada</string>
     <string name="leave_review">Rəy yazın</string>
     <string name="buy_again">Yenidən al</string>
+
+    <string name="how_is_your_order">Sifarişiniz necədir</string>
+    <string name="add_photo">Foto əlavə edin</string>
+    <string name="cancel">Ləğv et</string>
+    <string name="submit">Təsdiq edin</string>
+    <string name="type_review">Rəy yazın</string>
+    <string name="comment_added_successfully">Şərh uğurla əlavə edildi!!</string>
 </resources>

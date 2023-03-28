@@ -12,6 +12,7 @@ import az.red.presentation.base.BaseFragment
 import az.red.presentation.base.RecyclerListAdapter
 import az.red.presentation.common.gone
 import az.red.presentation.common.visible
+import az.red.presentation.content.orders.dialog.LeaveReviewDialog
 import az.red.presentation.databinding.FragmentOrdersBinding
 import az.red.presentation.databinding.ItemCancelledBinding
 import az.red.presentation.databinding.ItemCompletedBinding
@@ -153,6 +154,10 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>() {
                     tvCompletedProductName.text = data.product.name
                     tvCompletedProductPrice.text = "US $ ${data.product.currentPrice}"
                     imageOngoing.load(data.product.imageUrls.first())
+                    btnLeaveReview.setOnClickListener {
+                        val leaveReviewDialog = LeaveReviewDialog(data)
+                        leaveReviewDialog.show(requireActivity().supportFragmentManager,leaveReviewDialog.tag)
+                    }
                 }
             }
         )

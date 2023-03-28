@@ -68,4 +68,10 @@
     <string name="in_delivery">In delivery</string>
     <string name="leave_review">Leave review</string>
     <string name="buy_again">Buy again</string>
+    <string name="how_is_your_order">How is your order</string>
+    <string name="add_photo">Add photo</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="type_review">Type review</string>
+    <string name="comment_added_successfully">Comment added successfully!</string>
 </resources>

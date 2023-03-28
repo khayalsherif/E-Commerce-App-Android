@@ -103,6 +103,12 @@
         <item name="android:textColor">?attr/screen_title_color</item>
     </style>
 
+    <style name="BarlowBold24spStyle">
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?attr/screen_title_color</item>
+    </style>
+
     <style name="BarlowBold16spStyle">
         <item name="android:fontFamily">@font/barlow_bold</item>
         <item name="android:textSize">16sp</item>

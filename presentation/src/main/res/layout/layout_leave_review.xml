@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_is_your_order"
+            android:layout_marginTop="24dp"
+            style="@style/BarlowBold24spStyle"
+            android:layout_gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/image_dialog"
+                android:src="@drawable/product_image"
+                android:scaleType="fitXY"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_dialog_product_name"
+                    style="@style/NunitoSemiBold16spStyle"
+                    android:text="Iphone 13 pro"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_dialog_product_name"
+                    android:id="@+id/tv_dialog_product_price"
+                    style="@style/NunitoSemiBold14spStyle"
+                    android:text="US $ 540.00"
+                    android:layout_marginTop="8dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="64dp"
+                    app:cardCornerRadius="4dp"
+                    android:id="@+id/cv_status"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/outlined_button_state_background_color"
+                    app:strokeColor="@color/order_green"
+                    app:strokeWidth="1dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        style="@style/NunitoRegular10spStyle"
+                        android:id="@+id/tv_status"
+                        android:textColor="@color/order_green"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/completed" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/input_type_review"
+            style="@style/EditTextStyle"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="32dp"
+            android:drawablePadding="12dp"
+            android:hint="@string/type_review"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/ll_add_photo"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_add_image_24"
+                android:layout_marginEnd="16dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_photo"
+                style="@style/NunitoRegular16spStyle"
+                android:textColor="@color/carrot_accent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:id="@+id/btn_cancel"
+                app:cardCornerRadius="28dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/outlined_button_state_background_color"
+                app:strokeColor="@color/outlined_button_state_text_color"
+                app:strokeWidth="1dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="44dp">
+
+                <TextView
+                    style="@style/NunitoRegular12spStyle"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/cancel" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                style="@style/OrderButtonStyle"
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="28dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/submit" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

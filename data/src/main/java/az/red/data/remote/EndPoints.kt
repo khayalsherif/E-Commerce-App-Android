@@ -33,5 +33,9 @@ object EndPoints {
     const val CREATE_ORDER = ORDER_BASE
     const val GET_CUSTOMER_ORDERS = ORDER_BASE
 
+    //Review
+    private const val REVIEW_BASE = "comments"
+    const val ADD_COMMENT = REVIEW_BASE
+
 
 }
