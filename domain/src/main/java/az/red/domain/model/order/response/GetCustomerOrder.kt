@@ -1,11 +1,12 @@
 package az.red.domain.model.order.response
 
 import az.red.domain.model.auth.register.Register
+import az.red.domain.model.cart.CartProduct
 import az.red.domain.model.order.request.DeliveryAddress
 import az.red.domain.model.product.Product
 
 data class GetCustomerOrder(
-    val products : List<Product>,
+    val products : List<CartProduct>,
     val canceled : Boolean,
     val customerId : Register,
     val deliveryAddress : DeliveryAddress,

@@ -3,7 +3,6 @@ package az.red.presentation.content.orders
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import az.red.domain.common.NetworkResult
-import az.red.domain.model.cart.Cart
 import az.red.domain.model.order.response.GetCustomerOrder
 import az.red.domain.usecase.order.GetCustomerOrdersUseCase
 import az.red.presentation.base.BaseViewModel
@@ -16,6 +15,9 @@ class OrdersViewModel(
 ) : BaseViewModel() {
 
     val isLoading = MutableStateFlow(false)
+    val ongoingExpandState = MutableStateFlow(false)
+    val completedExpandState = MutableStateFlow(false)
+    val cancelledExpandState = MutableStateFlow(false)
 
     private val _getCustomerOrderResponse =
         MutableStateFlow<List<GetCustomerOrder>>(emptyList())
@@ -46,4 +48,15 @@ class OrdersViewModel(
             }
         }
     }
+
+    fun expandOngoingCard() {
+        ongoingExpandState.value = !ongoingExpandState.value
+    }
+    fun expandCompleteCard() {
+        completedExpandState.value = !completedExpandState.value
+    }
+    fun expandCancelledCard() {
+        cancelledExpandState.value = !cancelledExpandState.value
+    }
+
 }

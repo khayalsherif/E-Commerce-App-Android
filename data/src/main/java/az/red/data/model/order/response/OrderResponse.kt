@@ -1,10 +1,11 @@
 package az.red.data.model.order.response
 
 import az.red.domain.model.auth.register.Register
+import az.red.domain.model.cart.CartProduct
 import com.google.gson.annotations.SerializedName
 
 data class OrderResponse(
-    val products : List<az.red.domain.model.product.Product>,
+    val products : List<CartProduct>,
     val canceled : Boolean,
     @SerializedName("_id")
     val id : String,
