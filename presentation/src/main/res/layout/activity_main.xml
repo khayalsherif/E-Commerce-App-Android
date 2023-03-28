@@ -23,6 +23,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/BottomNavigation"
         android:id="@+id/bottom_navigation_view"
+        app:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"

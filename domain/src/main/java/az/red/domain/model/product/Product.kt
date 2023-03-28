@@ -1,7 +1,7 @@
 package az.red.domain.model.product
 
 data class Product(
-    val id: String,
+    val _id: String,
     val categories: String,
     val color: String?,
     val currentPrice: Double,
@@ -15,4 +15,23 @@ data class Product(
     val previousPrice: Double?,
     val quantity: Int,
     val size: String?
-)
+){
+    companion object {
+        val NULL = Product(
+            "",
+            "",
+            "",
+            0.0,
+            "",
+            "",
+            true,
+            "",
+            emptyList(),
+            "",
+            "",
+            0.0,
+            0,
+            ""
+        )
+    }
+}

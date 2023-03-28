@@ -82,7 +82,7 @@ class ProductViewHolder(private val binding: ProductCardBinding) :
             clickListener.onClick(it, product.itemNo)
         }
         binding.ivHeart.setOnClickListener {
-            addToWishList(product.id)
+            addToWishList(product._id)
         }
 
         if (lineView) {

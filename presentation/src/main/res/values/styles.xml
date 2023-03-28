@@ -2,6 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="colors">
         <attr name="hint_color" format="color" />
+        <attr name="custom_background" format="color" />
+        <attr name="carrot_accent" format="color" />
         <attr name="screen_title_color" format="color" />
         <attr name="text_color" format="color" />
         <attr name="back_icon_color" format="color" />
@@ -36,6 +38,13 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/shape_28_stroke</item>
+    <style name="OrderButtonStyle">
+        <item name="android:fontFamily">@font/nunito_semi_bold</item>
+        <item name="android:textColor">@color/button_state_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/shape_28</item>
+        <item name="backgroundTint">@color/button_state_background_color</item>
         <item name="lineHeight">20dp</item>
     </style>
 
@@ -103,6 +112,18 @@
         <item name="android:textColor">?attr/screen_title_color</item>
     </style>
 
+    <style name="BarlowBold24spStyle">
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?attr/screen_title_color</item>
+    </style>
+
+    <style name="BarlowBold16spStyle">
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/screen_title_color</item>
+    </style>
+
     <style name="NunitoRegular16spStyle">
         <item name="android:fontFamily">@font/nunito_regular</item>
         <item name="android:textSize">16sp</item>
@@ -124,6 +145,12 @@
     <style name="NunitoSemiBold18spStyle">
         <item name="android:fontFamily">@font/nunito_semi_bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="NunitoSemiBold14spStyle">
+        <item name="android:fontFamily">@font/nunito_semi_bold</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/text_color</item>
     </style>
 
@@ -155,6 +182,12 @@
         <item name="android:fontFamily">@font/nunito_regular</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="NunitoRegular10spStyle">
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/carrot_accent</item>
     </style>
 
     <style name="NunitoSemiBold12spWhiteStyle">
