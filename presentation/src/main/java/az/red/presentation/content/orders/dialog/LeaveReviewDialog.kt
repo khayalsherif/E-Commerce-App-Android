@@ -28,7 +28,7 @@ class LeaveReviewDialog(private val cartProduct: CartProduct) : DialogFragment()
         if(dialog != null && dialog!!.window != null){
             dialog!!.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog!!.window?.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-            dialog!!.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT));
+            dialog!!.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT))
         }
         return binding.root
     }
