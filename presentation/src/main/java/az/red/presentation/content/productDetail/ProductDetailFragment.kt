@@ -72,7 +72,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
                         buttonReviews.setOnClickListener {
                             navController.navigate(
                                 ProductDetailFragmentDirections.actionProductDetailFragmentToReviewsFragment(
-                                    productId = data.id,
+                                    productId = data._id,
                                     title = data.name,
                                     newPrice = "US $${data.currentPrice}",
                                     oldPrice = "US $${data.currentPrice}",

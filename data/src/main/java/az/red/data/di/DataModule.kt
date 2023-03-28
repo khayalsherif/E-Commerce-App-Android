@@ -118,8 +118,7 @@ val dataModule = module {
 
     factory<ReviewRepository> {
         ReviewRepositoryImpl(service = get())
-   
-   //Review
+    }
 
     // WishList
     factory<WishlistService> { get<Retrofit>().create(WishlistService::class.java) }

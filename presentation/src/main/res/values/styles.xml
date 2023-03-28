@@ -38,6 +38,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/shape_28_stroke</item>
+    </style>
 
     <style name="ButtonStyle12Sp">
         <item name="android:fontFamily">@font/nunito_regular</item>
