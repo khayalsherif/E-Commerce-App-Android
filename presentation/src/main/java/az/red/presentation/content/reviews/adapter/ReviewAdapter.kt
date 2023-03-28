@@ -3,6 +3,7 @@ package az.red.presentation.content.reviews.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import az.red.domain.model.review.Review
 import az.red.presentation.base.BaseDiffUtil
@@ -10,6 +11,7 @@ import az.red.presentation.databinding.ItemReviewBinding
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     private var emptyList = emptyList<Review>()
+    private val viewPool = RecyclerView.RecycledViewPool()
 
     class ReviewViewHolder(val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         companion object {
@@ -33,6 +35,19 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
         holder.binding.texTitle.text =
             "${emptyList[position].customer.firstName} ${emptyList[position].customer.lastName}"
         holder.binding.textTime.text = emptyList[position].customer.date.substring(0, 10)
+
+
+        val childLayoutManager = LinearLayoutManager(
+            holder.binding.root.context,
+            RecyclerView.HORIZONTAL,
+            false
+        )
+
+        holder.binding.rcView.apply {
+            layoutManager = childLayoutManager
+            adapter = ImageAdapter(emptyList[position].product.imageUrls)
+            setRecycledViewPool(viewPool)
+        }
     }
 
     fun setData(newList: List<Review>) {
