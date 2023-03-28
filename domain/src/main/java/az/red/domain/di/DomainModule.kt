@@ -9,7 +9,7 @@ import az.red.domain.usecase.home.GetProductsFilteredPaginatedUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
 import az.red.domain.usecase.order.GetCustomerOrdersUseCase
-import az.red.domain.usecase.review.AddCommentUseCase
+import az.red.domain.usecase.add_review.AddCommentUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import org.koin.dsl.module
 

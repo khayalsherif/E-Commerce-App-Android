@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import az.red.domain.common.NetworkResult
 import az.red.domain.model.review.request.AddCommentRequest
 import az.red.domain.model.review.response.AddComment
-import az.red.domain.usecase.review.AddCommentUseCase
+import az.red.domain.usecase.add_review.AddCommentUseCase
 import az.red.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
