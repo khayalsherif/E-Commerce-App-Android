@@ -55,7 +55,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         }
 
         btnGoMyProducts.setOnClickListener {
-            navController.navigate(R.id.action_profileFragment_to_homeFragment)
+            navController.popBackStack()
         }
 
         changeUI()

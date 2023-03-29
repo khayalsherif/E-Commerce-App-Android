@@ -26,6 +26,9 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>() {
     private var onGoingCount: Int = 0
     private var completeCount: Int = 0
     private var cancelledCount: Int = 0
+    private var ongoingList : MutableList<CartProduct> = mutableListOf()
+    private var completedList : MutableList<CartProduct> = mutableListOf()
+    private var cancelledList : MutableList<CartProduct> = mutableListOf()
 
     override val bindingCallBack: (LayoutInflater, ViewGroup?, Boolean) -> FragmentOrdersBinding
         get() = FragmentOrdersBinding::inflate
@@ -57,29 +60,38 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>() {
 
                             if (networkResult[index].canceled) {
                                 cancelledCount++
+                                for (cancelledIndex in networkResult[index].products.indices){
+                                    cancelledList.add(networkResult[index].products[cancelledIndex])
+                                }
                                 if (binding.rvCancelled.adapter == null) {
                                     binding.rvCancelled.adapter = adapterCancelled
                                 }
-                                adapterCancelled.submitList(networkResult[index].products)
+                                adapterCancelled.submitList(cancelledList)
                             }
 
                             if (networkResult[index].status == "shipped" && networkResult[index].canceled.not()) {
                                 completeCount++
+                                for (completedIndex in networkResult[index].products.indices){
+                                    completedList.add(networkResult[index].products[completedIndex])
+                                }
                                 if (binding.rvCompleted.adapter == null) {
                                     binding.rvCompleted.adapter = adapterCompleted
                                 }
-                                adapterCompleted.submitList(networkResult[index].products)
+                                adapterCompleted.submitList(completedList)
                             }
 
                             if (networkResult[index].status == "not shipped" && networkResult[index].canceled.not()) {
                                 onGoingCount++
+                                for (ongoingIndex in networkResult[index].products.indices){
+                                    ongoingList.add(networkResult[index].products[ongoingIndex])
+                                }
                                 if (binding.rvOngoing.adapter == null) {
                                     binding.rvOngoing.adapter = adapterOngoing
                                 }
-                                adapterOngoing.submitList(networkResult[index].products)
+                                adapterOngoing.submitList(ongoingList)
                             }
-
                         }
+
                     }
                 }
 

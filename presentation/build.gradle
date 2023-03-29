@@ -70,4 +70,7 @@ dependencies {
 
     // Image Slider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
+    //Splash API
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }
