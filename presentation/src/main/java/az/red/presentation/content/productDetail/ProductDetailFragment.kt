@@ -34,7 +34,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
 
     private val productListItemAdapter by lazy {
         ProductListItemAdapter(
-            addToWishList = { showToast("Added to wishlist") },
+            addToWishList = { viewModel.addToWishList(it); showToast("Added to wishlist") },
             clickListener = this@ProductDetailFragment
         )
     }
@@ -45,7 +45,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
         integrationRcView()
 
 
-        buttonAddCart.setOnClickListener{
+        buttonAddCart.setOnClickListener {
             viewModel.addToCart()
         }
 

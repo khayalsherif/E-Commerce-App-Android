@@ -7,17 +7,18 @@ import az.red.domain.model.product.Product
 import az.red.domain.usecase.cart.AddToCartUseCase
 import az.red.domain.usecase.home.GetProductByIdUseCase
 import az.red.domain.usecase.home.GetProductsFilteredUseCase
+import az.red.domain.usecase.wishList.AddToWishListUseCase
 import az.red.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel(
     private val getProductByIdUseCase: GetProductByIdUseCase,
     private val getProductsFilteredUseCase: GetProductsFilteredUseCase,
-    private val addToCartUseCase: AddToCartUseCase
+    private val addToCartUseCase: AddToCartUseCase,
+    private val addToWishListUseCase: AddToWishListUseCase
 ) : BaseViewModel() {
 
     private val _productResponse =
@@ -49,6 +50,19 @@ class ProductDetailViewModel(
             _productResponse.value.data?._id?.let {
                 addToCartUseCase(productId = it).collect {
                     _addToCartResponse.emit(it)
+                }
+            }
+        }
+    }
+    fun addToWishList(productId: String) {
+        viewModelScope.launch {
+            addToWishListUseCase(productId).collect {
+                when (it) {
+                    is NetworkResult.Empty -> println("Empty")
+                    is NetworkResult.Error -> println("Error")
+                    is NetworkResult.Exception -> println("Exception ${it.message}")
+                    is NetworkResult.Loading -> println("Loading")
+                    is NetworkResult.Success ->  println("Success")
                 }
             }
         }

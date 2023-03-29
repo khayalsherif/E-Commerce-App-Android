@@ -19,7 +19,7 @@ val presentationModule = module {
     viewModel { RegisterViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
     viewModel { HomeViewModel(getCategoriesUseCase = get(), getProductsFilteredUseCase = get(), getProductsFilteredPaginatedUseCase =  get(), addToWishListUseCase = get()) }
     viewModel { ProfileViewModel(sessionManagerUseCase = get()) }
-    viewModel { ProductDetailViewModel(getProductByIdUseCase = get(), getProductsFilteredUseCase = get(), addToCartUseCase = get()) }
+    viewModel { ProductDetailViewModel(getProductByIdUseCase = get(), getProductsFilteredUseCase = get(), addToCartUseCase = get(), addToWishListUseCase =  get()) }
     viewModel { ReviewsViewModel(useCase = get()) }
     viewModel { CartViewModel(cartUseCase = get(), deleteCartUseCase = get(), createOrderUseCase = get(), sessionManagerUseCase = get()) }
     viewModel { WishListViewModel(getWishListUseCase = get(), removeWishListItemUseCase = get(), addToCartUseCase = get()) }
