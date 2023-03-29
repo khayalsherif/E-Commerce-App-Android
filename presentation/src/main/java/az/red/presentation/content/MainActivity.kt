@@ -3,24 +3,33 @@ package az.red.presentation.content
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
+import az.red.presentation.MainActivityViewModel
 import az.red.presentation.R
 import az.red.presentation.common.gone
 import az.red.presentation.common.visible
 import az.red.presentation.databinding.ActivityMainBinding
 import az.red.presentation.util.LocalLanguageManager
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val useCase by inject<SessionManagerUseCase>()
+    private val viewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                viewModel.isLoading.value
+            }
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
     }
 
     override fun attachBaseContext(base: Context?) {
