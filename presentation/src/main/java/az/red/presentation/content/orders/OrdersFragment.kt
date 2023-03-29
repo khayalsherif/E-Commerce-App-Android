@@ -32,8 +32,9 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>() {
     override val kClass: KClass<OrdersViewModel>
         get() = OrdersViewModel::class
 
-    override val bindViews: FragmentOrdersBinding.() -> Unit = {
 
+    override val bindViews: FragmentOrdersBinding.() -> Unit = {
+        viewModel.getCustomerOrders()
         observeOrderValues()
         navigateBack()
         expandOrShrinkLayouts()
@@ -44,6 +45,14 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.getCustomerOrderResponse.collect { networkResult ->
+                        onGoingCount = 0
+                        cancelledCount = 0
+                        completeCount= 0
+
+                        adapterCancelled.submitList(emptyList())
+                        adapterCompleted.submitList(emptyList())
+                        adapterOngoing.submitList(emptyList())
+
                         for (index in networkResult.indices) {
 
                             if (networkResult[index].canceled) {

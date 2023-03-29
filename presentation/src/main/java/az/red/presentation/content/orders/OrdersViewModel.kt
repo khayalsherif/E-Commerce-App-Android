@@ -27,7 +27,7 @@ class OrdersViewModel(
         getCustomerOrders()
     }
 
-    private fun getCustomerOrders(){
+    fun getCustomerOrders(){
         viewModelScope.launch {
             getCustomerOrdersUseCase.getCustomerOrders().collect{networkResult ->
                 when(networkResult){
