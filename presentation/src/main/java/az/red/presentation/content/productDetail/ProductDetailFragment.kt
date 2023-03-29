@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,34 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
     override val bindViews: FragmentProductDetailBinding.() -> Unit = {
         init()
         integrationRcView()
+
+
+        buttonAddCart.setOnClickListener{
+            viewModel.addToCart()
+        }
+
+        lifecycleScope.launch {
+            viewModel.addToCartResponse.collect { result ->
+                when (result) {
+                    is NetworkResult.Empty -> {}
+                    is NetworkResult.Error -> {
+                        showToast(result.message!!)
+                        layoutLoading.root.gone()
+                    }
+                    is NetworkResult.Exception -> {
+                        showToast(result.message!!)
+                        layoutLoading.root.gone()
+                    }
+                    is NetworkResult.Loading -> {
+                        layoutLoading.root.visible()
+                    }
+                    is NetworkResult.Success -> {
+                        layoutLoading.root.gone()
+                        showToast("Product added to cart")
+                    }
+                }
+            }
+        }
 
         lifecycleScope.launch {
             viewModel.productResponse.collect { result ->

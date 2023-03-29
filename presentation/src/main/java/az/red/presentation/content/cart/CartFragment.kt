@@ -71,11 +71,21 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.createOrderResponse.collect {
                     if (it is NetworkResult.Success) {
-                        Snackbar.make(
-                            requireView(),
-                            it.data?.message ?: "Order has been created successfully",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                        if (it.data?.message.isNullOrEmpty().not()) {
+                            Snackbar.make(
+                                requireView(),
+                                (it.data!!.message + it.data!!.productAvailibilityInfo?.unavailableProducts?.joinToString(
+                                    ", ",
+                                    ": "
+                                ) { p -> p.name + " (available quantity: ${it.data!!.productAvailibilityInfo!!.productsAvailibilityDetails.first { d -> d.productId == p._id }.realQuantity})" }),
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        } else
+                            Snackbar.make(
+                                requireView(),
+                                "Order has been created successfully",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                     }
                 }
             }

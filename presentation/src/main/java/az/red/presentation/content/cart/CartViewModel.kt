@@ -122,20 +122,33 @@ class CartViewModel(
                     is NetworkResult.Loading -> Log.i("CREATE_ORDER", "Loading")
                     is NetworkResult.Success -> {
                         Log.i("CREATE_ORDER", "Success")
-                        deleteCartUseCase.deleteCart().collect {
-                            when (it) {
-                                is NetworkResult.Empty ->  {Log.i("DELETE_CART", "Empty")}
-                                is NetworkResult.Error ->  {Log.i("DELETE_CART", "Error")}
-                                is NetworkResult.Exception ->  { Log.i(
-                                    "DELETE_CART",
-                                    "Exception -> ${networkResult.message}"
-                                )}
-                                is NetworkResult.Loading -> {Log.i("DELETE_CART", "Loading")}
-                                is NetworkResult.Success -> {Log.i("DELETE_CART", "Success")}
+                        if (networkResult.data?.message.isNullOrEmpty()) {
+                            deleteCartUseCase.deleteCart().collect {
+                                when (it) {
+                                    is NetworkResult.Empty -> {
+                                        Log.i("DELETE_CART", "Empty")
+                                    }
+                                    is NetworkResult.Error -> {
+                                        Log.i("DELETE_CART", "Error")
+                                    }
+                                    is NetworkResult.Exception -> {
+                                        Log.i(
+                                            "DELETE_CART",
+                                            "Exception -> ${networkResult.message}"
+                                        )
+                                    }
+                                    is NetworkResult.Loading -> {
+                                        Log.i("DELETE_CART", "Loading")
+                                    }
+                                    is NetworkResult.Success -> {
+                                        Log.i("DELETE_CART", "Success")
+                                    }
+                                }
+                                getCart()
                             }
-                            getCart()
                         }
                         _createOrderResponse.emit(networkResult)
+                        isLoading.value = false
                     }
                 }
             }
