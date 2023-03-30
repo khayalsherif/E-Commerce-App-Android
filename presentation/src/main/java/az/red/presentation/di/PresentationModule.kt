@@ -17,8 +17,8 @@ import org.koin.dsl.module
 val presentationModule = module {
 
     viewModel { MainActivityViewModel() }
-    viewModel { LoginViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
-    viewModel { RegisterViewModel(authUseCase = get(), sessionManagerUseCase = get()) }
+    viewModel { LoginViewModel(loginUseCase = get(), sessionManagerUseCase = get()) }
+    viewModel { RegisterViewModel(registerUseCase = get(), sessionManagerUseCase = get()) }
     viewModel { HomeViewModel(getCategoriesUseCase = get(), getProductsFilteredUseCase = get(), getProductsFilteredPaginatedUseCase =  get(), addToWishListUseCase = get()) }
     viewModel { ProfileViewModel(sessionManagerUseCase = get()) }
     viewModel { ProductDetailViewModel(getProductByIdUseCase = get(), getProductsFilteredUseCase = get(), addToCartUseCase = get(), addToWishListUseCase =  get()) }

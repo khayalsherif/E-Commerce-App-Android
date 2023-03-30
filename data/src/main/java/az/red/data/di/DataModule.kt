@@ -13,23 +13,25 @@ import az.red.data.remote.product.ProductService
 import az.red.data.remote.review.ReviewService
 import az.red.data.remote.wishList.WishlistService
 import az.red.data.remote.review.AddReviewService
-import az.red.data.repository.auth.AuthRepositoryImpl
+import az.red.data.repository.auth.RegisterRepositoryImpl
 import az.red.data.repository.cart.CartRepositoryImpl
 import az.red.data.repository.category.CategoryRepositoryImpl
 import az.red.data.repository.order.OrderRepositoryImpl
 import az.red.data.repository.product.ProductRepositoryImpl
 import az.red.data.repository.review.ReviewRepositoryImpl
 import az.red.data.repository.add_review.AddReviewRepositoryImpl
+import az.red.data.repository.auth.LoginRepositoryImpl
 import az.red.data.repository.sessionmanager.SessionManagerImpl
 import az.red.data.repository.wishlist.WishListRepositoryImpl
 import az.red.domain.repository.WishListRepository
-import az.red.domain.repository.auth.AuthRepository
+import az.red.domain.repository.auth.RegisterRepository
 import az.red.domain.repository.cart.CartRepository
 import az.red.domain.repository.category.CategoryRepository
 import az.red.domain.repository.order.OrderRepository
 import az.red.domain.repository.product.ProductRepository
 import az.red.domain.repository.review.ReviewRepository
 import az.red.domain.repository.add_review.AddReviewRepository
+import az.red.domain.repository.auth.LoginRepository
 import az.red.domain.repository.sessionmanager.SessionManagerRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -81,12 +83,16 @@ val dataModule = module {
     // Auth
     factory<AuthService> { get<Retrofit>().create(AuthService::class.java) }
 
+    factory<RegisterRepository> {
+        RegisterRepositoryImpl(service = get())
+    }
+
+    factory<LoginRepository> {
+        LoginRepositoryImpl(service = get())
+    }
 
     factory<CartService> { get<Retrofit>().create(CartService::class.java) }
 
-    factory<AuthRepository> {
-        AuthRepositoryImpl(service = get())
-    }
     factory<CartRepository> {
         CartRepositoryImpl(cartService = get(), cartMapper = get())
     }

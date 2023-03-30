@@ -1,6 +1,5 @@
 package az.red.domain.di
 
-import az.red.domain.usecase.auth.AuthUseCase
 import az.red.domain.usecase.cart.AddToCartUseCase
 import az.red.domain.usecase.cart.DecreaseCartProductUseCase
 import az.red.domain.usecase.cart.DeleteCartUseCase
@@ -13,6 +12,8 @@ import az.red.domain.usecase.review.ReviewUseCase
 import az.red.domain.usecase.order.CreateOrderUseCase
 import az.red.domain.usecase.order.GetCustomerOrdersUseCase
 import az.red.domain.usecase.add_review.AddCommentUseCase
+import az.red.domain.usecase.auth.LoginUseCase
+import az.red.domain.usecase.auth.RegisterUseCase
 import az.red.domain.usecase.sessionmanager.SessionManagerUseCase
 import az.red.domain.usecase.wishList.AddToWishListUseCase
 import az.red.domain.usecase.wishList.GetWishListUseCase
@@ -21,7 +22,11 @@ import org.koin.dsl.module
 
 val domainModule = module {
     factory {
-        AuthUseCase(repository = get())
+        LoginUseCase(repository = get())
+    }
+
+    factory {
+        RegisterUseCase(repository = get())
     }
 
     factory {

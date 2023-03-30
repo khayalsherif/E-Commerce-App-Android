@@ -14,7 +14,7 @@ class MainActivityViewModel : BaseViewModel() {
 
     init {
         viewModelScope.launch {
-            delay(300L)
+            delay(800L)
             _isLoading.value = false
         }
     }
